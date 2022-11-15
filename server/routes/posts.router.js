@@ -27,8 +27,29 @@ const upload = multer({
 //location url '/api/posts'
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    //recieve information and test reciept
+    // console.log('in /api/posts GET');
+    
+    //sql text
+    let sqlText = `
+    SELECT "user"."username", "posts"."id", "posts"."title", "posts"."species",
+        "posts"."date_of_hunt", "posts"."success", "posts"."picture", "posts"."content", 
+        "posts"."created", "posts"."land_type", "hunt_area"."hunt_area", "posts"."weapon_type" 
+    FROM "user" 
+    JOIN "posts"
+	    ON "user"."id" = "posts"."user_id"
+    JOIN "hunt_area"
+	    ON "posts"."hunt_area_id" = "hunt_area"."id";
+    `;
 
+    //Pool.query from DB and send back to SAGA
+    pool.query(sqlText)
+        .then(dbRes => {
+            res.send(dbRes.rows);
+        })
+        .catch(err => {
+            console.error('in /api/posts GET Error', err);
+            res.sendStatus(500);
+        });
 
   // GET route code here
 });
@@ -47,9 +68,9 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
     let sqlText = `
     INSERT INTO "posts"
 	    ("title", "species", "hunt_area_id", "date_of_hunt", "success", 
-        "picture", "content", "user_id", "land_type")
+        "picture", "content", "user_id", "land_type", "weapon_type")
     VALUES
-        ($1, $2, $3, $4, $5, $6, $7, $8, $9);
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
     `;
 
     //sql params
@@ -62,7 +83,8 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
         'http://localhost:3000/images/'+req.file.filename,
         post.content,
         req.user.id,
-        post.land_type
+        post.land_type,
+        post.weaponType
     ];
 
     console.log('sql params', sqlParams);

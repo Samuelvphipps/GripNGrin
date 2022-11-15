@@ -65,6 +65,8 @@ function NewPost(){
             type: 'ADD_POST',
             payload: payload
         });
+
+        history.push('/home');
     };
     
     return(

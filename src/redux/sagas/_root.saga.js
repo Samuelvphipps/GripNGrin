@@ -2,7 +2,7 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
-import postSaga from './post.saga';
+import postsSaga from './posts.saga';
 import huntAreasSaga from './huntAreas.saga';
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -17,7 +17,7 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     //import postsaga function and listener to connect to saga
-    postSaga(),
+    postsSaga(),
     //huntAreasSaga
     huntAreasSaga(),
   ]);
