@@ -1,3 +1,5 @@
+--DROP TABLE "user", "hunt_area", "liked_post", "posts", "comments";
+
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
@@ -21,7 +23,7 @@ CREATE TABLE "posts" (
 	"species" VARCHAR(255),
 	"hunt_area_id" INT REFERENCES "hunt_area",
 	"date_of_hunt" DATE,
-	"success" VARCHAR,
+	"success" BOOLEAN,
 	"picture" VARCHAR,
 	"content" VARCHAR,
 	"created" DATE DEFAULT 'now()',
@@ -59,8 +61,6 @@ VALUES
 	(648),(646),(649),(101),(111),(104),(110),(169),(109),(107),(119),(177),(176),(184),(197),
 	(172),(171),(679),(173),(199),(181),(182),(178),(132),(133),(130),(131),(117),(126),(155),
 	(156),(183),(159),(157),(152),(604),(114),(260),('Red Lake Reservation');
-
-
 	
 
 
