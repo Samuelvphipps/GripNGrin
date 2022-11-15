@@ -123,7 +123,7 @@ function NewPost(){
                                 onChange={(evt)=>setHuntAreaId(evt.target.value)}
                             >
                                 {huntAreaList.map((area)=>{
-                                    return <MenuItem value={area.id}>{area.hunt_area}</MenuItem>
+                                    return <MenuItem key={area.id} value={area.id}>{area.hunt_area}</MenuItem>
                                 })}
 
                             </Select>
