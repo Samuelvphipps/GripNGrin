@@ -49,7 +49,12 @@ function* fetchPosts(){
         let posts = yield axios.get('/api/posts');
 
         console.log('response from server in posts get is:', posts.data);
-        //get posts redux and rerender after store is updated
+        
+        //send posts to redux store\
+        yield put({
+            type: 'SET_POSTS',
+            payload: posts.data
+        });
 
     } catch (err) {
         console.error('in fetchPosts SAGA error:', err);
@@ -58,7 +63,7 @@ function* fetchPosts(){
 }
 
 
-function* postSaga() {
+function* postsSaga() {
     //add post
     yield takeEvery('ADD_POST', addPost);
 
@@ -68,4 +73,4 @@ function* postSaga() {
 
 }
 
-export default postSaga;
+export default postsSaga;
