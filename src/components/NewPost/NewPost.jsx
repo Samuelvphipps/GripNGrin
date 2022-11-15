@@ -7,7 +7,7 @@ import Select from '@mui/material/Select';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 
 
@@ -18,6 +18,11 @@ function NewPost(){
     useEffect(() => {
         dispatch({ type: 'FETCH_HUNT_AREAS' });
     }, []);
+
+    //get huntAreas redux state
+    const huntAreaList = useSelector(store=>store.huntAreasReducer);
+    // console.log('huntAreaList', huntAreaList);
+
     
     //set up usehistory and useDispatch
     const dispatch=useDispatch();
@@ -29,7 +34,7 @@ function NewPost(){
     const [date, setDate] = useState('');
     const [species, setSpecies] = useState('');
     const [successful, setSuccessful] = useState('');
-    const [huntArea, setHuntArea] = useState(null);
+    const [huntAreaId, setHuntAreaId] = useState(null);
     const [weaponType, setWeaponType] = useState('');
     const [landType, setLandType] = useState('');
     const [story, setStory] = useState('');
@@ -47,7 +52,7 @@ function NewPost(){
             date,
             species,
             successful,
-            huntArea,
+            huntAreaId,
             weaponType,
             landType,
             story,
@@ -113,12 +118,13 @@ function NewPost(){
                         <InputLabel required id="huntarea-input-label">Hunt Area</InputLabel>
                             <Select
                                 labelId="huntarea-input-label"
-                                value={huntArea ? huntArea : ''}
+                                value={huntAreaId ? huntAreaId : ''}
                                 label="hunt-area"
-                                onChange={(evt)=>setHuntArea(evt.target.value)}
+                                onChange={(evt)=>setHuntAreaId(evt.target.value)}
                             >
-                                <MenuItem value={131}>131</MenuItem>
-                                <MenuItem value={218}>218</MenuItem>
+                                {huntAreaList.map((area)=>{
+                                    return <MenuItem value={area.id}>{area.hunt_area}</MenuItem>
+                                })}
 
                             </Select>
                     </FormControl>

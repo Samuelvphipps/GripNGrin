@@ -12,7 +12,12 @@ function* fetchHuntAreas(){
         
         // console.log('in huntAreas SAGA with a server return of:', huntAreas.data);
         //send to Redux
-
+        
+        yield put({
+            type: 'SET_HUNT_AREAS',
+            payload: huntAreas.data
+        });
+        
     } catch (err){
         //catch error
         console.error('in fetchHuntAreas SAGA error:', err);
