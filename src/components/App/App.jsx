@@ -16,10 +16,13 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
+import LandingPage from '../Z_OldComponents/LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Home from '../Home/Home';
+import NewPost from '../NewPost/NewPost';
+import PostDetails from '../PostDetails/PostDetails';
+import EditPost from '../EditPost/EditPost';
 
 import './App.css';
 
@@ -83,7 +86,7 @@ function App() {
             exact
             path="/newpost"
             >
-
+                <NewPost />
             </ProtectedRoute>
 
 
@@ -95,6 +98,7 @@ function App() {
             exact
             path="/post/:id"
             >
+                <PostDetails />
             </ProtectedRoute>
             
             {/* edit/ ensure userid verification */}
@@ -102,6 +106,7 @@ function App() {
             exact
             path="/post/edit/:id"
             >
+                <EditPost />
             </ProtectedRoute>
 
             {/* --STRETCH: PROFILE PAGE */}
