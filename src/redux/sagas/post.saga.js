@@ -6,39 +6,45 @@ import FormData from 'form-data';
 
 //Add post saga
 function* addPost(action) {
-    console.log('in addPost saga with payload of:', action.payload);
+    // console.log('in addPost saga with payload of:', action.payload);
+
     //create payload object
     let data=action.payload;
     //new formdata for payload to multer and router
     let formData = new FormData();
-    // formData.append('post_img', data.image);
-    // formData.append('date', data.date);
-    // formData.append('huntArea', data.huntArea);
-    // formData.append('',)
-    // formData.append('',)
-    // formData.append('',)
-    // formData.append('',)
-}
+    formData.append('post_img', data.image);
+    formData.append('date_of_hunt', data.date);
+    formData.append('hunt_area_id', data.huntAreaId);
+    formData.append('land_type', data.landType);
+    formData.append('title', data.postTitle);
+    formData.append('species', data.species);
+    formData.append('content', data.story);
+    formData.append('success', data.successful);
+    formData.append('weaponType', data.weaponType);
 
-//fetch hunt areas
-function* fetchHuntAreas(){
-    console.log('in fetchHuntArea SAGA');
+    //post to server
 
-    //get huntareas from server
     try{
+        //send FormData to server for db query
+        yield axios.post('/api/posts', formData, {
+            //must include this header, it is what Multer uses to id file
+            headers:{
+                headers: { "Content-Type": "multipart/form-data" },
+            }
+        });
 
-    } catch (err){
-        //catch error
-        console.error('in fetchHuntAreas SAGA error:', err);
+        //get posts redux and rerender after store is updated
+
+    } catch (err) {
+        console.error('in addItem SAGA error:', err);
     }
-
-
+    // console.log('in addPost saga and formData is:', formData);
 }
+
+
 
 function* postSaga() {
   yield takeEvery('ADD_POST', addPost);
-
-  yield takeEvery('FETCH_HUNT_AREAS', fetchHuntAreas)
 }
 
 export default postSaga;
