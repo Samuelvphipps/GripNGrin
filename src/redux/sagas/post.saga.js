@@ -41,10 +41,31 @@ function* addPost(action) {
     // console.log('in addPost saga and formData is:', formData);
 }
 
+function* fetchPosts(){
+    console.log('in fetchPosts SAGA');
+
+    try{
+        //Get posts from server
+        let posts = yield axios.get('/api/posts');
+
+        console.log('response from server in posts get is:', posts.data);
+        //get posts redux and rerender after store is updated
+
+    } catch (err) {
+        console.error('in fetchPosts SAGA error:', err);
+    }
+
+}
 
 
 function* postSaga() {
-  yield takeEvery('ADD_POST', addPost);
+    //add post
+    yield takeEvery('ADD_POST', addPost);
+
+    //Fetch posts
+    yield takeEvery('FETCH_POSTS', fetchPosts);
+
+
 }
 
 export default postSaga;

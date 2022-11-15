@@ -27,8 +27,29 @@ const upload = multer({
 //location url '/api/posts'
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    //recieve information and test reciept
+    // console.log('in /api/posts GET');
+    
+    //sql text
+    let sqlText = `
+        SELECT "user"."username", "posts"."id", "posts"."title", "posts"."species",
+            "posts"."date_of_hunt", "posts"."success", "posts"."picture", "posts"."content", 
+            "posts"."created", "posts"."land_type", "hunt_area"."hunt_area" 
+        FROM "user" 
+        JOIN "posts"
+            ON "user"."id" = "posts"."user_id"
+        JOIN "hunt_area"
+            ON "posts"."hunt_area_id" = "hunt_area"."id";
+    `;
 
+    //Pool.query from DB and send back to SAGA
+    pool.query(sqlText)
+        .then(dbRes => {
+            res.send(dbRes.rows);
+        })
+        .catch(err => {
+            console.error('in /api/posts GET Error', err);
+            res.sendStatus(500);
+        });
 
   // GET route code here
 });
