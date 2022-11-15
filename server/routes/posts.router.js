@@ -46,7 +46,8 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
     //sqlText using params to protect the DB
     let sqlText = `
     INSERT INTO "posts"
-	    ("title", "species", "hunt_area_id", "date_of_hunt", "success", "picture", "content", "user_id", "land_type")
+	    ("title", "species", "hunt_area_id", "date_of_hunt", "success", 
+        "picture", "content", "user_id", "land_type")
     VALUES
         ($1, $2, $3, $4, $5, $6, $7, $8, $9);
     `;
@@ -66,6 +67,14 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
 
     console.log('sql params', sqlParams);
     //pool.query
+    pool.query(sqlText, sqlParams)
+        .then(result => {
+             res.sendStatus(201);
+        })
+        .catch(err => {
+            console.error('in posts POST error:', err);
+            res.sendStatus(500);
+        })
 });
 
 module.exports = router;
