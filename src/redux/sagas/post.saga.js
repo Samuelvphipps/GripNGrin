@@ -22,7 +22,17 @@ function* addPost(action) {
 
 //fetch hunt areas
 function* fetchHuntAreas(){
-    
+    console.log('in fetchHuntArea SAGA');
+
+    //get huntareas from server
+    try{
+
+    } catch (err){
+        //catch error
+        console.error('in fetchHuntAreas SAGA error:', err);
+    }
+
+
 }
 
 function* postSaga() {

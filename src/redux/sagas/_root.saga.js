@@ -3,7 +3,7 @@ import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import postSaga from './post.saga';
-
+import huntAreasSaga from './huntAreas.saga';
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -18,5 +18,7 @@ export default function* rootSaga() {
     userSaga(),
     //import postsaga function and listener to connect to saga
     postSaga(),
+    //huntAreasSaga
+    huntAreasSaga(),
   ]);
 }
