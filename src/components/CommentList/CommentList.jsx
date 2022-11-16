@@ -14,16 +14,14 @@ function CommentList ({post}) {
     //set up useDispatch
     const dispatch = useDispatch();
 
+    console.log('post id is:', post);
+    
     //get comments information
-    useEffect(()=>{
-        //fetch comments through SAGA
-        dispatch({
-            type: 'FETCH_COMMENTS',
-            payload: post.id
-        });
-    }, []);
+    // useEffect(()=>{
+  
+    // }, []);
 
-    console.log('post id is:', post.id);
+
 
 
 

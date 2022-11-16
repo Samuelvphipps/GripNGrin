@@ -16,8 +16,8 @@ function* addComment(action){
         yield axios.post('/api/comments', action.payload);
 
         
-    } catch (err) {
-        console.error('in commentsSaga error and error is:', err);
+    } catch {
+        console.error('in commentsSaga error');
     }
 };
 
@@ -26,9 +26,9 @@ function* fetchComments(action) {
 
     try{
         const comments = yield axios.get(`/api/comments/${action.payload}`);
-
-    } catch (err){
-        console.error('in fetchComments SAGA error and error is:', err);
+        console.log('comments retrieved from server in SAGA are:', comments.data);
+    } catch{
+        console.error('in fetchComments SAGA error');
     }
 
 }

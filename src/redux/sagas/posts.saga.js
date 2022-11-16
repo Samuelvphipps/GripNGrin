@@ -73,7 +73,7 @@ function* fetchSelectedPost(action){
         //get the selected post from the Database
         let singlePost = yield axios.get(`/api/posts/${action.payload}`)
         // console.log('single post in saga is:', singlePost.data[0]);
-
+        
         //send selected post information to redux
         yield put({
             type: 'SET_SELECTED_POST',

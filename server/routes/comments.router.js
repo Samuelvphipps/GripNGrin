@@ -9,10 +9,26 @@ const {
  * GET route template
  */
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-  // GET route code here
-  console.log('in comments GET and post id is:', req.params.id);
+    // GET route code here
+    console.log('in comments GET and post id is:', req.params.id);
 
-  
+    //sql query text
+    let sqlText =`
+        SELECT * FROM "comments"
+        WHERE "post_id" = $1;
+    `;
+    
+    //sql query
+    pool.query(sqlText, [req.params.id])
+        .then(dbRes => {
+            res.send(dbRes.rows);
+        })
+        .catch(err => {
+            console.error('in comments GET error:', err);
+            res.sendStatus(500);
+        })
+
+
 });
 
 /**

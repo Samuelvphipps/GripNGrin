@@ -21,6 +21,12 @@ function PostDetails(){
             type: 'FETCH_SELECTED_POST',
             payload: params.id
         });
+
+            //fetch comments through SAGA
+            dispatch({
+            type: 'FETCH_COMMENTS',
+            payload: params.id
+        });
         //set the params id here so if the url switches use effect re-runs and gets the new post by id
     }, [params.id]);
 
