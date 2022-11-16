@@ -14,16 +14,12 @@ function CommentList ({post}) {
     //set up useDispatch
     const dispatch = useDispatch();
 
-    console.log('post id is:', post);
-    
-    //get comments information
-    // useEffect(()=>{
-  
-    // }, []);
+    // console.log('post id is:', post);
 
+    //get comments from reducer
+    const comments = useSelector(store => store.comments.commentsReducer);
 
-
-
+    console.log('commentsreducer redux store in list:', comments);
 
     //local state for comment
     const [content, setContent] = useState('');

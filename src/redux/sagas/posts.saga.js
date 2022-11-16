@@ -34,8 +34,7 @@ function* addPost(action) {
         });
 
         yield put({
-            type: 'FETCH_POSTS',
-            payload: posts.data
+            type: 'FETCH_POSTS'
         });
 
         //get posts redux and rerender after store is updated

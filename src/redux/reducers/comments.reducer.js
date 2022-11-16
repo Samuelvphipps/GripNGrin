@@ -2,6 +2,11 @@ import { combineReducers } from 'redux';
 
 
 const commentsReducer = (state=[], action) =>{
+// SWITCH FOR REDUCER TYPE
+    switch (action.type){
+        case 'SET_COMMENTS':
+            return action.payload;
+    };
 
     return state;
 };

@@ -14,7 +14,12 @@ function* addComment(action){
     try{
         //post comment to server
         yield axios.post('/api/comments', action.payload);
-
+        console.log('action.payload in post', action.payload);
+        //get updated comments
+        yield put({
+            type: 'FETCH_COMMENTS',
+            payload: action.payload.post_id,
+        });
         
     } catch {
         console.error('in commentsSaga error');
@@ -22,11 +27,19 @@ function* addComment(action){
 };
 
 function* fetchComments(action) {
-    console.log('in fetchComments SAGA and payload is:', action.payload);
+    // console.log('in fetchComments SAGA and payload is:', action.payload);
 
     try{
+        //get comments from server (DB)
         const comments = yield axios.get(`/api/comments/${action.payload}`);
-        console.log('comments retrieved from server in SAGA are:', comments.data);
+        // console.log('comments retrieved from server in SAGA are:', comments.data);
+
+        //send response to redux
+        yield put({
+            type: 'SET_COMMENTS',
+            payload: comments.data
+        });
+
     } catch{
         console.error('in fetchComments SAGA error');
     }
