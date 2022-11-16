@@ -36,7 +36,7 @@ function PostItems({post}){
                     </div>
                 </div>
                 <div>
-                    <p>{post.content}</p>
+                    <p>{post.content.substring(0, 240) + '...'}</p>
                 </div>
                 <button>LIKE!</button>
             </article>
