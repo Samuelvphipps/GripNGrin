@@ -61,7 +61,7 @@ function PostDetails(){
         </div>
         <button>LIKE!</button>
     </article>
-    <CommentList />
+    <CommentList post={post}/>
     </>
     );
 };
