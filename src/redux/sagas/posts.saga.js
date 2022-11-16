@@ -62,6 +62,24 @@ function* fetchPosts(){
 
 }
 
+function* fetchSelectedPost(action){
+    // console.log('in fetchSinglePost saga');
+    try {
+        //get the selected post from the Database
+        let singlePost = yield axios.get(`/api/posts/${action.payload}`)
+        console.log('single post in saga is:', singlePost.data[0]);
+
+        //send selected post information to redux
+        yield put({
+            type: 'SET_SELECTED_POST',
+            payload: singlePost.data[0]
+        });
+        
+    } catch (err){
+        console.error('in fetchSinglePost saga error', err);
+    }
+
+}
 
 function* postsSaga() {
     //add post
@@ -69,6 +87,9 @@ function* postsSaga() {
 
     //Fetch posts
     yield takeEvery('FETCH_POSTS', fetchPosts);
+
+    //fetch single post for the post details page
+    yield takeEvery('FETCH_SELECTED_POST', fetchSelectedPost)
 
 
 }
