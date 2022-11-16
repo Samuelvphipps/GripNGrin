@@ -9,7 +9,7 @@ const {
 //import multer for file reciept
 const multer  = require('multer');
 
-//set storage location and naming convention
+//set storage location and naming convention for image
 const storage = multer.diskStorage({
     destination: './public/images', 
     filename: function (req, file, cb) {
@@ -26,6 +26,12 @@ const upload = multer({
 
 //location url '/api/posts'
 
+router.get('/:id', rejectUnauthenticated, (req, res) =>{
+
+    
+})
+
+
 router.get('/', rejectUnauthenticated, (req, res) => {
     // console.log('in /api/posts GET');
     
@@ -33,7 +39,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     let sqlText = `
     SELECT "user"."username", "posts"."id", "posts"."title", "posts"."species",
         "posts"."date_of_hunt", "posts"."success", "posts"."picture", "posts"."content", 
-        "posts"."created", "posts"."land_type", "hunt_area"."hunt_area", "posts"."weapon_type" 
+        "posts"."created", "posts"."land_type", "hunt_area"."hunt_area", "posts"."weapon_type", "posts"."user_id" 
     FROM "user" 
     JOIN "posts"
 	    ON "user"."id" = "posts"."user_id"

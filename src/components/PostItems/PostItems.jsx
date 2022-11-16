@@ -1,8 +1,11 @@
 import './PostItems.css';
+import { useHistory } from 'react-router-dom';
 
 
 function PostItems({post}){
 
+    //use History setup
+    const history=useHistory();
 
     return(
         <li>
@@ -36,7 +39,7 @@ function PostItems({post}){
                     </div>
                 </div>
                 <div>
-                    <p>{post.content}</p>
+                    <p className='postContent' onClick={()=>history.push(`/post/${post.id}`)}>{post.content.substring(0, 240) + '...'}</p>
                 </div>
                 <button>LIKE!</button>
             </article>

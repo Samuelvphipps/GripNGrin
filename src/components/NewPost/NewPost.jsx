@@ -65,7 +65,7 @@ function NewPost(){
             type: 'ADD_POST',
             payload: payload
         });
-
+        // alert('Your post is live!');
         history.push('/home');
     };
     
