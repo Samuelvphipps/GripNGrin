@@ -22,10 +22,10 @@ function* addComment(action){
 };
 
 function* fetchComments(action) {
-    console.log('in fetchComments SAGA');
+    console.log('in fetchComments SAGA and payload is:', action.payload);
 
     try{
-        const comments = yield axios.get('/api/comments', action.payload);
+        const comments = yield axios.get(`/api/comments/${action.payload}`);
 
     } catch (err){
         console.error('in fetchComments SAGA error and error is:', err);

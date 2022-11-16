@@ -23,6 +23,8 @@ function CommentList ({post}) {
         });
     }, []);
 
+    console.log('post id is:', post.id);
+
 
 
     //local state for comment

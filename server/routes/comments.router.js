@@ -8,8 +8,11 @@ const {
 /**
  * GET route template
  */
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
   // GET route code here
+  console.log('in comments GET and post id is:', req.params.id);
+
+  
 });
 
 /**

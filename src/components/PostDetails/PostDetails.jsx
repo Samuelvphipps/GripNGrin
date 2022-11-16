@@ -24,6 +24,7 @@ function PostDetails(){
         //set the params id here so if the url switches use effect re-runs and gets the new post by id
     }, [params.id]);
 
+    // console.log('post:', post);
     
     return(
         <>

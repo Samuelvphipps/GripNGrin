@@ -53,7 +53,7 @@ function* fetchPosts(){
         //Get posts from server
         let posts = yield axios.get('/api/posts');
 
-        console.log('response from server in posts get is:', posts.data);
+        // console.log('response from server in posts get is:', posts.data);
         
         //send posts to redux store\
         yield put({
@@ -72,7 +72,7 @@ function* fetchSelectedPost(action){
     try {
         //get the selected post from the Database
         let singlePost = yield axios.get(`/api/posts/${action.payload}`)
-        console.log('single post in saga is:', singlePost.data[0]);
+        // console.log('single post in saga is:', singlePost.data[0]);
 
         //send selected post information to redux
         yield put({
