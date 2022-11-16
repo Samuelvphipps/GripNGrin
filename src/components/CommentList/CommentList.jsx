@@ -7,6 +7,8 @@ import CommentItem from "../CommentItem/CommentItem";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import './comments.css';
+
 
  
 
@@ -19,7 +21,7 @@ function CommentList ({post}) {
     //get comments from reducer
     const comments = useSelector(store => store.comments.commentsReducer);
 
-    console.log('commentsreducer redux store in list:', comments);
+    // console.log('commentsreducer redux store in list:', comments);
 
     //local state for comment
     const [content, setContent] = useState('');
@@ -45,14 +47,17 @@ function CommentList ({post}) {
     return(
         <>
             <h1>Comments component</h1>
+                <div>
+                    {comments.map(comment => {
+                        return <CommentItem 
+                            key={comment.id} 
+                            comment={comment}
+                            comments={comments}
+                        />;
+                    })}
+                </div>
 
-                {comments.map(comment => {
-                    <CommentItem comment={comment}/>;
-                })}
-            
             <form onSubmit={newComment}>
-
-
                 <InputLabel>New Comment</InputLabel>
                 <TextareaAutosize 
                 onChange={(evt)=>setContent(evt.target.value)}

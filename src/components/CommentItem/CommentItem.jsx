@@ -1,17 +1,27 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 
-function CommentItem ({comment}){
+import CommentsLayer2 from '../CommentsLayer2/CommentsLayer2';
+import CommentToggle from '../CommentToggle/CommentToggle';
 
+function CommentItem ({comment, comments}){
 
-    //setup dispatch
-    const dispatch = useDispatch();
-
-    //set up toggle for conditional render
-    const [replyOpen, setReplyOpen] = useState(false);
 
     return(
-        <h3>Comment item component</h3>
+        <>
+            <div>
+                { comment.parent_comment_id ? <></> :
+                <><p>{comment.username} {comment.created}</p>
+                <p>{comment.content}</p></>
+            }
+            </div>
+            
+                {comments.map(comment2 =>{
+                    if(comment.id === comment2.parent_comment_id){
+                    return <CommentsLayer2 key={comment2.id} comment2={comment2}/>}
+                    else {return};
+                })}
+        
+            <CommentToggle comment={comment} />
+        </>
     );
 }
 

@@ -14,8 +14,12 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
     //sql query text
     let sqlText =`
-        SELECT * FROM "comments"
-        WHERE "post_id" = $1;
+    SELECT "comments"."id", "comments"."content", "comments"."created", 
+	    "comments"."parent_comment_id", "comments"."post_id", "user"."username" FROM "comments"
+    JOIN "user"
+	    ON "user"."id" = "comments"."user_id"
+    WHERE "post_id" = $1
+    ORDER BY "created";
     `;
     
     //sql query
