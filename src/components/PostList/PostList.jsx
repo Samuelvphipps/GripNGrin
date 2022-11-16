@@ -13,7 +13,7 @@ function PostList(){
             <h2>PostList</h2>
             <ul>
                 {posts.map((post) => 
-                    <PostItems post={post}/>
+                    <PostItems key={post.id} post={post}/>
                 )}
             </ul>
         </>
