@@ -33,6 +33,11 @@ function* addPost(action) {
             }
         });
 
+        yield put({
+            type: 'FETCH_POSTS',
+            payload: posts.data
+        });
+
         //get posts redux and rerender after store is updated
 
     } catch (err) {
@@ -74,6 +79,8 @@ function* fetchSelectedPost(action){
             type: 'SET_SELECTED_POST',
             payload: singlePost.data[0]
         });
+
+
         
     } catch (err){
         console.error('in fetchSinglePost saga error', err);
