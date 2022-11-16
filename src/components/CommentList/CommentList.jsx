@@ -1,7 +1,12 @@
 import CommentItem from "../CommentItem/CommentItem";
-
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+ 
 
 function CommentList () {
+
+
+    
 
     return(
         <>

@@ -1,6 +1,7 @@
 import PostItems from "../PostItems/PostItems";
 import { useSelector } from 'react-redux';
 
+
 function PostList(){
 
     //pull posts from the redux store
