@@ -1,10 +1,9 @@
---DROP TABLE "user", "hunt_area", "liked_post", "posts", "comments";
 
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
-    "created_date" DATE DEFAULT 'now()',
+    "created_date" DATE DEFAULT CURRENT_DATE,
     "profile_pic" VARCHAR(255),
     "about me" VARCHAR,
     "access_level" INT DEFAULT '1'
@@ -26,10 +25,12 @@ CREATE TABLE "posts" (
 	"success" BOOLEAN,
 	"picture" VARCHAR,
 	"content" VARCHAR,
-	"created" DATE DEFAULT 'now()',
+	"created" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	"user_id" INT REFERENCES "user",
 	"land_type" varchar(255),
-	"Flagged" BOOLEAN DEFAULT 'false');
+	"flagged" BOOLEAN DEFAULT 'false',
+	"weapon_type" VARCHAR
+	);
 
 
 
@@ -42,7 +43,7 @@ CREATE TABLE "liked_post" (
 CREATE TABLE "comments" (
 	"id" SERIAL PRIMARY KEY,
 	"content" VARCHAR,
-	"created" DATE DEFAULT 'now()',
+	"created" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	"user_id" INT REFERENCES "user",
 	"post_id" INT REFERENCES "posts",
 	"parent_comment_id" INT);
@@ -63,9 +64,4 @@ VALUES
 	(156),(183),(159),(157),(152),(604),(114),(260),('Red Lake Reservation');
 	
 
-
-
-
-
-
-
+	

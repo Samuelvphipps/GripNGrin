@@ -1,8 +1,11 @@
+//mui
+import Button from '@mui/material/Button';
+
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import Comments from '../Comments/Comments';
+import CommentList from '../CommentList/CommentList';
 
 function PostDetails(){
 
@@ -21,9 +24,16 @@ function PostDetails(){
             type: 'FETCH_SELECTED_POST',
             payload: params.id
         });
+
+            //fetch comments through SAGA
+            dispatch({
+            type: 'FETCH_COMMENTS',
+            payload: params.id
+        });
         //set the params id here so if the url switches use effect re-runs and gets the new post by id
     }, [params.id]);
 
+    // console.log('post:', post);
     
     return(
         <>
@@ -61,7 +71,7 @@ function PostDetails(){
         </div>
         <button>LIKE!</button>
     </article>
-    <Comments />
+    <CommentList post={post}/>
     </>
     );
 };

@@ -4,6 +4,7 @@ import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import postsSaga from './posts.saga';
 import huntAreasSaga from './huntAreas.saga';
+import commentsSaga from './comments.saga';
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -20,5 +21,6 @@ export default function* rootSaga() {
     postsSaga(),
     //huntAreasSaga
     huntAreasSaga(),
+    commentsSaga(), // import comments saga and add to root
   ]);
 }

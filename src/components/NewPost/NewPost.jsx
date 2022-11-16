@@ -65,7 +65,7 @@ function NewPost(){
             type: 'ADD_POST',
             payload: payload
         });
-        // alert('Your post is live!');
+        alert('Your post is live!');
         history.push('/home');
     };
     
@@ -152,8 +152,6 @@ function NewPost(){
                 <section>
                 <TextareaAutosize
                     required
-                    maxRows={4}
-                    aria-label="maximum height"
                     placeholder="Tell the story..."
                     style={{ width: 500, height:200 }}
                     value={story} onChange={(evt)=>setStory(evt.target.value)}
