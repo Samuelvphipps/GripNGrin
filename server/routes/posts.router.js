@@ -27,8 +27,24 @@ const upload = multer({
 //location url '/api/posts'
 
 router.get('/:id', rejectUnauthenticated, (req, res) =>{
-
+    console.log('in GET single post');
+    console.log('req.params', req.params.id);
     
+    //set up sql text for query
+    let sqlText =`
+        SELECT * FROM  "posts"
+        WHERE "id" = $1;
+    `;
+
+    pool.query(sqlText, [req.params.id])
+        .then(dbRes => {
+            res.send(dbRes.rows);
+        })
+        .catch(err => {
+            console.error('in GET single post error', err);
+            res.sendStatus(500);
+        });
+
 })
 
 

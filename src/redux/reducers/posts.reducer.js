@@ -1,4 +1,4 @@
-
+import { combineReducers } from 'redux';
 
 
 const postsReducer = (state=[], action) =>{
@@ -11,4 +11,16 @@ const postsReducer = (state=[], action) =>{
     return state;
 };
 
-export default postsReducer;
+const selectedPostReducer = ( state={}, action) =>{
+    //set state with single selected post
+    switch(action.type) {
+        case 'SET_SELECTED_POST':
+            return action.payload;
+    };
+return state;
+}
+
+export default combineReducers({
+    postsReducer,
+    selectedPostReducer
+});
