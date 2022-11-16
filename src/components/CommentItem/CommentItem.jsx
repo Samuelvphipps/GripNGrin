@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-function CommentItem (){
+function CommentItem ({comment}){
 
 
     //setup dispatch
     const dispatch = useDispatch();
-    
+
     //set up toggle for conditional render
     const [replyOpen, setReplyOpen] = useState(false);
 

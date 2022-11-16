@@ -45,8 +45,14 @@ function CommentList ({post}) {
     return(
         <>
             <h1>Comments component</h1>
-            <CommentItem />
+
+                {comments.map(comment => {
+                    <CommentItem comment={comment}/>;
+                })}
+            
             <form onSubmit={newComment}>
+
+
                 <InputLabel>New Comment</InputLabel>
                 <TextareaAutosize 
                 onChange={(evt)=>setContent(evt.target.value)}
