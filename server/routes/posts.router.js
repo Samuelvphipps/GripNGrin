@@ -60,7 +60,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     JOIN "posts"
 	    ON "user"."id" = "posts"."user_id"
     JOIN "hunt_area"
-	    ON "posts"."hunt_area_id" = "hunt_area"."id";
+	    ON "posts"."hunt_area_id" = "hunt_area"."id"
+    ORDER BY "posts"."created" DESC;
     `;
 
     //Pool.query from DB and send back to SAGA

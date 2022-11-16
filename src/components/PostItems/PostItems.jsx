@@ -1,11 +1,20 @@
+//mui
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+
 import './PostItems.css';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 function PostItems({post}){
 
     //use History setup
     const history=useHistory();
+
+    //get user information for conditional render
+    const user = useSelector(store => store.user);
+    console.log('user', user);
 
     return(
         <li>
@@ -22,6 +31,14 @@ function PostItems({post}){
                                 <h3>{post.title}</h3>
                                 <p>{post.username}</p>
                                 <p>{post.created}</p>
+                                { user.id===post.user_id ?
+                                <Stack spacing={2} direction="row">
+                                    <Button variant="text">Edit</Button>
+                                    <Button variant="text">Delete</Button>
+                                </Stack>
+                                :
+                                null
+                                }
                             </div>
                         </div>
                         <div className='dataContainer'>
