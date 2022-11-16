@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import Comments from '../Comments/Comments';
+import CommentList from '../CommentList/CommentList';
 
 function PostDetails(){
 
@@ -61,7 +61,7 @@ function PostDetails(){
         </div>
         <button>LIKE!</button>
     </article>
-    <Comments />
+    <CommentList />
     </>
     );
 };
