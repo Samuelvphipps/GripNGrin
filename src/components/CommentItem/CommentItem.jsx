@@ -32,8 +32,9 @@ function CommentItem ({comment, post, comments}){
 
     return(
         <>
-                <CommentEditToggle user={user} post={post} comment={comment} />
-                            
+                { comment.parent_comment_id ? null :
+                    <CommentEditToggle deleteComment={deleteComment} user={user} post={post} comment={comment} />
+                }           
                 {/* go to second layer comments where the comments have this comment as 
                 a parent comment */}
                 {comments.map(comment2 =>{
