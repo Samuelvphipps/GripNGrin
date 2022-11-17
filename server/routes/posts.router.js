@@ -27,18 +27,26 @@ const upload = multer({
 //location url '/api/posts'
 
 router.get('/:id', rejectUnauthenticated, (req, res) =>{
-    console.log('in GET single post');
-    console.log('req.params', req.params.id);
+    // console.log('in GET single post');
+    // console.log('req.params', req.params.id);
     
     //set up sql text for query
     let sqlText =`
-        SELECT * FROM  "posts"
-        WHERE "id" = $1;
+        SELECT "posts"."id", "posts"."title", "posts"."hunt_area_id", "posts"."success",
+            "posts"."picture", "posts"."species", "posts"."date_of_hunt", "hunt_area"."hunt_area", 
+            "posts"."content", "posts"."created", "posts"."land_type", "posts"."weapon_type", 
+            "user"."username" FROM "posts"
+        JOIN "user"
+            ON "posts"."user_id" = "user"."id"
+        JOIN "hunt_area"
+            ON "hunt_area"."id" = "posts"."hunt_area_id"
+        WHERE "posts"."id" = $1;
     `;
 
     pool.query(sqlText, [req.params.id])
         .then(dbRes => {
             res.send(dbRes.rows);
+            console.log(dbRes.rows);
         })
         .catch(err => {
             console.error('in GET single post error', err);
@@ -121,5 +129,28 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
             res.sendStatus(500);
         })
 });
+
+router.delete('/', rejectUnauthenticated, (req, res) => {
+    console.log('in /api/posts DELETE with payload of:', Number(req.query.user_id), req.user.id);
+    //make sure the owner of the post is the one deleting it
+    if(req.user.id === Number(req.query.user_id)){
+        //set sql text if user matches the post owner
+        let sqlText = `
+            DELETE FROM "posts"
+            WHERE "id" = $1;
+        `;
+        console.log('in delete conditional')
+        //pool.query and send the post_id and the sql text
+        pool.query(sqlText, [req.query.post_id])
+            .then(dbres => {
+                res.sendStatus(200)
+            })
+            .catch(err => {
+                console.error('in /api/posts DELETE error', err);
+                res.sendStatus(500);
+            })
+    }
+    else{res.sendStatus(403)};
+})
 
 module.exports = router;

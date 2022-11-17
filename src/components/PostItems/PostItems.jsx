@@ -10,11 +10,29 @@ import { useDispatch, useSelector } from 'react-redux';
 function PostItems({post}){
 
     //use History setup
-    const history=useHistory();
+    const history = useHistory();
+    const dispatch = useDispatch();
 
     //get user information for conditional render
     const user = useSelector(store => store.user);
-    console.log('user', user);
+    // console.log('individual post information logged:', post);
+
+    //Delete selected post information
+    const deletePost = () => {
+        // console.log('in deletePost with id of', post.id);
+        //dispatch delete request to saga
+        dispatch({
+            type:'DELETE_POST',
+            payload: {post_id: post.id, user_id: post.user_id}
+        });
+        
+    };
+    
+    const pushToDetails = () => {
+        console.log('in pushtodetails fn')
+        history.push(`/post/${post.id}`)
+    };
+
 
     return(
         <li>
@@ -34,7 +52,7 @@ function PostItems({post}){
                                 { user.id===post.user_id ?
                                 <Stack spacing={2} direction="row">
                                     <Button variant="text">Edit</Button>
-                                    <Button variant="text">Delete</Button>
+                                    <Button onClick={deletePost} variant="text">Delete</Button>
                                 </Stack>
                                 :
                                 null
@@ -56,7 +74,7 @@ function PostItems({post}){
                     </div>
                 </div>
                 <div>
-                    <p className='postContent' onClick={()=>history.push(`/post/${post.id}`)}>{post.content.substring(0, 240) + '...'}</p>
+                    <p className='postContent' onClick={pushToDetails}>{post.content.substring(0, 240) + '...'}</p>
                 </div>
                 <button>LIKE!</button>
             </article>

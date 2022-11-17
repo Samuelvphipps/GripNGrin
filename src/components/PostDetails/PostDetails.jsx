@@ -1,5 +1,7 @@
 //mui
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+
 
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -12,9 +14,11 @@ function PostDetails(){
     //setup useParams and useDispatch
     const params = useParams();
     const dispatch = useDispatch();
+    const history = useHistory();
 
-    //useSelecter to get singlepost from redux
+    //useSelecter to get singlepost from redux and user from redux
     const post = useSelector(store => store.posts.selectedPostReducer);
+    const user = useSelector(store => store.user);
     // console.log('selected post is:', selectedPost);
 
     useEffect(()=>{
@@ -25,15 +29,35 @@ function PostDetails(){
             payload: params.id
         });
 
-            //fetch comments through SAGA
-            dispatch({
+        dispatch({
             type: 'FETCH_COMMENTS',
             payload: params.id
-        });
+        })
+            
         //set the params id here so if the url switches use effect re-runs and gets the new post by id
     }, [params.id]);
 
+    const deletePost = () => {
+        // console.log('in deletePost with id of', post.id);
+        //dispatch delete request to saga
+        dispatch({
+            type:'DELETE_POST',
+            payload: {post_id: post.id, user_id: post.user_id}
+        });
+
+        console.log('selected post:', post);
+       
+
+        history.push('/home');
+
     // console.log('post:', post);
+    }
+
+    console.log('in single post with post of:', post);
+
+    if(!post.id){
+        return <h1>404 Page Not Found</h1>;
+    }
     
     return(
         <>
@@ -50,6 +74,14 @@ function PostDetails(){
                         <h3>{post.title}</h3>
                         <p>{post.username}</p>
                         <p>{post.created}</p>
+                        { user.id===post.user_id ?
+                                <Stack spacing={2} direction="row">
+                                    <Button variant="text">Edit</Button>
+                                    <Button onClick={deletePost} variant="text">Delete</Button>
+                                </Stack>
+                                :
+                                null
+                            }
                     </div>
                 </div>
                 <div className='dataContainer'>
