@@ -1,9 +1,17 @@
 //mui
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import Input from '@mui/material/Input';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import TextareaAutosize from '@mui/base/TextareaAutosize';
 
 
-import { useEffect } from 'react';
+
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -37,23 +45,44 @@ function EditPost(){
         //set the params id here so if the url switches use effect re-runs and gets the new post by id
     }, [params.id]);
 
-    const deletePost = () => {
-        // console.log('in deletePost with id of', post.id);
-        //dispatch delete request to saga
-        dispatch({
-            type:'DELETE_POST',
-            payload: {post_id: post.id, user_id: post.user_id}
-        });
-
-        console.log('selected post:', post);
-       
-        //after delete head home
-        history.push('/home');
-
-    // console.log('post:', post);
-    }
+    const [postTitle, setPostTitle] = useState(post.title);
+    const [species, setSpecies] = useState(post.species);
+    const [successful, setSuccessful] = useState(post.success);
+    const [huntAreaId, setHuntAreaId] = useState(post.hunt_area);
+    const [weaponType, setWeaponType] = useState(post.weapon_type);
+    const [landType, setLandType] = useState(post.land_type);
+    const [story, setStory] = useState(post.content);
 
     console.log('in single post with post of:', post);
+
+
+        //todo: consolidate some data with spreaders - STRETCH
+
+    const submitHunt = (evt) => {
+        evt.preventDefault();
+
+        //create payload of form data to send to saga (destructured)
+        let payload = {
+            postTitle,
+            image,
+            date: post.date_of_hunt,
+            species,
+            successful,
+            huntAreaId,
+            weaponType,
+            landType,
+            story,
+        }
+
+        // console.log('payload object:', payload);
+
+        //dispatch payload to SAGA
+        dispatch({
+            type: 'EDIT_POST',
+            payload: payload
+        });
+        history.push('/home');
+    };
 
     //if they change url params to a post id that doesnt exist anymore (i.e. deleted they will see 404)
     // TODO = figure out how to redirect home without causing doubleclick async problem on home page
@@ -63,7 +92,7 @@ function EditPost(){
     
     return(
         <>
-        <article >
+        <form >
         <div className='postBox'>
             <div>
                 <div className="imgContainer">
@@ -73,17 +102,9 @@ function EditPost(){
             <div className='bodyBox'>
                 <div>
                     <div className='titleRow'>
-                        <h3>{post.title}</h3>
+                        <h3><Input type='Text' placeholder='Post Title' value={postTitle} onChange={(evt)=>setPostTitle(evt.target.value)} required/></h3>
                         <p>{post.username}</p>
                         <p>{post.created}</p>
-                        { user.id===post.user_id ?
-                                <Stack spacing={2} direction="row">
-                                    <Button onClick={()=>history.push(`/post/edit/${post.id}`)} variant="text">Edit</Button>
-                                    <Button onClick={deletePost} variant="text">Delete</Button>
-                                </Stack>
-                                :
-                                null
-                            }
                     </div>
                 </div>
                 <div className='dataContainer'>
@@ -104,7 +125,7 @@ function EditPost(){
             <p className='postContent' >{post.content}</p>
         </div>
         <button>LIKE!</button>
-    </article>
+    </form>
     <CommentList post={post}/>
     </>
     );
