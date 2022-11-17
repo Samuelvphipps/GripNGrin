@@ -25,7 +25,7 @@ function CommentList ({post}) {
 
     //local state for comment
     const [content, setContent] = useState('');
-    const [parentCommentId, setParentCommentId] = useState(null);
+
 
     const newComment = (evt) => {
         //prevent default
@@ -38,7 +38,7 @@ function CommentList ({post}) {
             payload: {
                 post_id: post.id,
                 content,
-                parent_comment_id: parentCommentId
+                parent_comment_id: null
             }
         });
     }
@@ -50,6 +50,7 @@ function CommentList ({post}) {
                 <div>
                     {comments.map(comment => {
                         return <CommentItem 
+                            post={post}
                             key={comment.id} 
                             comment={comment}
                             comments={comments}

@@ -30,7 +30,7 @@ function* fetchComments(action) {
     // console.log('in fetchComments SAGA and payload is:', action.payload);
 
     try{
-        //get comments from server (DB)
+        //get comments from server (DB) using post id
         const comments = yield axios.get(`/api/comments/${action.payload}`);
         // console.log('comments retrieved from server in SAGA are:', comments.data);
 
@@ -44,6 +44,26 @@ function* fetchComments(action) {
         console.error('in fetchComments SAGA error');
     }
 
+};
+
+function* deleteComment(action){
+    console.log('in deleteComment SAGA');
+
+    console.log('in delete comment with data of:', action.payload);
+
+    try{
+        //send delete request with comment id
+        yield axios.delete(`/api/comments/${action.payload.comment_id}`);
+
+        //get updated comment list
+        yield put({
+            type: 'FETCH_COMMENTS',
+            payload: action.payload.post_id,
+        });
+
+    } catch {
+        console.error('in deleteComment SAGA error');
+    }
 }
 
 function* commentsSaga() {
@@ -53,6 +73,8 @@ function* commentsSaga() {
     //fetchComments
     yield takeEvery('FETCH_COMMENTS', fetchComments);
 
+    //delete comment
+    yield takeEvery('DELETE_COMMENT', deleteComment);
 
 }
 

@@ -47,7 +47,7 @@ function PostDetails(){
 
         console.log('selected post:', post);
        
-
+        //after delete head home
         history.push('/home');
 
     // console.log('post:', post);
@@ -55,6 +55,8 @@ function PostDetails(){
 
     console.log('in single post with post of:', post);
 
+    //if they change url params to a post id that doesnt exist anymore (i.e. deleted they will see 404)
+    // TODO = figure out how to redirect home without causing doubleclick async problem on home page
     if(!post.id){
         return <h1>404 Page Not Found</h1>;
     }
