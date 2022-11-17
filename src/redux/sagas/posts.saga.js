@@ -4,6 +4,7 @@ import axios from 'axios';
 //IMPORT FORM DATA FOR FILE SEND
 import FormData from 'form-data';
 
+// end point: /api/posts
 //Add post saga
 function* addPost(action) {
     // console.log('in addPost saga with payload of:', action.payload);
@@ -11,6 +12,7 @@ function* addPost(action) {
     //create payload object
     let data=action.payload;
     //new formdata for payload to multer and router
+    //THERE HAS GOT TO BE A BETTER WAY TO DO THIS
     let formData = new FormData();
     formData.append('post_img', data.image);
     formData.append('date_of_hunt', data.date);
@@ -39,14 +41,14 @@ function* addPost(action) {
 
         //get posts redux and rerender after store is updated
 
-    } catch (err) {
-        console.error('in addItem SAGA error:', err);
+    } catch {
+        console.error('in addItem SAGA error');
     }
     // console.log('in addPost saga and formData is:', formData);
 }
 
 function* fetchPosts(){
-    console.log('in fetchPosts SAGA');
+    // console.log('in fetchPosts SAGA');
 
     try{
         //Get posts from server
@@ -60,8 +62,8 @@ function* fetchPosts(){
             payload: posts.data
         });
 
-    } catch (err) {
-        console.error('in fetchPosts SAGA error:', err);
+    } catch {
+        console.error('in fetchPosts SAGA error');
     }
 
 }
@@ -71,20 +73,38 @@ function* fetchSelectedPost(action){
     try {
         //get the selected post from the Database
         let singlePost = yield axios.get(`/api/posts/${action.payload}`)
-        // console.log('single post in saga is:', singlePost.data[0]);
+        console.log('single post in saga is:', singlePost.data[0]);
         
         //send selected post information to redux
+
         yield put({
             type: 'SET_SELECTED_POST',
             payload: singlePost.data[0]
         });
 
-
         
-    } catch (err){
-        console.error('in fetchSinglePost saga error', err);
-    }
+    } catch {
+        console.error('in fetchSelectedPost saga error');
 
+}}
+
+function* deletePost(action){
+    console.log('in deletePost SAGA with payload of:', action.payload);
+
+    try{
+        //DELETE SELECTED POST
+        yield axios.delete(`/api/posts/`,{
+            params: action.payload
+        });
+
+        //refetch posts after delete
+        yield put({
+            type: 'FETCH_POSTS',
+        });
+
+    } catch {
+        console.error('in deletePost SAGA error');
+    }
 }
 
 function* postsSaga() {
@@ -95,7 +115,10 @@ function* postsSaga() {
     yield takeEvery('FETCH_POSTS', fetchPosts);
 
     //fetch single post for the post details page
-    yield takeEvery('FETCH_SELECTED_POST', fetchSelectedPost)
+    yield takeEvery('FETCH_SELECTED_POST', fetchSelectedPost);
+
+    //delete post with userid verification
+    yield takeEvery('DELETE_POST', deletePost);
 
 
 }
