@@ -29,6 +29,10 @@ function PostDetails(){
             payload: params.id
         });
 
+        dispatch({
+            type: 'FETCH_COMMENTS',
+            payload: params.id
+        })
             
         //set the params id here so if the url switches use effect re-runs and gets the new post by id
     }, [params.id]);
@@ -41,6 +45,7 @@ function PostDetails(){
             payload: {post_id: post.id, user_id: post.user_id}
         });
 
+        console.log('selected post:', post);
        
 
         history.push('/home');
