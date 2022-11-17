@@ -24,7 +24,7 @@ function CommentList ({post}) {
     // console.log('commentsreducer redux store in list:', comments);
 
     //local state for comment
-    const [content, setContent] = useState('');
+    const [comment, setComment] = useState('');
 
 
     const newComment = (evt) => {
@@ -37,10 +37,11 @@ function CommentList ({post}) {
             type: 'ADD_COMMENT',
             payload: {
                 post_id: post.id,
-                content,
+                comment,
                 parent_comment_id: null
             }
         });
+        setComment('')
     }
 
 
@@ -61,8 +62,8 @@ function CommentList ({post}) {
             <form onSubmit={newComment}>
                 <InputLabel>New Comment</InputLabel>
                 <TextareaAutosize 
-                onChange={(evt)=>setContent(evt.target.value)}
-                value={content}
+                onChange={(evt)=>setComment(evt.target.value)}
+                value={comment}
                 style={{ width: 400, height:100 }} 
                 required></TextareaAutosize>
                 <Input type='submit' name="postComment" />
