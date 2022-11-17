@@ -49,7 +49,7 @@ function* fetchComments(action) {
 function* deleteComment(action){
     console.log('in deleteComment SAGA');
 
-    console.log('in delete comment with data of:', action.payload);
+    // console.log('in delete comment with data of:', action.payload);
 
     try{
         //send delete request with comment id

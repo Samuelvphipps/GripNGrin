@@ -27,7 +27,7 @@ function CommentToggle({comment}){
         type: 'ADD_COMMENT',
         payload: {
             post_id: comment.post_id,
-            content: reply,
+            comment: reply,
             parent_comment_id: comment.id,
         }
     });
