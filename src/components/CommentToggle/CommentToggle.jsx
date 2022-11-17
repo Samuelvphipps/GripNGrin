@@ -34,6 +34,7 @@ function CommentToggle({comment}){
 
     //close the input
     setReplyOpen(false);
+    setReply('');
     }
 
     if (comment.parent_comment_id === null){

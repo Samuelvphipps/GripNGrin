@@ -10,14 +10,14 @@ const {
  */
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     // GET route code here
-    console.log('in comments GET and post id is:', req.params.id);
+    // console.log('in comments GET and post id is:', req.params.id);
 
     //sql query text
     let sqlText =`
-    SELECT "comments"."id", "comments"."content", "comments"."created", 
-	    "comments"."parent_comment_id", "comments"."post_id", "user"."username" FROM "comments"
+    SELECT "comments"."id", "comments"."content", "comments"."created", "comments"."user_id", 
+        "comments"."parent_comment_id", "comments"."post_id", "user"."username" FROM "comments"
     JOIN "user"
-	    ON "user"."id" = "comments"."user_id"
+        ON "user"."id" = "comments"."user_id"
     WHERE "post_id" = $1
     ORDER BY "created";
     `;
@@ -26,6 +26,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     pool.query(sqlText, [req.params.id])
         .then(dbRes => {
             res.send(dbRes.rows);
+            // console.log('dbRes comments:', dbRes.rows)
         })
         .catch(err => {
             console.error('in comments GET error:', err);
@@ -68,5 +69,27 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         });
 
 });
+
+router.delete('/', rejectUnauthenticated, (req, res) => {
+    // console.log('in delete Router with content of:', req.query);
+
+    //conditional to protect delete rout
+    
+    if(Number(req.query.user_id) === req.user.id){
+    //set up query text
+    let sqlText = `
+        DELETE FROM "comments"
+        WHERE "id" = $1 OR "parent_comment_id" = $1;
+    `;
+    //query db to delete comment/comments
+    pool.query(sqlText, [req.query.comment_id])
+        .then(dbRes => res.sendStatus(200))
+        .catch(err => {
+            console.error('in /api/comments DELETE error:', err);
+            res.sendStatus(500);
+        });}
+    else{res.sendStatus(403)}
+})
+
 
 module.exports = router;
