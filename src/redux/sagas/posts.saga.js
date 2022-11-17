@@ -85,6 +85,10 @@ function* fetchSelectedPost(action){
         
     } catch {
         console.error('in fetchSelectedPost saga error');
+        yield put({
+            type: 'SET_SELECTED_POST',
+            payload: {}
+        });
 
 }}
 

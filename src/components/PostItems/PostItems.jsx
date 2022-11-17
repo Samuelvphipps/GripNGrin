@@ -15,7 +15,7 @@ function PostItems({post}){
 
     //get user information for conditional render
     const user = useSelector(store => store.user);
-    console.log('individual post information logged:', post);
+    // console.log('individual post information logged:', post);
 
     //Delete selected post information
     const deletePost = () => {
@@ -26,6 +26,11 @@ function PostItems({post}){
             payload: {post_id: post.id, user_id: post.user_id}
         });
         
+    };
+    
+    const pushToDetails = () => {
+        console.log('in pushtodetails fn')
+        history.push(`/post/${post.id}`)
     };
 
 
@@ -69,7 +74,7 @@ function PostItems({post}){
                     </div>
                 </div>
                 <div>
-                    <p className='postContent' onClick={(evt)=>history.push(`/post/${post.id}`)}>{post.content.substring(0, 240) + '...'}</p>
+                    <p className='postContent' onClick={pushToDetails}>{post.content.substring(0, 240) + '...'}</p>
                 </div>
                 <button>LIKE!</button>
             </article>

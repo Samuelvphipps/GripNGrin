@@ -50,8 +50,8 @@ function PostDetails(){
 
     console.log('in single post with post of:', post);
 
-    if(post.id != params.id){
-        history.push('/home');
+    if(!post.id){
+        return <h1>404 Page Not Found</h1>;
     }
     
     return(
