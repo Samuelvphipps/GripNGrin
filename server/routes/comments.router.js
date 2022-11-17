@@ -41,7 +41,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
   // POST route code here
-    console.log('in comments POST route and req.body is:', req.user.id, req.body);
+    // console.log('in comments POST route and req.body is:', req.user.id, req.body);
 
     //SQL INSERT TEXT
     sqlText =`
@@ -73,10 +73,11 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 router.delete('/', rejectUnauthenticated, (req, res) => {
     // console.log('in delete Router with content of:', req.query);
 
-    //conditional to protect delete rout
-    
+    //conditional to protect delete route so only the comment owner can delete
     if(Number(req.query.user_id) === req.user.id){
-    //set up query text
+    //set up query text to delete the comment from the db where comment 
+    //equals comment id or the children comments are 
+    //related to that id
     let sqlText = `
         DELETE FROM "comments"
         WHERE "id" = $1 OR "parent_comment_id" = $1;
@@ -89,6 +90,30 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500);
         });}
     else{res.sendStatus(403)}
+})
+
+router.put('/', rejectUnauthenticated, (req, res) => {
+    console.log('in /api/comments PUT with a payload of:', req.body);
+    
+    //conditional to protect delete route so only the comment owner can edit
+    if(Number(req.body.data.user_id) === req.user.id){
+    //create sql text to updste comment content in the Database
+    let sqlText = `
+        UPDATE "comments"
+        SET "content" = $1
+        WHERE "id" = $2;
+    `;
+    
+    //query to DB to update the comment
+    pool.query(sqlText, [req.body.data.comment_content, req.body.data.comment_id])
+        .then(dbRes => res.sendStatus(201))
+        .catch( err => {
+            console.error('in /api/comments PUT route with error:', err);
+            res.sendStatus(500);
+        })
+    }
+    else{ res.sendStatus(403) };
+
 })
 
 

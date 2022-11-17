@@ -3,7 +3,7 @@ import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 
-import CommentItem from "../CommentItem/CommentItem";
+import CommentItem from "./CommentItem/CommentItem";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 

@@ -45,7 +45,7 @@ function PostDetails(){
             payload: {post_id: post.id, user_id: post.user_id}
         });
 
-        console.log('selected post:', post);
+        // console.log('selected post:', post);
        
         //after delete head home
         history.push('/home');
@@ -53,7 +53,7 @@ function PostDetails(){
     // console.log('post:', post);
     }
 
-    console.log('in single post with post of:', post);
+    // console.log('in single post with post of:', post);
 
     //if they change url params to a post id that doesnt exist anymore (i.e. deleted they will see 404)
     // TODO = figure out how to redirect home without causing doubleclick async problem on home page

@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import CommentsLayer2 from '../CommentsLayer2/CommentsLayer2';
 import CommentToggle from '../CommentToggle/CommentToggle';
-import CommentEditToggle from '../CommentEdit/CommentEdit';
+import CommentEditToggle from '../CommentEditToggle/CommentEditToggle';
 
 function CommentItem ({comment, post, comments}){
 
@@ -28,33 +28,37 @@ function CommentItem ({comment, post, comments}){
             type: 'DELETE_COMMENT',     //grab post id to send the fetch comments request
             payload: {comment_id: id, post_id: post.id, user_id: user.id}
         })
+    };
+
+    const editComment = (id, content, userId) => {
+        console.log('in edit comment with an id of:', id, 'and content of:', content, 'user owner id:', userId);
+        
+        dispatch({
+            type: 'UPDATE_COMMENT',
+            payload: {comment_id: id, comment_content: content, user_id:userId, post_id:post.id}
+        })
     }
 
     return(
         <>
-            <div>
                 { comment.parent_comment_id ? null :
-                <><p>{comment.username} {comment.created}</p>
-                <p>{comment.content}</p></>
-            }
-                {/* if user id matches comment userid and no parent comment id */}
-            {(user.id===comment.user_id && !comment.parent_comment_id) ? 
-            <>
-                <Button variant="text">Edit</Button>
-                <Button  onClick={()=>deleteComment(comment.id)} variant="text">Delete</Button>
-            </>
-            :
-            null }
-                            
-            </div>
+                    <CommentEditToggle 
+                        editComment={editComment} 
+                        deleteComment={deleteComment} 
+                        user={user} 
+                        post={post} 
+                        comment={comment} />
+                }           
                 {/* go to second layer comments where the comments have this comment as 
                 a parent comment */}
                 {comments.map(comment2 =>{
                     if(comment.id === comment2.parent_comment_id){
-                    return <CommentsLayer2 user={user} 
-                    deleteComment = {deleteComment}
-                    key={comment2.id} 
-                    comment2={comment2}/>}
+                    return <CommentsLayer2 
+                        user={user} 
+                        deleteComment = {deleteComment}
+                        editComment ={editComment}
+                        key={comment2.id} 
+                        comment2={comment2}/>}
                     else {return};
                 })}
         

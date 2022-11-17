@@ -68,6 +68,25 @@ function* deleteComment(action){
     }
 }
 
+function* updateComment(action){
+    console.log('in updateComment SAGA with payload of:', action.payload);
+
+    try{
+        //send updated content to database through the data
+        //user verification in server to make sure they own the comment serverside
+        yield axios.put('/api/comments', {
+            data: action.payload
+        })
+        //refetch comments
+        yield put({
+            type: 'FETCH_COMMENTS',
+            payload: action.payload.post_id
+        })
+    } catch {
+        console.error('in updateComment SAGA error');
+    }
+}
+
 function* commentsSaga() {
     //add comment
     yield takeEvery('ADD_COMMENT', addComment);
@@ -77,6 +96,9 @@ function* commentsSaga() {
 
     //delete comment
     yield takeEvery('DELETE_COMMENT', deleteComment);
+
+    //Update comment
+    yield takeEvery('UPDATE_COMMENT', updateComment);
 
 }
 
