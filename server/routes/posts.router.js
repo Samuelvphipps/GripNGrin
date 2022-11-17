@@ -35,7 +35,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) =>{
         SELECT "posts"."id", "posts"."title", "posts"."hunt_area_id", "posts"."success",
             "posts"."picture", "posts"."species", "posts"."date_of_hunt", "hunt_area"."hunt_area", 
             "posts"."content", "posts"."created", "posts"."land_type", "posts"."weapon_type", 
-            "user"."username" FROM "posts"
+            "posts"."user_id", "user"."username" FROM "posts"
         JOIN "user"
             ON "posts"."user_id" = "user"."id"
         JOIN "hunt_area"

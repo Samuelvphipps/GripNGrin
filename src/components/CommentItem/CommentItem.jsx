@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import CommentsLayer2 from '../CommentsLayer2/CommentsLayer2';
 import CommentToggle from '../CommentToggle/CommentToggle';
+import CommentEditToggle from '../CommentEdit/CommentEdit';
 
 function CommentItem ({comment, post, comments}){
 
@@ -32,18 +33,18 @@ function CommentItem ({comment, post, comments}){
     return(
         <>
             <div>
-                { comment.parent_comment_id ? <></> :
+                { comment.parent_comment_id ? null :
                 <><p>{comment.username} {comment.created}</p>
                 <p>{comment.content}</p></>
             }
                 {/* if user id matches comment userid and no parent comment id */}
             {(user.id===comment.user_id && !comment.parent_comment_id) ? 
-            <Stack spacing={2} direction="row">
+            <>
                 <Button variant="text">Edit</Button>
                 <Button  onClick={()=>deleteComment(comment.id)} variant="text">Delete</Button>
-            </Stack>
+            </>
             :
-            <></> }
+            null }
                             
             </div>
                 {/* go to second layer comments where the comments have this comment as 

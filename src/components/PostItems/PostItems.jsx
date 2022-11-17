@@ -51,7 +51,7 @@ function PostItems({post}){
                                 <p>{post.created}</p>
                                 { user.id===post.user_id ?
                                 <Stack spacing={2} direction="row">
-                                    <Button variant="text">Edit</Button>
+                                    <Button onClick={()=>history.push(`/post/edit/${post.id}`)} variant="text">Edit</Button>
                                     <Button onClick={deletePost} variant="text">Delete</Button>
                                 </Stack>
                                 :
