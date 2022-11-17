@@ -69,7 +69,7 @@ function PostItems({post}){
                     </div>
                 </div>
                 <div>
-                    <p className='postContent' onClick={()=>history.push(`/post/${post.id}`)}>{post.content.substring(0, 240) + '...'}</p>
+                    <p className='postContent' onClick={(evt)=>history.push(`/post/${post.id}`)}>{post.content.substring(0, 240) + '...'}</p>
                 </div>
                 <button>LIKE!</button>
             </article>
