@@ -70,22 +70,25 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 });
 
-router.delete('/:id', rejectUnauthenticated, (req, res) => {
-    // console.log('in delete Router with content of:', req.params.id);
+router.delete('/', rejectUnauthenticated, (req, res) => {
+    // console.log('in delete Router with content of:', req.query);
 
+    //conditional to protect delete rout
+    
+    if(Number(req.query.user_id) === req.user.id){
     //set up query text
     let sqlText = `
         DELETE FROM "comments"
         WHERE "id" = $1 OR "parent_comment_id" = $1;
     `;
     //query db to delete comment/comments
-    pool.query(sqlText, [req.params.id])
+    pool.query(sqlText, [req.query.comment_id])
         .then(dbRes => res.sendStatus(200))
         .catch(err => {
             console.error('in /api/comments DELETE error:', err);
             res.sendStatus(500);
-        });
-
+        });}
+    else{res.sendStatus(403)}
 })
 
 

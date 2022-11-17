@@ -25,7 +25,7 @@ function CommentItem ({comment, post, comments}){
 
         dispatch({
             type: 'DELETE_COMMENT',     //grab post id to send the fetch comments request
-            payload: {comment_id: id, post_id: post.id}
+            payload: {comment_id: id, post_id: post.id, user_id: user.id}
         })
     }
 

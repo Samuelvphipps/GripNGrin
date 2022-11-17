@@ -53,7 +53,9 @@ function* deleteComment(action){
 
     try{
         //send delete request with comment id
-        yield axios.delete(`/api/comments/${action.payload.comment_id}`);
+        yield axios.delete(`/api/comments/`, {
+            params: action.payload
+        });
 
         //get updated comment list
         yield put({
