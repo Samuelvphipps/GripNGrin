@@ -41,7 +41,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
   // POST route code here
-    // console.log('in comments POST route and req.body is:', req.user.id, req.body);
+    console.log('in comments POST route and req.body is:', req.user.id, req.body);
 
     //SQL INSERT TEXT
     sqlText =`
@@ -52,7 +52,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         `;
     //SQL INSERT PARAMS
     sqlParams =[
-        req.body.content, 
+        req.body.comment, 
         req.user.id, 
         req.body.post_id, 
         req.body.parent_comment_id

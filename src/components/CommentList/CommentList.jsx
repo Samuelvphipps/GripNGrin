@@ -30,14 +30,14 @@ function CommentList ({post}) {
     const newComment = (evt) => {
         //prevent default
         evt.preventDefault();
-        // console.log('In newComment and text says:', comment);
+        console.log('In newComment and text says:', comment);
 
         //dispatch to saga
         dispatch({
             type: 'ADD_COMMENT',
             payload: {
                 post_id: post.id,
-                comment,
+                comment: comment,
                 parent_comment_id: null
             }
         });

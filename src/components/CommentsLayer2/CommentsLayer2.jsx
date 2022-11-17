@@ -5,6 +5,9 @@ import Stack from '@mui/material/Stack';
 function CommentsLayer2({comment2, user, deleteComment}){
 
         // console.log('user in comment2', user);
+
+    
+    
     return(
         <div className="commentl2">
             <p>{comment2.username} {comment2.created}</p>
