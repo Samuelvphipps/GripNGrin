@@ -32,21 +32,8 @@ function CommentItem ({comment, post, comments}){
 
     return(
         <>
-            <div>
-                { comment.parent_comment_id ? null :
-                <><p>{comment.username} {comment.created}</p>
-                <p>{comment.content}</p></>
-            }
-                {/* if user id matches comment userid and no parent comment id */}
-            {(user.id===comment.user_id && !comment.parent_comment_id) ? 
-            <>
-                <Button variant="text">Edit</Button>
-                <Button  onClick={()=>deleteComment(comment.id)} variant="text">Delete</Button>
-            </>
-            :
-            null }
+                <CommentEditToggle user={user} post={post} comment={comment} />
                             
-            </div>
                 {/* go to second layer comments where the comments have this comment as 
                 a parent comment */}
                 {comments.map(comment2 =>{
