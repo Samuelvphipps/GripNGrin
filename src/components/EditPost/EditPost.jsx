@@ -9,7 +9,10 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 
+//date formatter
 
+import { format } from 'date-fns';
+import { parseISO } from 'date-fns/esm';
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -25,7 +28,7 @@ function EditPost(){
     const history = useHistory();
 
     //useSelecter to get singlepost from redux and user from redux
-    const post = useSelector(store => store.posts.selectedPostReducer);
+    const editPost = useSelector(store => store.editPost.editPostReducer);
     const huntAreaList = useSelector(store=>store.huntAreasReducer);
     const user = useSelector(store => store.user);
     // console.log('selected post is:', selectedPost);
@@ -33,10 +36,7 @@ function EditPost(){
     useEffect(()=>{
         //send id to saga
         //get the selected post information! ⬇️
-        dispatch({
-            type: 'FETCH_SELECTED_POST',
-            payload: params.id
-        });
+
         //TODO fetch edit comment
 
         dispatch({
@@ -51,15 +51,9 @@ function EditPost(){
     }, [params.id]);
 
 
-    // console.log('in single post with post of:', post);
-
-
-        //todo: consolidate some data with spreaders - STRETCH
-
-
     //if they change url params to a post id that doesnt exist anymore (i.e. deleted they will see 404)
     // TODO = figure out how to redirect home without causing doubleclick async problem on home page
-    if(!post.id){
+    if(!editPost.id){
         return <h1>404 Page Not Found</h1>;
     }
     
@@ -69,25 +63,44 @@ function EditPost(){
         <div className='postBox'>
             <div>
                 <div className="imgContainer">
-                    <img src={post.picture}/>
+                    <img src={editPost.picture}/>
                     <Input type='file' name="post_img"/>
                 </div>
             </div>
             <div className='bodyBox'>
                 <div>
                     <div className='titleRow'>
-                        <h3><Input type='Text' placeholder='Post Title' required/></h3>
-                        <p>{post.username}</p>
-                        <p>{post.created}</p>
+                        <h3>
+                            <Input type='Text' 
+                                value={editPost.title}
+                                //add in dispatch fn
+                                placeholder='Post Title' 
+                                required
+                            />
+                        </h3>
+                        <p>{editPost.username}</p>
+                        <p>{editPost.created}</p>
                     </div>
                 </div>
                 <div className='dataContainer'>
                     <div>
                         <p>Date of hunt: </p>
-                            <Input required type='date'></Input>
+                            <Input 
+                                required 
+                                value={format(parseISO(editPost.date_of_hunt), 'yyyy-MM-dd')}
+                                type='date'
+                                //on change
+                            >
+
+                            </Input>
                             
                         <p>Species: </p>
-                            <Input type='text' placeholder='Species' required></Input>                            
+                            <Input 
+                                type='text' 
+                                placeholder='Species' 
+                                required
+                                //on change
+                            ></Input>                            
                         <p>Success:</p> 
                             <FormControl fullWidth>
                                 <InputLabel>Succesful Hunt?</InputLabel>
@@ -95,7 +108,8 @@ function EditPost(){
                                         required
                                         labelId="successful-input-label"                                                
                                         label="successful-hunt"
-                                        value={''}                                                
+                                        value={editPost.success}    
+                                        //on change                                            
                                     >
                                         <MenuItem value={true}>Yes</MenuItem>
                                         <MenuItem value={false}>No</MenuItem>
@@ -108,7 +122,7 @@ function EditPost(){
                                 <InputLabel required id="huntarea-input-label">Hunt Area</InputLabel>
                                     <Select
                                         labelId="huntarea-input-label"
-                                        value={''}
+                                        value={editPost.hunt_area_id ? editPost.hunt_area_id : ''}
                                         label="hunt-area"
                                     >
                                         {huntAreaList.map((area)=>{
@@ -145,7 +159,7 @@ function EditPost(){
                 />
         </div>
     </form>
-    <CommentList post={post}/>
+    <CommentList post={editPost}/>
     </>
     );
 };

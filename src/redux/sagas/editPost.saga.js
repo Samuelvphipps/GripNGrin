@@ -12,7 +12,13 @@ function* fetchEditPost(action){
     console.log('in fetchEditPost SAGA with payload of:', action.payload);
 
     try {
-       const editPost = axios.put(`/api/editPosts/${action.payload}`);
+       const editPost = yield axios.get(`/api/editPosts/${action.payload}`);
+    //    console.log('response from server in fetchEditPost SAGA', editPost.data);
+
+        yield put({
+            type: 'SET_EDIT_POST',
+            payload: editPost.data
+        })
 
     } catch (err){
         console.error('in fetch Edit Post SAGA Error', err);

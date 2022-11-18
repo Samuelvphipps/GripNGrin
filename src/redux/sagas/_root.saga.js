@@ -5,7 +5,7 @@ import userSaga from './user.saga';
 import postsSaga from './posts.saga';
 import huntAreasSaga from './huntAreas.saga';
 import commentsSaga from './comments.saga';
-import editPostsSaga from './editPosts.saga';
+import editPostsSaga from './editPost.saga';
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga

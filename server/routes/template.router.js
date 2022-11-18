@@ -5,8 +5,8 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get('/:id', (req, res) => {
-    console.log('in /api/editPosts/id GET route');
+router.get('/:', (req, res) => {
+
 });
 
 /**
