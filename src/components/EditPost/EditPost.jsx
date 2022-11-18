@@ -57,14 +57,25 @@ function EditPost(){
         return <h1>404 Page Not Found</h1>;
     }
     
+    const submitEditPost = (evt) => {
+        //prevent default
+        evt.preventDefault();
+        console.log('in sbmitEditPost fn');
+    }
+
     return(
         <>
-        <form >
+        <form onSubmit={submitEditPost}>
         <div className='postBox'>
             <div>
                 <div className="imgContainer">
                     <img src={editPost.picture}/>
-                    <Input type='file' name="post_img"/>
+                    <Input type='file' 
+                    onChange={(evt) => dispatch({
+                        type: 'UPDATE_EDIT_POST',
+                        payload: {picture: evt.target.files[0]}
+                    })}
+                    name="post_img"/>
                 </div>
             </div>
             <div className='bodyBox'>
@@ -74,6 +85,11 @@ function EditPost(){
                             <Input type='Text' 
                                 value={editPost.title}
                                 //add in dispatch fn
+                                //on change update redux store with new value
+                                onChange={(evt) => dispatch({
+                                    type: 'UPDATE_EDIT_POST',
+                                    payload: {title: evt.target.value}
+                                })}
                                 placeholder='Post Title' 
                                 required
                             />
@@ -85,13 +101,17 @@ function EditPost(){
                 <div className='dataContainer'>
                     <div>
                         <p>Date of hunt: </p>
+                         
                             <Input 
                                 required 
                                 value={format(parseISO(editPost.date_of_hunt), 'yyyy-MM-dd')}
                                 type='date'
-                                //on change
+                                //on change update redux store with new value
+                                onChange={(evt) => dispatch({
+                                    type: 'UPDATE_EDIT_POST',
+                                    payload: {date_of_hunt: evt.target.value}
+                                })}
                             >
-
                             </Input>
                             
                         <p>Species: </p>
@@ -100,6 +120,11 @@ function EditPost(){
                                 placeholder='Species' 
                                 required
                                 value={editPost.species}
+                                //on change update redux store with new value
+                                onChange={(evt) => dispatch({
+                                    type: 'UPDATE_EDIT_POST',
+                                    payload: {species: evt.target.value}
+                                })}
                                 //on change
                             ></Input>                            
                         <p>Success:</p> 
@@ -109,8 +134,12 @@ function EditPost(){
                                         required
                                         labelId="successful-input-label"                                                
                                         label="successful-hunt"
-                                        value={editPost.success}    
-                                        //on change                                            
+                                        value={editPost.success}
+                                        //on change update redux store with new value    
+                                        onChange={(evt) => dispatch({
+                                            type: 'UPDATE_EDIT_POST',
+                                            payload: {success: evt.target.value}
+                                        })}                                          
                                     >
                                         <MenuItem value={true}>Yes</MenuItem>
                                         <MenuItem value={false}>No</MenuItem>
@@ -124,7 +153,11 @@ function EditPost(){
                                     <Select
                                         labelId="huntarea-input-label"
                                         value={editPost.hunt_area_id ? editPost.hunt_area_id : ''}
-                                        //onchange
+                                        //on change update redux store with new value
+                                        onChange={(evt) => dispatch({
+                                            type: 'UPDATE_EDIT_POST',
+                                            payload: {hunt_area_id: evt.target.value}
+                                        })}                               
                                         label="hunt-area"
                                     >
                                         {huntAreaList.map((area)=>{
@@ -137,7 +170,11 @@ function EditPost(){
                         <Input 
                             type='text' 
                             placeholder='weapon-used'
-                            //on change
+                            //on change update redux store with new value
+                            onChange={(evt) => dispatch({
+                                type: 'UPDATE_EDIT_POST',
+                                payload: {weapon_type: evt.target.value}
+                            })}
                             value={editPost.weapon_type}
                         >
                         </Input>
@@ -148,6 +185,11 @@ function EditPost(){
                                 labelId="land-type-input-label"
                                 value={editPost.land_type}
                                 //onchange
+                                //on change update redux store with new value
+                                onChange={(evt) => dispatch({
+                                    type: 'UPDATE_EDIT_POST',
+                                    payload: {land_type: evt.target.value}
+                                })}
                                 label="land-type"
                                 // onChange={(evt)=>setLandType(evt.target.value)}
                             >
@@ -165,9 +207,15 @@ function EditPost(){
                     placeholder="Tell the story..."
                     style={{ width: 500, height:200 }}
                     value={editPost.content} 
+                    onChange={(evt) => dispatch({
+                        type: 'UPDATE_EDIT_POST',
+                        payload: {content: evt.target.value}
+                    })}
+                    //on change update redux store with new value
                     // onChange={(evt)=>setStory(evt.target.value)}
                 />
         </div>
+        <Button type='submit'>Submit</Button>
     </form>
     <CommentList post={editPost}/>
     </>

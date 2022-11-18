@@ -7,6 +7,11 @@ const editPostReducer = (state={}, action) =>{
     switch(action.type) {
         case 'SET_EDIT_POST':
             return action.payload;
+        case 'UPDATE_EDIT_POST':
+            return {
+                ...state,
+                ...action.payload
+            }
     };
 
     return state;
