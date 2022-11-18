@@ -27,36 +27,56 @@ function* fetchEditPost(action){
 }
 
 function* editPost(action){
-    console.log('in editPost saga with a payload of:', action.payload);
+    // console.log('in editPost saga with a payload of:', action.payload);
     let data=action.payload;
 
     console.log('the type of picture=', typeof data.picture);
 
-    let formData = new FormData();
+    if((typeof data.picture)==='object'){
 
-        formData.append('id', data.id);
-        formData.append('content', data.content);
-        formData.append('date_of_hunt', data.date_of_hunt);
-        formData.append('hunt_area_id', data.hunt_area_id);
-        formData.append('land_type', data.land_type);
-        formData.append('species', data.species);
-        formData.append('success', data.success);
-        formData.append('title', data.title);
-        formData.append('weapon_type', data.weapon_type);
-        formData.append('user_id', data.user_id)
+            console.log('inside of the image put route call in SAGA')
 
-    // console.log('object in saga is:', object);
+            //create form data for information
+            let formData = new FormData();
+
+            //append values to be updated
+            formData.append('id', data.id);
+            formData.append('content', data.content);
+            formData.append('date_of_hunt', data.date_of_hunt);
+            formData.append('hunt_area_id', data.hunt_area_id);
+            formData.append('land_type', data.land_type);
+            formData.append('species', data.species);
+            formData.append('success', data.success);
+            formData.append('title', data.title);
+            formData.append('weapon_type', data.weapon_type);
+            formData.append('user_id', data.user_id)
+
+        // console.log('object in saga is:', object);
 
 
-    //append image if it exists
-    formData.append('post_img', data.picture)
+        //append image if it exists
+        formData.append('post_img', data.picture)
+        try{
+            //send updated post to server then re-get the info
+            yield axios.put('/api/editPosts/image', formData,{
+                //must include this header, it is what Multer uses to id file
+                headers:{
+                    headers: { "Content-Type": "multipart/form-data" },
+                }
+            })
 
-    yield axios.put('/api/editPosts/image', formData,{
-        //must include this header, it is what Multer uses to id file
-        headers:{
-            headers: { "Content-Type": "multipart/form-data" },
-        }
-    })
+            //refresh redux
+            yield put({
+                type: 'FETCH_POSTS'
+            });
+            
+        } catch (err){
+            console.error('in image put route err SAGA:', err);
+        }}
+    else{
+        console.error('in the wrong conditional')
+    }
+
 
 }
 
