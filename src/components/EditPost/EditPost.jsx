@@ -38,20 +38,20 @@ function EditPost(){
             payload: params.id
         });
         //TODO fetch edit comment
+
+        dispatch({
+            type: 'FETCH_EDIT_POST',
+            payload: params.id
+        });
         
         //fetch huntareas
         dispatch({ type: 'FETCH_HUNT_AREAS' });
-
-        dispatch({
-            type: 'FETCH_COMMENTS',
-            payload: params.id
-        })
-            
+    
         //set the params id here so if the url switches use effect re-runs and gets the new post by id
     }, [params.id]);
 
 
-    console.log('in single post with post of:', post);
+    // console.log('in single post with post of:', post);
 
 
         //todo: consolidate some data with spreaders - STRETCH

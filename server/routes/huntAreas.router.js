@@ -11,7 +11,7 @@ const {
  * GET route template
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
-    console.log('in api/huntareas GET request');
+    // console.log('in api/huntareas GET request');
 
     //set SQL Text for pool.query
     let sqlText =`
