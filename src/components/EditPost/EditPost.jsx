@@ -61,6 +61,12 @@ function EditPost(){
         //prevent default
         evt.preventDefault();
         console.log('in sbmitEditPost fn');
+
+        //send post to saga for axios put request
+        dispatch({
+            type: 'EDIT_POST',
+            payload: editPost
+        });
     }
 
     return(
