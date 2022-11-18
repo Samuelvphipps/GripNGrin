@@ -13,6 +13,7 @@ function* addPost(action) {
     let data=action.payload;
     //new formdata for payload to multer and router
     //THERE HAS GOT TO BE A BETTER WAY TO DO THIS
+    //TODO: fix this shit ⬇️
     let formData = new FormData();
     formData.append('post_img', data.image);
     formData.append('date_of_hunt', data.date);
