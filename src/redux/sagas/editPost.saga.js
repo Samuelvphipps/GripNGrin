@@ -71,14 +71,30 @@ function* editPost(action){
             });
             
         } catch (err){
-            console.error('in image put route err SAGA:', err);
+            console.error('in image post edit put route err SAGA:', err);
         }}
     else{
-        console.error('in the wrong conditional')
+        // console.error('in the no Image conditional')
+        try{
+            //send updated post to server then re-get the info
+            yield axios.put('/api/editPosts/noImage', {
+                data: data,
+            })
+
+            //refresh redux
+            yield put({
+                type: 'FETCH_POSTS'
+            });
+            
+        } catch (err){
+            console.error('in no image post edit put route err SAGA:', err);
+        }}
+
+
     }
 
 
-}
+
 
 function* editPostsSaga() {
     //fetch post to be edited
