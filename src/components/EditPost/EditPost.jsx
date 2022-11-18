@@ -26,6 +26,7 @@ function EditPost(){
 
     //useSelecter to get singlepost from redux and user from redux
     const post = useSelector(store => store.posts.selectedPostReducer);
+    const huntAreaList = useSelector(store=>store.huntAreasReducer);
     const user = useSelector(store => store.user);
     // console.log('selected post is:', selectedPost);
 
@@ -36,6 +37,10 @@ function EditPost(){
             type: 'FETCH_SELECTED_POST',
             payload: params.id
         });
+        //TODO fetch edit comment
+        
+        //fetch huntareas
+        dispatch({ type: 'FETCH_HUNT_AREAS' });
 
         dispatch({
             type: 'FETCH_COMMENTS',
@@ -45,44 +50,12 @@ function EditPost(){
         //set the params id here so if the url switches use effect re-runs and gets the new post by id
     }, [params.id]);
 
-    const [postTitle, setPostTitle] = useState(post.title);
-    const [species, setSpecies] = useState(post.species);
-    const [successful, setSuccessful] = useState(post.success);
-    const [huntAreaId, setHuntAreaId] = useState(post.hunt_area);
-    const [weaponType, setWeaponType] = useState(post.weapon_type);
-    const [landType, setLandType] = useState(post.land_type);
-    const [story, setStory] = useState(post.content);
 
     console.log('in single post with post of:', post);
 
 
         //todo: consolidate some data with spreaders - STRETCH
 
-    const submitHunt = (evt) => {
-        evt.preventDefault();
-
-        //create payload of form data to send to saga (destructured)
-        let payload = {
-            postTitle,
-            image,
-            date: post.date_of_hunt,
-            species,
-            successful,
-            huntAreaId,
-            weaponType,
-            landType,
-            story,
-        }
-
-        // console.log('payload object:', payload);
-
-        //dispatch payload to SAGA
-        dispatch({
-            type: 'EDIT_POST',
-            payload: payload
-        });
-        history.push('/home');
-    };
 
     //if they change url params to a post id that doesnt exist anymore (i.e. deleted they will see 404)
     // TODO = figure out how to redirect home without causing doubleclick async problem on home page
@@ -97,34 +70,80 @@ function EditPost(){
             <div>
                 <div className="imgContainer">
                     <img src={post.picture}/>
+                    <Input type='file' name="post_img"/>
                 </div>
             </div>
             <div className='bodyBox'>
                 <div>
                     <div className='titleRow'>
-                        <h3><Input type='Text' placeholder='Post Title' value={postTitle} onChange={(evt)=>setPostTitle(evt.target.value)} required/></h3>
+                        <h3><Input type='Text' placeholder='Post Title' required/></h3>
                         <p>{post.username}</p>
                         <p>{post.created}</p>
                     </div>
                 </div>
                 <div className='dataContainer'>
                     <div>
-                        <p>Date of hunt: {post.date_of_hunt}</p>
-                        <p>Species: {post.species}</p>
-                        <p>Success: {post.success ? <>Yes</> : <>No</>}</p>
+                        <p>Date of hunt: </p>
+                            <Input required type='date'></Input>
+                            
+                        <p>Species: </p>
+                            <Input type='text' placeholder='Species' required></Input>                            
+                        <p>Success:</p> 
+                            <FormControl fullWidth>
+                                <InputLabel>Succesful Hunt?</InputLabel>
+                                    <Select
+                                        required
+                                        labelId="successful-input-label"                                                
+                                        label="successful-hunt"
+                                        value={''}                                                
+                                    >
+                                        <MenuItem value={true}>Yes</MenuItem>
+                                        <MenuItem value={false}>No</MenuItem>
+                                    </Select>
+                            </FormControl>
                     </div>
                     <div>
-                        <p>Location: {post.hunt_area}</p>
-                        <p>Weapon used: {post.weapon_type}</p>
-                        <p>Land Type: {post.land_type}</p>
+                        <p>Location:</p>
+                            <FormControl fullWidth>
+                                <InputLabel required id="huntarea-input-label">Hunt Area</InputLabel>
+                                    <Select
+                                        labelId="huntarea-input-label"
+                                        value={''}
+                                        label="hunt-area"
+                                    >
+                                        {huntAreaList.map((area)=>{
+                                            return <MenuItem key={area.id} value={area.id}>{area.hunt_area}</MenuItem>
+                                        })}
+
+                                    </Select>
+                            </FormControl>
+                        <p>Weapon used:</p>
+                        <Input type='text' placeholder='weapon-used'></Input>
+                        <p>Land Type:</p>
+                        <FormControl fullWidth>
+                        <InputLabel id="land-type-input-label">Land Type</InputLabel>
+                            <Select
+                                labelId="land-type-input-label"
+                                value={''}
+                                label="land-type"
+                                // onChange={(evt)=>setLandType(evt.target.value)}
+                            >
+                                <MenuItem value={'public'}>Public</MenuItem>
+                                <MenuItem value={'private'}>Private</MenuItem>
+                            </Select>
+                    </FormControl>
                     </div>
                 </div>
             </div>
         </div>
         <div>
-            <p className='postContent' >{post.content}</p>
+        <TextareaAutosize
+                    required
+                    placeholder="Tell the story..."
+                    style={{ width: 500, height:200 }}
+                    // value={story} onChange={(evt)=>setStory(evt.target.value)}
+                />
         </div>
-        <button>LIKE!</button>
     </form>
     <CommentList post={post}/>
     </>
