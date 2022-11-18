@@ -58,37 +58,52 @@ router.put('/image', rejectUnauthenticated, upload.single('post_img'), (req, res
   // POST route code here
     console.log('in /image put route with values: file:', req.file, 'body"', req.body);
     let post=req.body;
+    //PROTECT THE ROUTE
+     if(Number(req.body.user_id)===req.user.id){
     //SQL
+        console.log('inside SQL area on the PUT')
+        let sqlText = `
+            UPDATE "posts"
+            SET
+                "title" = $1,
+                "species" = $2,
+                "hunt_area_id" = $3,
+                "date_of_hunt" = $4,
+                "success" = $5,
+                "picture" = $6,
+                "content" = $7,
+                "user_id" = $8,
+                "land_type" = $9,
+                "weapon_type" = $10
+            WHERE "id" = $11;
+            `;
 
-let sqlText = `
-    INSERT INTO "posts"
-	    "title" = $1
-        "species" = $2
-        "hunt_area_id" = $3 
-        "date_of_hunt" = $4
-        "success" = $5
-        "picture" = $6
-        "content" = $7
-        "user_id" = $8
-        "land_type" = $9
-        "weapon_type" = $10
-    VALUES
-        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
-    `;
+        //sql params
+        let sqlParams=[
+            post.title,
+            post.species,
+            Number(post.hunt_area_id),
+            post.date_of_hunt,
+            post.success,
+            'http://localhost:3000/images/'+req.file.filename,
+            post.content,
+            req.user.id,
+            post.land_type,
+            post.weapon_type,
+            post.id
+        ];
+        //Query to DB
+        pool.query(sqlText, sqlParams)
+            .then(dbRes => {
+                res.sendStatus(201);
+            })
+            .catch(err => {
+                console.error('in /api/editPosts/image RTE error', err);
+                res.sendStatus(500);
+            })
 
-    //sql params
-    let sqlParams=[
-        post.title,
-        post.species,
-        Number(post.hunt_area_id),
-        post.date_of_hunt,
-        post.success,
-        'http://localhost:3000/images/'+req.file.filename,
-        post.content,
-        req.user.id,
-        post.land_type,
-        post.weaponType
-    ];
+
+    } else {res.sendStatus(403)}
 
 });
 

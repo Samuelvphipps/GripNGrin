@@ -42,7 +42,8 @@ function* editPost(action){
         formData.append('species', data.species);
         formData.append('success', data.success);
         formData.append('title', data.title);
-        formData.append('weapon_type', data.weapon_type)
+        formData.append('weapon_type', data.weapon_type);
+        formData.append('user_id', data.user_id)
 
     // console.log('object in saga is:', object);
 
