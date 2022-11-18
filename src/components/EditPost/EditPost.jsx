@@ -99,6 +99,7 @@ function EditPost(){
                                 type='text' 
                                 placeholder='Species' 
                                 required
+                                value={editPost.species}
                                 //on change
                             ></Input>                            
                         <p>Success:</p> 
@@ -123,6 +124,7 @@ function EditPost(){
                                     <Select
                                         labelId="huntarea-input-label"
                                         value={editPost.hunt_area_id ? editPost.hunt_area_id : ''}
+                                        //onchange
                                         label="hunt-area"
                                     >
                                         {huntAreaList.map((area)=>{
@@ -132,13 +134,20 @@ function EditPost(){
                                     </Select>
                             </FormControl>
                         <p>Weapon used:</p>
-                        <Input type='text' placeholder='weapon-used'></Input>
+                        <Input 
+                            type='text' 
+                            placeholder='weapon-used'
+                            //on change
+                            value={editPost.weapon_type}
+                        >
+                        </Input>
                         <p>Land Type:</p>
                         <FormControl fullWidth>
                         <InputLabel id="land-type-input-label">Land Type</InputLabel>
                             <Select
                                 labelId="land-type-input-label"
-                                value={''}
+                                value={editPost.land_type}
+                                //onchange
                                 label="land-type"
                                 // onChange={(evt)=>setLandType(evt.target.value)}
                             >
@@ -155,7 +164,8 @@ function EditPost(){
                     required
                     placeholder="Tell the story..."
                     style={{ width: 500, height:200 }}
-                    // value={story} onChange={(evt)=>setStory(evt.target.value)}
+                    value={editPost.content} 
+                    // onChange={(evt)=>setStory(evt.target.value)}
                 />
         </div>
     </form>
