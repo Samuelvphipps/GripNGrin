@@ -30,7 +30,6 @@ function EditPost(){
     //useSelecter to get singlepost from redux and user from redux
     const editPost = useSelector(store => store.editPost.editPostReducer);
     const huntAreaList = useSelector(store=>store.huntAreasReducer);
-    const user = useSelector(store => store.user);
     // console.log('selected post is:', selectedPost);
 
     useEffect(()=>{
@@ -67,6 +66,10 @@ function EditPost(){
             type: 'EDIT_POST',
             payload: editPost
         });
+
+        alert('Your post is edited and live!!!');
+
+        history.push(`/post/${params.id}`);
     }
 
     return(

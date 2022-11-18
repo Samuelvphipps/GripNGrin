@@ -56,12 +56,12 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 //if there is an image file: ⬇️
 router.put('/image', rejectUnauthenticated, upload.single('post_img'), (req, res) => {
   // POST route code here
-    console.log('in /image put route with values: file:', req.file, 'body"', req.body);
+    // console.log('in /image put route with values: file:', req.file, 'body"', req.body);
     let post=req.body;
     //PROTECT THE ROUTE
      if(Number(req.body.user_id)===req.user.id){
     //SQL
-        console.log('inside SQL area on the PUT')
+        // console.log('inside SQL area on the PUT')
         let sqlText = `
             UPDATE "posts"
             SET
