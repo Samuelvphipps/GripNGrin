@@ -83,7 +83,12 @@ function NewPost(){
                 </figure>
                 {/* header with  Title Input, profile name, date*/}
                 <header>
-                    <Input type='Text' placeholder='Post Title' value={postTitle} onChange={(evt)=>setPostTitle(evt.target.value)} required/>
+                    <Input 
+                    type='Text' 
+                    placeholder='Post Title' 
+                    value={postTitle} 
+                    onChange={(evt)=>setPostTitle(evt.target.value)} 
+                    required/>
                     <p> Username </p>
                     <p> Date Posted (autofilled)</p>
                 </header>
@@ -93,10 +98,21 @@ function NewPost(){
                 <section>
 
                     <InputLabel>Date of Hunt</InputLabel>
-                        <Input required value={date} onChange={(evt)=>setDate(evt.target.value)} type='date'></Input>
+                        <Input 
+                            required 
+                            value={date} 
+                            onChange={(evt)=>setDate(evt.target.value)} 
+                            type='date'>                                
+                        </Input>
 
                     <InputLabel>Species</InputLabel>
-                    <Input type='text' value={species} onChange={(evt)=>setSpecies(evt.target.value)} placeholder='Species' required></Input>
+                    <Input 
+                        type='text' 
+                        value={species} 
+                        onChange={(evt)=>setSpecies(evt.target.value)} 
+                        placeholder='Species' 
+                        required>                    
+                    </Input>
                     
                     <FormControl fullWidth>
                         <InputLabel>Succesful Hunt?</InputLabel>

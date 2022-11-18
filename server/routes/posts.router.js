@@ -45,8 +45,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) =>{
 
     pool.query(sqlText, [req.params.id])
         .then(dbRes => {
-            res.send(dbRes.rows);
-            console.log(dbRes.rows);
+            res.send(dbRes.rows[0]);
+            // console.log(dbRes.rows);
         })
         .catch(err => {
             console.error('in GET single post error', err);

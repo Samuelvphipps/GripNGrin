@@ -14,7 +14,9 @@ const postsRouter = require('./routes/posts.router');
 //huntAreasRouter
 const huntAreasRouter = require('./routes/huntAreas.router');
 //comments router
-const commentsRouter = require('./routes/comments.router')
+const commentsRouter = require('./routes/comments.router');
+//editPosts router - posts router is getting too complicated
+const editPostsRouter = require('./routes/editPosts.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -32,6 +34,7 @@ app.use('/api/user', userRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/huntAreas', huntAreasRouter);
 app.use('/api/comments', commentsRouter);
+app.use('/api/editPosts', editPostsRouter);
 
 // Serve static files
 app.use(express.static('build'));

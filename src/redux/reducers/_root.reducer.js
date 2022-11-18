@@ -4,6 +4,7 @@ import user from './user.reducer';
 import huntAreasReducer from './huntAreas.reducer';
 import posts from './posts.reducer';
 import comments from './comments.reducer';
+import editPost from './editPost.reducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   huntAreasReducer, //contains the list of huntareas (array of objects)
   posts, //contains all posts redux state
   comments, //contains all comments redux state
+  editPost,  //import the edit posts reducer
 });
 
 export default rootReducer;

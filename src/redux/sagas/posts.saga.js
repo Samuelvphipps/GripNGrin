@@ -42,8 +42,8 @@ function* addPost(action) {
 
         //get posts redux and rerender after store is updated
 
-    } catch {
-        console.error('in addItem SAGA error');
+    } catch (err){
+        console.error('in addItem SAGA error', err);
     }
     // console.log('in addPost saga and formData is:', formData);
 }
@@ -63,8 +63,8 @@ function* fetchPosts(){
             payload: posts.data
         });
 
-    } catch {
-        console.error('in fetchPosts SAGA error');
+    } catch (err){
+        console.error('in fetchPosts SAGA error', err);
     }
 
 }
@@ -77,15 +77,16 @@ function* fetchSelectedPost(action){
         // console.log('single post in saga is:', singlePost.data[0]);
         
         //send selected post information to redux
-
         yield put({
             type: 'SET_SELECTED_POST',
-            payload: singlePost.data[0]
+            payload: singlePost.data
         });
 
         
-    } catch {
-        console.error('in fetchSelectedPost saga error');
+    } catch (err) {
+        console.error('in fetchSelectedPost saga error', err);
+
+        //if error set empty post
         yield put({
             type: 'SET_SELECTED_POST',
             payload: {}
@@ -94,7 +95,7 @@ function* fetchSelectedPost(action){
 }}
 
 function* deletePost(action){
-    console.log('in deletePost SAGA with payload of:', action.payload);
+    // console.log('in deletePost SAGA with payload of:', action.payload);
 
     try{
         //DELETE SELECTED POST
@@ -107,8 +108,8 @@ function* deletePost(action){
             type: 'FETCH_POSTS',
         });
 
-    } catch {
-        console.error('in deletePost SAGA error');
+    } catch (err) {
+        console.error('in deletePost SAGA error', err);
     }
 }
 
