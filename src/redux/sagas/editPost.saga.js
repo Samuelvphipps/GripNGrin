@@ -32,14 +32,17 @@ function* editPost(action){
 
     console.log('the type of picture=', typeof data.picture);
 
+
+    //if the data.picture is an object (i.e. an image file follow this route and create form data) 
+    //else follow the route with no image file (i.e. no change of the post imagew)
     if((typeof data.picture)==='object'){
 
-            console.log('inside of the image put route call in SAGA')
+            // console.log('inside of the image put route call in SAGA')
 
             //create form data for information
             let formData = new FormData();
 
-            //append values to be updated
+            //append values to be updated to send to server for put route
             formData.append('id', data.id);
             formData.append('content', data.content);
             formData.append('date_of_hunt', data.date_of_hunt);
@@ -54,10 +57,11 @@ function* editPost(action){
         // console.log('object in saga is:', object);
 
 
-        //append image if it exists
+        //append image to formdata for the ride to the server
         formData.append('post_img', data.picture)
         try{
             //send updated post to server then re-get the info
+                            //this route sends an image file
             yield axios.put('/api/editPosts/image', formData,{
                 //must include this header, it is what Multer uses to id file
                 headers:{
@@ -77,6 +81,7 @@ function* editPost(action){
         // console.error('in the no Image conditional')
         try{
             //send updated post to server then re-get the info
+                            //no image file in axios put
             yield axios.put('/api/editPosts/noImage', {
                 data: data,
             })
