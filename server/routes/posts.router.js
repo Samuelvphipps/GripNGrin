@@ -26,57 +26,21 @@ const upload = multer({
 
 //location url '/api/posts'
 
-router.get('/:id', rejectUnauthenticated, (req, res) =>{
-    // console.log('in GET single post');
-    // console.log('req.params', req.params.id);
-    
-    //set up sql text for query
-    let sqlText =`
-        SELECT "posts"."id", "posts"."title", "posts"."hunt_area_id", "posts"."success",
-            "posts"."picture", "posts"."species", "posts"."date_of_hunt", "hunt_area"."hunt_area", 
-            "posts"."content", "posts"."created", "posts"."land_type", "posts"."weapon_type", 
-            "posts"."user_id", "user"."username" FROM "posts"
-        JOIN "user"
-            ON "posts"."user_id" = "user"."id"
-        JOIN "hunt_area"
-            ON "hunt_area"."id" = "posts"."hunt_area_id"
-        WHERE "posts"."id" = $1;
-    `;
-
-    pool.query(sqlText, [req.params.id])
-        .then(dbRes => {
-            res.send(dbRes.rows[0]);
-            // console.log(dbRes.rows);
-        })
-        .catch(err => {
-            console.error('in GET single post error', err);
-            res.sendStatus(500);
-        });
-
-})
-
-//  TESTING ROUTE FOR NEW SQL
 // router.get('/:id', rejectUnauthenticated, (req, res) =>{
 //     // console.log('in GET single post');
 //     // console.log('req.params', req.params.id);
     
 //     //set up sql text for query
 //     let sqlText =`
-//     SELECT count("liked_post"."post_id") as LIKES, 
-//         "posts"."id", "posts"."title", "posts"."hunt_area_id", "posts"."success",
-//         "posts"."picture", "posts"."species", "posts"."date_of_hunt", "hunt_area"."hunt_area", 
-//         "posts"."content", "posts"."created", "posts"."land_type", "posts"."weapon_type", 
-//         "posts"."user_id", "user"."username"
-//     FROM "liked_post"
-//     JOIN "posts"
-//         ON "posts"."id" = "liked_post"."post_id"
-//     JOIN "user"
-//         ON "user"."id" = "posts"."user_id"
-//     JOIN "hunt_area"
-//         ON "hunt_area"."id" = "posts"."hunt_area_id"
-//         WHERE "posts"."id" = $1
-//     GROUP BY ("posts"."id", "user"."username", "hunt_area"."hunt_area")
-//     ;
+//         SELECT "posts"."id", "posts"."title", "posts"."hunt_area_id", "posts"."success",
+//             "posts"."picture", "posts"."species", "posts"."date_of_hunt", "hunt_area"."hunt_area", 
+//             "posts"."content", "posts"."created", "posts"."land_type", "posts"."weapon_type", 
+//             "posts"."user_id", "user"."username" FROM "posts"
+//         JOIN "user"
+//             ON "posts"."user_id" = "user"."id"
+//         JOIN "hunt_area"
+//             ON "hunt_area"."id" = "posts"."hunt_area_id"
+//         WHERE "posts"."id" = $1;
 //     `;
 
 //     pool.query(sqlText, [req.params.id])
@@ -90,6 +54,42 @@ router.get('/:id', rejectUnauthenticated, (req, res) =>{
 //         });
 
 // })
+
+//  TESTING ROUTE FOR NEW SQL
+router.get('/:id', rejectUnauthenticated, (req, res) =>{
+    // console.log('in GET single post');
+    // console.log('req.params', req.params.id);
+    
+    //set up sql text for query
+    let sqlText =`
+    SELECT count("liked_post"."post_id") as LIKES, 
+        "posts"."id", "posts"."title", "posts"."hunt_area_id", "posts"."success",
+        "posts"."picture", "posts"."species", "posts"."date_of_hunt", "hunt_area"."hunt_area", 
+        "posts"."content", "posts"."created", "posts"."land_type", "posts"."weapon_type", 
+        "posts"."user_id", "user"."username"
+    FROM "posts"
+    LEFT JOIN "liked_post"
+        ON "posts"."id" = "liked_post"."post_id"
+    JOIN "user"
+        ON "user"."id" = "posts"."user_id"
+    JOIN "hunt_area"
+        ON "hunt_area"."id" = "posts"."hunt_area_id"
+        WHERE "posts"."id" = $1
+    GROUP BY ("posts"."id", "user"."username", "hunt_area"."hunt_area")
+    ;
+    `;
+
+    pool.query(sqlText, [req.params.id])
+        .then(dbRes => {
+            res.send(dbRes.rows[0]);
+            // console.log(dbRes.rows);
+        })
+        .catch(err => {
+            console.error('in GET single post error', err);
+            res.sendStatus(500);
+        });
+
+})
 
         // THIS IS THE ORIGINAL ROUTE
 // router.get('/', rejectUnauthenticated, (req, res) => {

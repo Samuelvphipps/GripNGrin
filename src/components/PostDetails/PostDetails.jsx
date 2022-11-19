@@ -104,6 +104,7 @@ function PostDetails(){
             <p className='postContent' >{post.content}</p>
         </div>
         <button>LIKE!</button>
+        <p>{post.likes}</p>
     </article>
     <CommentList post={post}/>
     </>
