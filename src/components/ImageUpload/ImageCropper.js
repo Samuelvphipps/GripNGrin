@@ -40,6 +40,8 @@ function ImageCropper({ setImgUrl,
         setFinalFile(croppedBlob);
         setImgUrl(URL.createObjectURL(croppedBlob));
         setSelectedFile(null);
+
+        //conditional edit dispatch for edit view. Boolean passed in props
         if(bool===true){dispatch({
             type: 'UPDATE_EDIT_POST',
             payload: {picture: croppedBlob}

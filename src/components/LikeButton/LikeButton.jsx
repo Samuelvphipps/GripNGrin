@@ -1,11 +1,12 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function LikeButton({user, post, selectedId}){
     //dispatch setup
     const dispatch =useDispatch();
-
+    const history = useHistory()
     const userLikes = useSelector(store => store.likes.userLikesReducer)
     //GET all likes to check if user likes the post already
 
@@ -13,11 +14,16 @@ function LikeButton({user, post, selectedId}){
         dispatch({
             type: 'FETCH_USER_LIKES'
         });
+        
+        dispatch({
+            type: 'FETCH_SELECTED_POST',
+            payload: selectedId
+        });
 
 
     }, []);
 
-    console.log('selectedId', selectedId)
+    // console.log('selectedId', selectedId)
 
     //on clicking like run a function to dispatch a like to saga => server => db
     //send post id so it can be given into sql and send user.id 
@@ -30,9 +36,14 @@ function LikeButton({user, post, selectedId}){
             type: 'ADD_LIKE',
             payload: {
                 post_id: post.id,
-                user_id: user.id
+                user_id: user.id,
+                selectedPost: selectedId
             }
-        })
+        });
+
+        // if(selectedId){
+        //     history.push(`/post/${selectedId}`)
+        // };
     }
 
     const unlikePost = () =>{
@@ -43,10 +54,15 @@ function LikeButton({user, post, selectedId}){
             type: 'UNLIKE',
             payload: {
                 post_id: post.id,
-                user_id: user.id
+                user_id: user.id,
+                selectedPost: selectedId
             }
         });
 
+        //use history push to force a rerender
+        // if(selectedId){
+        //     history.push(`/post/${selectedId}`)
+        // };
     }
     //if user owns the post no button exists
     if(post.user_id === user.id){

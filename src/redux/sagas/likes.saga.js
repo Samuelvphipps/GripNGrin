@@ -21,6 +21,13 @@ function* addLike(action){
             type: 'FETCH_USER_LIKES'
         })
 
+        if(action.payload.selectedPost){
+            yield put({
+                type: 'FETCH_SELECTED_POST',
+                payload: Number(action.payload.selectedPost)
+            });
+        }
+
     } catch (err) {
         console.error('in addLike SAGA error', err);
     }
@@ -63,6 +70,13 @@ function* unlike(action) {
             type: 'FETCH_USER_LIKES'
         })
         
+        if(action.payload.selectedPost){
+            yield put({
+                type: 'FETCH_SELECTED_POST',
+                payload: Number(action.payload.selectedPost)
+            });
+        }
+
     } catch (err){
         console.error('in unlike SAGA error:', err);
     }

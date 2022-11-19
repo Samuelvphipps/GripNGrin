@@ -1,3 +1,12 @@
+/*
+
+I got this image function from the Easy Crop documentation and 
+through their how to tutorials
+
+*/
+
+
+
 const createImage = (url) =>
   new Promise((resolve, reject) => {
     const image = new Image();
