@@ -86,7 +86,7 @@ function* fetchSelectedPost(action){
     } catch (err) {
         console.error('in fetchSelectedPost saga error', err);
 
-        //if error set empty post
+        //if error reset empty post so unknown page doesnt get the previous post
         yield put({
             type: 'SET_SELECTED_POST',
             payload: {}
