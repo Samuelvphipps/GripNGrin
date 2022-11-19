@@ -20,7 +20,8 @@ function* addLike(action){
         yield put({
             type: 'FETCH_USER_LIKES'
         })
-
+        
+//if an id is sent along update the selected post store to cause a rerender
         if(action.payload.selectedPost){
             yield put({
                 type: 'FETCH_SELECTED_POST',
@@ -69,7 +70,7 @@ function* unlike(action) {
         yield put({
             type: 'FETCH_USER_LIKES'
         })
-        
+        //if an id is sent along update the selected post store to cause a rerender
         if(action.payload.selectedPost){
             yield put({
                 type: 'FETCH_SELECTED_POST',

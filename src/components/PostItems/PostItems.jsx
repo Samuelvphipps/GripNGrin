@@ -81,7 +81,7 @@ function PostItems({post}){
                     post={post}
                     user={user}
                 />
-                <p>{post.likes}</p>
+
             </article>
         </li>
     )

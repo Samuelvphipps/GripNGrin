@@ -109,7 +109,7 @@ function PostDetails(){
             user={user}
             selectedId={params.id}
         />
-        <p>{post.likes}</p>
+
     </article>
     <CommentList post={post}/>
     </>
