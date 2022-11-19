@@ -77,6 +77,7 @@ function PostItems({post}){
                     <p className='postContent' onClick={pushToDetails}>{post.content.substring(0, 240) + '...'}</p>
                 </div>
                 <button>LIKE!</button>
+                <p>{post.likes}</p>
             </article>
         </li>
     )
