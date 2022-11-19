@@ -58,7 +58,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) =>{
 
 router.get('/', rejectUnauthenticated, (req, res) => {
     // console.log('in /api/posts GET');
-    
+    //get posts from db
     //sql text
     let sqlText = `
     SELECT "user"."username", "posts"."id", "posts"."title", "posts"."species",
