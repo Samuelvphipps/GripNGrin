@@ -7,7 +7,7 @@ import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-function CommentToggle({comment}){
+function ReplyToggle({comment}){
 
     //setup dispatch
     const dispatch = useDispatch();
@@ -40,6 +40,7 @@ function CommentToggle({comment}){
     if (comment.parent_comment_id === null){
         return(
             <>
+            {/* this is the input area for replies to comments. When reply is clicked it opens a  text box for a new reply on the parent comment */}
                 {replyOpen ? <form onSubmit={newReply}>
                     <InputLabel>Reply</InputLabel>
                     <TextareaAutosize 
@@ -59,4 +60,4 @@ function CommentToggle({comment}){
 
 
 
-export default CommentToggle;
+export default ReplyToggle;

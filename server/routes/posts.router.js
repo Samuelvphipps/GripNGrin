@@ -119,7 +119,7 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
     ];
 
     console.log('sql params', sqlParams);
-    //pool.query
+    //pool.query and send status back to saga
     pool.query(sqlText, sqlParams)
         .then(result => {
              res.sendStatus(201);
