@@ -4,14 +4,18 @@ import Cropper from "react-easy-crop";
 import getCroppedImg from "./cropImage";
 
 import './crop.css';
+import { useDispatch } from "react-redux";
 
 
 function ImageCropper({ setImgUrl,
                         setFinalFile, 
                         imageUrl,  
-                        setSelectedFile}){
+                        setSelectedFile,
+                        dispatchNewFile,
+                        bool}){
 
-
+    //define dispatch
+    const dispatch = useDispatch();
 
     const [zoom, setZoom] = useState(1);
     const [crop, setCrop] = useState({x:0, y:0});
@@ -36,6 +40,10 @@ function ImageCropper({ setImgUrl,
         setFinalFile(croppedBlob);
         setImgUrl(URL.createObjectURL(croppedBlob));
         setSelectedFile(null);
+        if(bool===true){dispatch({
+            type: 'UPDATE_EDIT_POST',
+            payload: {picture: croppedBlob}
+        })}
         // const blobFile=new Blob([croppedImageUrl], {type:'image/jpg'});
         
         // console.log('blobFile result', blobFile);

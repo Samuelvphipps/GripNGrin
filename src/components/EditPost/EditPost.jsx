@@ -19,6 +19,8 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import CommentList from '../CommentList/CommentList';
+import ImageCropper from '../ImageUpload/ImageCropper';
+
 
 function EditPost(){
 
@@ -32,6 +34,13 @@ function EditPost(){
     const huntAreaList = useSelector(store=>store.huntAreasReducer);
     // console.log('selected post is:', selectedPost);
 
+    //image processing information
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [finalFile, setFinalFile] = useState(null);
+    const [imgUrl, setImgUrl] = useState(null);
+    
+
+
     useEffect(()=>{
         //send id to saga
         //get the selected post information! ⬇️
@@ -42,6 +51,13 @@ function EditPost(){
             type: 'FETCH_EDIT_POST',
             payload: params.id
         });
+
+        if(finalFile != null){
+            dispatch({
+                type: 'UPDATE_EDIT_POST',
+                payload: {picture: finalFile}
+            })
+        }
         
         //fetch huntareas
         dispatch({ type: 'FETCH_HUNT_AREAS' });
@@ -61,6 +77,7 @@ function EditPost(){
         evt.preventDefault();
         console.log('in sbmitEditPost fn');
 
+
         //send post to saga for axios put request
         dispatch({
             type: 'EDIT_POST',
@@ -71,6 +88,28 @@ function EditPost(){
 
         history.push(`/post/${params.id}`);
     }
+        //dispatch the new cropped image
+        const dispatchNewFile = (file) => {
+            console.log('file is', file)
+
+        }
+
+        //on change activate cropper
+        const changeHandler = (event) => {
+            console.log('in changeHandler');
+            setSelectedFile({imageUrl: URL.createObjectURL(event.target.files[0])});
+            // ⬇️ this is setting a url for conditional render of the preview
+            //likely need to move this to the onCrop fn
+            // let url= URL.createObjectURL(event.target.files[0]);
+            // setImgUrl(url);
+            // if(finalFile != null){
+            //     dispatch({
+            //         type: 'UPDATE_EDIT_POST',
+            //         payload: {picture: finalFile}
+            //     })
+            // }
+
+        }
             /*
             In this return the values are pulled from the editPost info pulled from redux. On change they update redux with new data. This keeps redux state
             in synce with form prior to the axios.put.
@@ -83,12 +122,17 @@ function EditPost(){
         <div className='postBox'>
             <div>
                 <div className="imgContainer">
-                    <img src={editPost.picture}/>
+                    { finalFile ? <img src={imgUrl}/> :
+                        <img src={editPost.picture}/>
+                    
+                    }
+                    
                     <Input type='file' 
-                    onChange={(evt) => dispatch({
-                        type: 'UPDATE_EDIT_POST',
-                        payload: {picture: evt.target.files[0]}
-                    })}
+                    onChange={changeHandler}
+                    // onChange={(evt) => dispatch({
+                    //     type: 'UPDATE_EDIT_POST',
+                    //     payload: {picture: evt.target.files[0]}
+                    // })}
                     name="post_img"/>
                 </div>
             </div>
@@ -232,6 +276,17 @@ function EditPost(){
         </div>
         <Button type='submit'>Submit</Button>
     </form>
+        {selectedFile ? 
+                <ImageCropper 
+                    id={selectedFile.id} 
+                    imageUrl={selectedFile.imageUrl}
+                    setFinalFile={setFinalFile}
+                    setSelectedFile={setSelectedFile}
+                    setImgUrl={setImgUrl}
+                    dispatchNewFile={dispatchNewFile}
+                    bool={true}
+                    // setCroppedImageFor={setCroppedImageFor}
+                /> : null}
     <CommentList post={editPost}/>
     </>
     );

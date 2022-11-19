@@ -201,7 +201,7 @@ function NewPost(){
             </form>
 
             </article>
-
+            {/* image cropper activated by change handler */}
             {selectedFile ? 
                 <ImageCropper 
                     id={selectedFile.id} 
