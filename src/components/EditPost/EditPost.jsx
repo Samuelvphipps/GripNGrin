@@ -287,7 +287,6 @@ function EditPost(){
                     bool={true}
                     // setCroppedImageFor={setCroppedImageFor}
                 /> : null}
-    <CommentList post={editPost}/>
     </>
     );
 };
