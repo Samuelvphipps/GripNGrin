@@ -38,6 +38,11 @@ function NewPost(){
     const [weaponType, setWeaponType] = useState('');
     const [landType, setLandType] = useState('');
     const [story, setStory] = useState('');
+
+    //image processing information
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [finalFile, setFinalFile] = useState(null);
+    const [imgUrl, setImgUrl] = useState('');
    
 
     //todo: consolidate some data with spreaders? - STRETCH
