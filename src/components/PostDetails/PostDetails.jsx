@@ -107,6 +107,7 @@ function PostDetails(){
         <LikeButton 
             post={post}
             user={user}
+            selectedId={params.id}
         />
         <p>{post.likes}</p>
     </article>

@@ -44,6 +44,30 @@ function* fetchUserLikes(){
     }
 }
 
+function* unlike(action) {
+    console.log('in unlike SAGA', action.payload);
+
+    try{
+        //delete to DB
+        yield axios.delete('/api/likes', {
+            params: action.payload
+        });
+        
+         //fetch all posts again
+         yield put({
+            type: 'FETCH_POSTS',
+        });
+
+        //get the updated userlikes
+        yield put({
+            type: 'FETCH_USER_LIKES'
+        })
+        
+    } catch (err){
+        console.error('in unlike SAGA error:', err);
+    }
+}
+
 function* likesSaga() {
 
     //Get a like from client and send to working saga
@@ -51,6 +75,9 @@ function* likesSaga() {
 
     //get all the likes for a user
     yield takeEvery('FETCH_USER_LIKES', fetchUserLikes);
+
+    //remove like
+    yield takeEvery('UNLIKE', unlike)
 }
 
 export default likesSaga;

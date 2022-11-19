@@ -1,11 +1,14 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
 
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     // console.log('in /api/likes GET')
 
     //set up sql text
@@ -28,7 +31,7 @@ router.get('/', (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
 
 
     //check for correct user ⬇️
@@ -54,5 +57,33 @@ router.post('/', (req, res) => {
     }  //if user isnt the the liker the update wont happen send forbidden
     else{ res.sendStatus(403)}
 });
+
+router.delete('/', rejectUnauthenticated, (req,res) =>{
+    console.log('in /api/likes unlike DELETE route with params of:', req.query);
+    if(Number(req.query.user_id) === req.user.id){
+        //setup query text to delete from DB
+        let sqlText = `
+            DELETE FROM "liked_post"
+            WHERE "user_id" = $1 
+            AND "post_id" = $2;
+        `;
+
+        //set up sql params with data recieved from client
+        let sqlParams = [
+            req.user.id,
+            req.query.post_id
+        ]
+        //send Query to DB 
+        pool.query(sqlText, sqlParams)
+            .then(dbRes => res.sendStatus(200))
+            .catch(err => {
+                 console.error('in /api/likes delete route error:', err);
+                 res.sendStatus(500);
+            })
+    }
+    else{
+        res.sendStatus(403);
+    }
+})
 
 module.exports = router;
