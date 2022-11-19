@@ -14,8 +14,10 @@ function LikeButton({user, post, selectedId}){
             type: 'FETCH_USER_LIKES'
         });
 
+
     }, []);
 
+    console.log('selectedId', selectedId)
 
     //on clicking like run a function to dispatch a like to saga => server => db
     //send post id so it can be given into sql and send user.id 
@@ -44,6 +46,7 @@ function LikeButton({user, post, selectedId}){
                 user_id: user.id
             }
         });
+
     }
     //if user owns the post no button exists
     if(post.user_id === user.id){
