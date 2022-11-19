@@ -11,6 +11,8 @@ function CommentsLayer2({comment2, user, deleteComment, editComment}){
     
     
     return(
+        //call in the comment edit toggle bit
+        //TODO climb back one layer as this is redundant and happend through edits
         <div className="commentl2">
                 <CommentEditToggle 
                     comment={comment2}

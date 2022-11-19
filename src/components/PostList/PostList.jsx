@@ -6,6 +6,7 @@ function PostList(){
 
     //pull posts from the redux store
     const posts = useSelector(store => store.posts.postsReducer);
+    console.log('posts is now (in postlist):', posts);
 
     // console.log('posts in postlist', posts);
 

@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import './PostItems.css';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import LikeButton from '../LikeButton/LikeButton';
 
 
 function PostItems({post}){
@@ -76,7 +77,11 @@ function PostItems({post}){
                 <div>
                     <p className='postContent' onClick={pushToDetails}>{post.content.substring(0, 240) + '...'}</p>
                 </div>
-                <button>LIKE!</button>
+                <LikeButton 
+                    post={post}
+                    user={user}
+                />
+                <p>{post.likes}</p>
             </article>
         </li>
     )

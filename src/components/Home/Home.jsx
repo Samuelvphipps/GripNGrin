@@ -14,9 +14,9 @@ function Home(){
         dispatch({
             type: 'FETCH_POSTS',
         });
-        
     }, []);
 
+    //grab the post list
     return(
         <>
             <h1> IN HOME </h1>

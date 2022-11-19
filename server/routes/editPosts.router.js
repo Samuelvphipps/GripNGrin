@@ -28,7 +28,7 @@ const upload = multer({
  */
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     // console.log('in /api/editPosts/id GET route with id of:', req.params);
-    //set sql text to get post info from db
+    //set sql text to get post info from db and send to the editpost reducer
     let sqlText =`
         SELECT "posts"."id", "posts"."title", "posts"."hunt_area_id", "posts"."success",
             "posts"."picture", "posts"."species", "posts"."date_of_hunt", "hunt_area"."hunt_area", 
@@ -43,6 +43,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
     pool.query(sqlText, [req.params.id])
     .then(dbRes => {
+        //send the result to the SAGA for a redux store
         res.send(dbRes.rows[0]);
         // console.log(dbRes.rows);
     })
@@ -53,12 +54,12 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 });
 
-//if there is an image file: ⬇️
+//if there is an image file this is the route: ⬇️
 router.put('/image', rejectUnauthenticated, upload.single('post_img'), (req, res) => {
   // POST route code here
     // console.log('in /image put route with values: file:', req.file, 'body"', req.body);
     let post=req.body;
-    //PROTECT THE ROUTE
+    //PROTECT THE ROUTE FROM OTHER USERS
      if(Number(req.body.user_id)===req.user.id){
     //SQL
         // console.log('inside SQL area on the PUT')
@@ -112,10 +113,10 @@ router.put('/noImage', rejectUnauthenticated, (req, res) => {
     // POST route code here
     console.log('in the no image post edit PUT route', req.body)
     let post=req.body.data;
-    //PROTECT THE ROUTE
+    //PROTECT THE ROUTE FROM OTHER USERS
     console.log('user id', post.user_id, req.user.id)
      if(post.user_id===req.user.id){
-    //SQL
+    //SQL to update the post @ the database
         console.log('inside SQL area on the PUT')
         let sqlText = `
             UPDATE "posts"

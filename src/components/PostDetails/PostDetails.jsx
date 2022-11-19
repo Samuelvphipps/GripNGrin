@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import CommentList from '../CommentList/CommentList';
+import LikeButton from '../LikeButton/LikeButton';
 
 function PostDetails(){
 
@@ -103,7 +104,12 @@ function PostDetails(){
         <div>
             <p className='postContent' >{post.content}</p>
         </div>
-        <button>LIKE!</button>
+        <LikeButton 
+            post={post}
+            user={user}
+            selectedId={params.id}
+        />
+        <p>{post.likes}</p>
     </article>
     <CommentList post={post}/>
     </>

@@ -28,7 +28,7 @@ function NewPost(){
     const dispatch=useDispatch();
     const history=useHistory();
 
-    //set up form state
+    //set up form state - this local state tracks fields for the eventual post via axios
     const [postTitle, setPostTitle] = useState('');
     const [image, setImage] = useState('');
     const [date, setDate] = useState('');
@@ -40,7 +40,7 @@ function NewPost(){
     const [story, setStory] = useState('');
    
 
-    //todo: consolidate some data with spreaders - STRETCH
+    //todo: consolidate some data with spreaders? - STRETCH
 
     const submitHunt = (evt) => {
         evt.preventDefault();
@@ -65,7 +65,9 @@ function NewPost(){
             type: 'ADD_POST',
             payload: payload
         });
+        //alert to give post time to come from db to home page
         alert('Your post is live!');
+        //send user to the home page with the list of posts
         history.push('/home');
     };
     

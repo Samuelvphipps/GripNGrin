@@ -71,7 +71,12 @@ function EditPost(){
 
         history.push(`/post/${params.id}`);
     }
-
+            /*
+            In this return the values are pulled from the editPost info pulled from redux. On change they update redux with new data. This keeps redux state
+            in synce with form prior to the axios.put.
+            On submital of the form the submit edit post dispatches the info the SAGA where the conditional axios request takes place depending
+            on the presence of an image
+            */ 
     return(
         <>
         <form onSubmit={submitEditPost}>
@@ -161,6 +166,7 @@ function EditPost(){
                                 <InputLabel required id="huntarea-input-label">Hunt Area</InputLabel>
                                     <Select
                                         labelId="huntarea-input-label"
+                                        //have the input be empty until the hunt area id arrives (prevents an error)
                                         value={editPost.hunt_area_id ? editPost.hunt_area_id : ''}
                                         //on change update redux store with new value
                                         onChange={(evt) => dispatch({
