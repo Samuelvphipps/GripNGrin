@@ -9,6 +9,7 @@ import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom'
+import ImageCropper from '../ImageUpload/ImageCropper';
 
 
 function NewPost(){
@@ -30,7 +31,7 @@ function NewPost(){
 
     //set up form state - this local state tracks fields for the eventual post via axios
     const [postTitle, setPostTitle] = useState('');
-    const [image, setImage] = useState('');
+    // const [image, setImage] = useState('');
     const [date, setDate] = useState('');
     const [species, setSpecies] = useState('');
     const [successful, setSuccessful] = useState('');
@@ -53,7 +54,7 @@ function NewPost(){
         //create payload of form data to send to saga (destructured)
         let payload = {
             postTitle,
-            image,
+            image: finalFile,
             date,
             species,
             successful,
@@ -75,6 +76,16 @@ function NewPost(){
         //send user to the home page with the list of posts
         history.push('/home');
     };
+
+    const changeHandler = (event) => {
+        console.log('in changeHandler');
+        setSelectedFile({imageUrl: URL.createObjectURL(event.target.files[0])});
+        // ⬇️ this is setting a url for conditional render of the preview
+        //likely need to move this to the onCrop fn
+        // let url= URL.createObjectURL(event.target.files[0]);
+        // setImgUrl(url);
+
+    }
     
     return(
         <>
@@ -85,9 +96,12 @@ function NewPost(){
             {/* add post form info */}
             <form onSubmit={submitHunt}>
                 {/* Image container and input */}
-                <figure>
-                    <Input type='file' name="post_img" onChange={(evt)=>setImage(evt.target.files[0])}/>
-                </figure>
+                {imgUrl.length>0 ? <img  className="preview" src={imgUrl}></img>: <figure>
+                    <Input type='file' name="post_img" 
+                    onChange = {changeHandler}
+                    //original==onChange={(evt)=>setImage(evt.target.files[0])}
+                    />
+                </figure>}
                 {/* header with  Title Input, profile name, date*/}
                 <header>
                     <Input 
@@ -187,6 +201,16 @@ function NewPost(){
             </form>
 
             </article>
+
+            {selectedFile ? 
+                <ImageCropper 
+                    id={selectedFile.id} 
+                    imageUrl={selectedFile.imageUrl}
+                    setFinalFile={setFinalFile}
+                    setSelectedFile={setSelectedFile}
+                    setImgUrl={setImgUrl}
+                    // setCroppedImageFor={setCroppedImageFor}
+                /> : null}
         </>
     )
 };
