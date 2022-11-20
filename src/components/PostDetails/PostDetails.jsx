@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import CommentList from '../CommentList/CommentList';
 import LikeButton from '../LikeButton/LikeButton';
+import { Link } from 'react-router-dom';
 
 function PostDetails(){
 
@@ -108,7 +109,7 @@ function PostDetails(){
         <div className='postBox'>
             <div>
                 <div className="imgContainer">
-                    <img src={post.picture}/>
+                    <a href={post.picture}><img src={post.picture}/></a>
                 </div>
             </div>
             <div className='bodyBox'>
