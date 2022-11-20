@@ -2,6 +2,12 @@
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
+//sweet alert import
+const Swal = require('sweetalert2')
+
+//moment import
+import moment from 'moment';
+
 import './PostItems.css';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,11 +27,46 @@ function PostItems({post}){
     //Delete selected post information
     const deletePost = () => {
         // console.log('in deletePost with id of', post.id);
-        //dispatch delete request to saga
-        dispatch({
-            type:'DELETE_POST',
-            payload: {post_id: post.id, user_id: post.user_id}
-        });
+        //dispatch delete request to saga with sweet alert
+
+        //original example of this sweet alert found @
+        //https://sweetalert2.github.io/
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-success',
+              cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+          })
+          
+        swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+        }).then((result) => {
+        if (result.isConfirmed) {
+            swalWithBootstrapButtons.fire(
+            'Deleted!',
+            'Your Post has been deleted.'
+            )
+            //dispatch delete request to saga
+            dispatch({
+                type:'DELETE_POST',
+                payload: {post_id: post.id, user_id: post.user_id}
+            });
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+            'Cancelled'
+            )
+        }
+        })
         
     };
     
@@ -48,8 +89,8 @@ function PostItems({post}){
                         <div>
                             <div className='titleRow'>
                                 <h3>{post.title}</h3>
-                                <p>{post.username}</p>
-                                <p>{post.created}</p>
+                                <p>{post.username}-</p>
+                                <p>{moment(post.created).format("MMM Do YYYY")}</p>
                                 { user.id===post.user_id ?
                                 <Stack spacing={2} direction="row">
                                     <Button onClick={()=>history.push(`/post/edit/${post.id}`)} variant="text">Edit</Button>
@@ -62,7 +103,7 @@ function PostItems({post}){
                         </div>
                         <div className='dataContainer'>
                             <div>
-                                <p>Date of hunt: {post.date_of_hunt}</p>
+                                <p>Date of hunt: {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
                                 <p>Species: {post.species}</p>
                                 <p>Success: {post.success ? <>Yes</> : <>No</>}</p>
                             </div>
