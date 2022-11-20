@@ -5,6 +5,8 @@ import Stack from '@mui/material/Stack';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+//sweet alert import
+const Swal = require('sweetalert2')
 
 import CommentsLayer2 from '../CommentsLayer2/CommentsLayer2';
 import ReplyToggle from '../ReplyToggle/ReplyToggle';
@@ -24,10 +26,44 @@ function CommentItem ({comment, post, comments}){
     const deleteComment = (id) => {
         console.log('in delete comment with an id of:', id);
 
+
+                 //original example of this sweet alert found @
+        //https://sweetalert2.github.io/
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-success',
+              cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+          })
+          
+        swalWithBootstrapButtons.fire({
+        title: 'Are you sure you want to delete this comment?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+        }).then((result) => {
+        if (result.isConfirmed) {
+            swalWithBootstrapButtons.fire(
+            'Deleted!',
+            'Your comment has been deleted.'
+            )
             //delete the comment chosem. includes coment id, post id, and userid (for server side verification)
         dispatch({
             type: 'DELETE_COMMENT',     //grab post id to send the fetch comments request
             payload: {comment_id: id, post_id: post.id, user_id: user.id}
+        })  
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+            'Cancelled'
+            )
+        }
         })
     };
 

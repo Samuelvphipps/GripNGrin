@@ -2,6 +2,8 @@
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
+//sweet alert import
+const Swal = require('sweetalert2')
 import './PostItems.css';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,11 +23,46 @@ function PostItems({post}){
     //Delete selected post information
     const deletePost = () => {
         // console.log('in deletePost with id of', post.id);
-        //dispatch delete request to saga
-        dispatch({
-            type:'DELETE_POST',
-            payload: {post_id: post.id, user_id: post.user_id}
-        });
+        //dispatch delete request to saga with sweet alert
+
+        //original example of this sweet alert found @
+        //https://sweetalert2.github.io/
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-success',
+              cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+          })
+          
+        swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+        }).then((result) => {
+        if (result.isConfirmed) {
+            swalWithBootstrapButtons.fire(
+            'Deleted!',
+            'Your Post has been deleted.'
+            )
+            //dispatch delete request to saga
+            dispatch({
+                type:'DELETE_POST',
+                payload: {post_id: post.id, user_id: post.user_id}
+            });
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+            'Cancelled'
+            )
+        }
+        })
         
     };
     

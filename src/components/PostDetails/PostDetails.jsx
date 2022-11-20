@@ -2,6 +2,8 @@
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
+//sweet alert import
+const Swal = require('sweetalert2')
 
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -40,16 +42,52 @@ function PostDetails(){
 
     const deletePost = () => {
         // console.log('in deletePost with id of', post.id);
-        //dispatch delete request to saga
-        dispatch({
-            type:'DELETE_POST',
-            payload: {post_id: post.id, user_id: post.user_id}
-        });
+        
 
         // console.log('selected post:', post);
        
-        //after delete head home
-        history.push('/home');
+         //original example of this sweet alert found @
+        //https://sweetalert2.github.io/
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-success',
+              cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+          })
+          
+        swalWithBootstrapButtons.fire({
+        title: 'Are you sur you want to delete this post?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+        }).then((result) => {
+        if (result.isConfirmed) {
+            swalWithBootstrapButtons.fire(
+            'Deleted!',
+            'Your post has been deleted.'
+            )
+            //dispatch delete request to saga
+            dispatch({
+                type:'DELETE_POST',
+                payload: {post_id: post.id, user_id: post.user_id}
+            });
+            //after delete head home
+            history.push('/home');
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+            'Cancelled'
+            )
+        }
+        })
+        
+
 
     // console.log('post:', post);
     }

@@ -9,6 +9,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 
+//sweet alert import
+const Swal = require('sweetalert2')
+
 //date formatter
 
 import { format } from 'date-fns';
@@ -84,9 +87,11 @@ function EditPost(){
             payload: editPost
         });
 
-        alert('Your post is edited and live!!!');
+        Swal.fire('Your edited post is live!')
+        .then((result) => {
+            history.push(`/post/${params.id}`);
+          })
 
-        history.push(`/post/${params.id}`);
     }
         //dispatch the new cropped image
         const dispatchNewFile = (file) => {
