@@ -6,6 +6,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 
+//sweet alert import
+const Swal = require('sweetalert2')
+
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom'
@@ -72,9 +75,13 @@ function NewPost(){
             payload: payload
         });
         //alert to give post time to come from db to home page
-        alert('Your post is live!');
+        Swal.fire('Your post is live!')
+        .then((result) => {
+            history.push('/home');
+            
+          })
+        // alert('Your post is live!');
         //send user to the home page with the list of posts
-        history.push('/home');
     };
 
     const changeHandler = (event) => {
