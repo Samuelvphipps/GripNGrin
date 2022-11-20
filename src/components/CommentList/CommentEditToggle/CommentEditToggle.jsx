@@ -3,6 +3,8 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 
+import moment from 'moment';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 
@@ -34,7 +36,7 @@ function CommentEditToggle({user, post, deleteComment, comment, editComment}){
         // if toggle isnt engaged show this
     return(
         <>
-                <><p>{comment.username} {comment.created}</p>
+                <><p>{comment.username} {moment(comment.created).format("MMM Do YYYY")}</p>
                 <p>{comment.content}</p></>
             
                 {/* if the user owns the  comment the buttons are here and allow the user to delete or edit the post*/}

@@ -4,6 +4,10 @@ import Button from '@mui/material/Button';
 
 //sweet alert import
 const Swal = require('sweetalert2')
+
+//moment import
+import moment from 'moment';
+
 import './PostItems.css';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -85,8 +89,8 @@ function PostItems({post}){
                         <div>
                             <div className='titleRow'>
                                 <h3>{post.title}</h3>
-                                <p>{post.username}</p>
-                                <p>{post.created}</p>
+                                <p>{post.username}-</p>
+                                <p>{moment(post.created).format("MMM Do YYYY")}</p>
                                 { user.id===post.user_id ?
                                 <Stack spacing={2} direction="row">
                                     <Button onClick={()=>history.push(`/post/edit/${post.id}`)} variant="text">Edit</Button>
@@ -99,7 +103,7 @@ function PostItems({post}){
                         </div>
                         <div className='dataContainer'>
                             <div>
-                                <p>Date of hunt: {post.date_of_hunt}</p>
+                                <p>Date of hunt: {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
                                 <p>Species: {post.species}</p>
                                 <p>Success: {post.success ? <>Yes</> : <>No</>}</p>
                             </div>

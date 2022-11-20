@@ -4,6 +4,8 @@ import Stack from '@mui/material/Stack';
 
 //sweet alert import
 const Swal = require('sweetalert2')
+//import moment
+import moment from 'moment';
 
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -114,7 +116,7 @@ function PostDetails(){
                     <div className='titleRow'>
                         <h3>{post.title}</h3>
                         <p>{post.username}</p>
-                        <p>{post.created}</p>
+                        <p>{moment(post.created).format("MMM Do YYYY")}</p>
                         { user.id===post.user_id ?
                                 <Stack spacing={2} direction="row">
                                     <Button onClick={()=>history.push(`/post/edit/${post.id}`)} variant="text">Edit</Button>
@@ -127,7 +129,7 @@ function PostDetails(){
                 </div>
                 <div className='dataContainer'>
                     <div>
-                        <p>Date of hunt: {post.date_of_hunt}</p>
+                        <p>Date of hunt: {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
                         <p>Species: {post.species}</p>
                         <p>Success: {post.success ? <>Yes</> : <>No</>}</p>
                     </div>
