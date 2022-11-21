@@ -1,6 +1,11 @@
 //mui
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+
+import {
+    Button,
+    Stack, 
+    Grid,
+    Divider
+} from '@mui/material';
 
 //css
 import './PostDetails.css'
@@ -99,43 +104,32 @@ function PostDetails(){
     
     return(
         <>
-        <article >
-        <div className='postBox'>
-            <div>
-                <div>
-                    <a href={post.picture}><img className='imgContainer' src={post.picture}/></a>
-                </div>
-            </div>
-            <div className='bodyBox'>
-                <div>
-                    <div className='titleRow'>
-                        <h3>{post.title}</h3>
-                        <p>{post.username}</p>
-                        <p>{moment(post.created).format("MMM Do YYYY")}</p>
-                        { user.id===post.user_id ?
-                                <Stack spacing={2} direction="row">
-                                    <Button onClick={()=>history.push(`/post/edit/${post.id}`)} variant="text">Edit</Button>
-                                    <Button onClick={deletePost} variant="text">Delete</Button>
-                                </Stack>
-                                :
-                                null
-                            }
-                    </div>
-                </div>
-                <div className='dataContainer'>
-                    <div>
-                        <p>Date of hunt: {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
-                        <p>Species: {post.species}</p>
-                        <p>Success: {post.success ? <>Yes</> : <>No</>}</p>
-                    </div>
-                    <div>
-                        <p>Location: {post.hunt_area}</p>
-                        <p>Weapon used: {post.weapon_type}</p>
-                        <p>Land Type: {post.land_type}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <article className='postDetailsContainer'>
+                        <h3 className='postDetailsTitle'>{post.title}</h3>
+                        <Grid container spacing={1}>
+                            <Grid item sm={6}><p>{post.username}</p></Grid>
+                            <Grid item sm={4}>
+                                
+                            </Grid>
+                            <Grid item sm={2}><p>{moment(post.created).format("MMM Do YYYY")}</p></Grid>
+                        </Grid>
+
+            
+       <Grid container spacing={1}>
+            <Grid item sm={6}>
+                <a href={post.picture}><img className='imgContainer' src={post.picture}/></a>
+            </Grid>
+            <Grid item sm={6}>
+                            
+                            <p className='detailsData top'><span className='postItemDataDetails'>Date of hunt:</span> {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
+                            <p className='detailsData'><span className='postItemDataDetails'>Species:</span> {post.species}</p>
+                            <p className='detailsData'><span className='postItemDataDetails'>Success:</span> {post.success ? <>Yes</> : <>No</>}</p>                        
+                            <p className='detailsData'><span className='postItemDataDetails'>Location:</span> {post.hunt_area}</p>
+                            <p className='detailsData'><span className='postItemDataDetails'>Weapon used:</span> {post.weapon_type}</p>
+                            <p className='detailsData'><span className='postItemDataDetails'>Land Type:</span> {post.land_type}</p>
+                
+            </Grid>
+       </Grid>
         <div>
             <p className='postContent' >{post.content}</p>
         </div>
@@ -144,8 +138,16 @@ function PostDetails(){
             user={user}
             selectedId={params.id}
         />
-
+        { user.id===post.user_id ?
+                                        <Stack spacing={2} direction="row">
+                                            <Button onClick={()=>history.push(`/post/edit/${post.id}`)} variant="text">Edit</Button>
+                                            <Button onClick={deletePost} variant="text">Delete</Button>
+                                        </Stack>
+                                        :
+                                        null
+                                    }
     </article>
+    <Divider />
     <CommentList post={post}/>
     </>
     );

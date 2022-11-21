@@ -1,3 +1,29 @@
 .imgContainer{
-    max-width: 200px;
+    max-width: 430px;
+    border-radius: 10px;
+}
+
+.postDetailsContainer{
+    max-width: 900px;
+    margin: auto;
+    border: 1px solid black;
+    padding: 2rem
+}
+
+.postDetailsTitle {
+    font-size: 32px;
+    text-align: center;
+}
+
+.postItemDataDetails {
+    font-weight: bold;
+}
+
+.detailsData {
+    margin-bottom: 37px;
+    font-size: 22px;
+}
+
+.detailsData.top {
+    margin-top: 41px;
 }
