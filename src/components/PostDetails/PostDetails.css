@@ -1,0 +1,19 @@
+.imgContainer {
+    max-width: 150px;
+}
+
+.postBox{
+    display: flex;
+}
+
+.titleRow{
+    display: flex;
+}
+
+.bodyBox{
+    display: block;
+}
+
+.dataContainer {
+    display: flex;
+}

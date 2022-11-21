@@ -2,6 +2,8 @@
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
+//css
+import './PostDetails.css'
 //sweet alert import
 const Swal = require('sweetalert2')
 //import moment
@@ -100,8 +102,8 @@ function PostDetails(){
         <article >
         <div className='postBox'>
             <div>
-                <div className="imgContainer">
-                    <a href={post.picture}><img src={post.picture}/></a>
+                <div>
+                    <a href={post.picture}><img className='imgContainer' src={post.picture}/></a>
                 </div>
             </div>
             <div className='bodyBox'>
