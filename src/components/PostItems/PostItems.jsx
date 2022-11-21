@@ -112,7 +112,7 @@ function PostItems({post}){
                         <Grid container spacing={1}>
                             <Grid item sm={1}></Grid>
                             <Grid item sm={10}>
-                                <p className='postContent' onClick={pushToDetails}>{post.content.substring(0, 240) + '...'}</p>
+                                <p className='postContent' onClick={pushToDetails}>{post.content.substring(0, 150) + '...'}</p>
                             </Grid>
                             <Grid item sm={1}></Grid>
                         </Grid>
