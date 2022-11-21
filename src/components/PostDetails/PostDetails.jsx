@@ -49,18 +49,10 @@ function PostDetails(){
 
         // console.log('selected post:', post);
        
-         //original example of this sweet alert found @
+         //original example of this sweet alert found in documentation found @
         //https://sweetalert2.github.io/
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-              confirmButton: 'btn btn-success',
-              cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: false
-          })
-          
-        swalWithBootstrapButtons.fire({
-        title: 'Are you sur you want to delete this post?',
+        Swal.fire({
+        title: 'Are you sure you want to delete this post?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
