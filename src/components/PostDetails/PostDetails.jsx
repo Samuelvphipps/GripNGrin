@@ -107,11 +107,12 @@ function PostDetails(){
         <article className='postDetailsContainer'>
                         <h3 className='postDetailsTitle'>{post.title}</h3>
                         <Grid container spacing={1}>
-                            <Grid item sm={6}><p>{post.username}</p></Grid>
-                            <Grid item sm={4}>
+                            <Grid item sm={1}></Grid>
+                            <Grid item sm={5}><p className='username detailsHeader'>{post.username}</p></Grid>
+                            <Grid item sm={3}>
                                 
                             </Grid>
-                            <Grid item sm={2}><p>{moment(post.created).format("MMM Do YYYY")}</p></Grid>
+                            <Grid item sm={3}><p className='postDate detailsHeader'>{moment(post.created).format("MMM Do YYYY")}</p></Grid>
                         </Grid>
 
             
@@ -147,8 +148,7 @@ function PostDetails(){
                                         null
                                     }
     </article>
-    <Divider />
-    <CommentList post={post}/>
+    <article className='commentsContainer'><CommentList post={post}/></article>
     </>
     );
 };

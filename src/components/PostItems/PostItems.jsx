@@ -84,8 +84,8 @@ function PostItems({post}){
                                             <Grid container spacing={2}>
                                                 
                                                     <Grid item sm={3.5}><h3 className='postItemTitle'>{post.title}</h3></Grid>
-                                                    <Grid item sm={4}><p className='postItemHead'>{post.username}</p></Grid>
-                                                    <Grid item sm={3}><p className='postItemHead'>{moment(post.created).format("MMM Do YYYY")}</p></Grid>
+                                                    <Grid item sm={4}><p className='postItemHead username'>{post.username}</p></Grid>
+                                                    <Grid item sm={4}><p className='postItemHead postDate'>{moment(post.created).format("MMM Do YYYY")}</p></Grid>
                                                  
                                             </Grid>
                                         </div>

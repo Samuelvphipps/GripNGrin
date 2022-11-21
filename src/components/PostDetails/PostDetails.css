@@ -1,18 +1,26 @@
 .imgContainer{
-    max-width: 430px;
+    max-width: 450px;
     border-radius: 10px;
 }
 
 .postDetailsContainer{
-    max-width: 900px;
+    max-width: 1000px;
+    margin: auto;
+    border: 1px solid black;
+    padding: 2rem
+}
+
+.commentsContainer {
+    max-width: 1000px;
     margin: auto;
     border: 1px solid black;
     padding: 2rem
 }
 
 .postDetailsTitle {
-    font-size: 32px;
+    font-size: 40px;
     text-align: center;
+    margin-top: 0;
 }
 
 .postItemDataDetails {
@@ -20,10 +28,28 @@
 }
 
 .detailsData {
-    margin-bottom: 37px;
+    margin-bottom: 40px;
     font-size: 22px;
+
 }
 
 .detailsData.top {
     margin-top: 41px;
+}
+
+.postContent {
+    font-size: 22px;
+}
+
+.username {
+    color: blue;
+    font-weight: bold;
+}
+
+.detailsHeader {
+    font-size: 25px;
+}
+
+.postDate {
+    font-style: italic;
 }

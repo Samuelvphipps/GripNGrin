@@ -292,7 +292,11 @@ function EditPost(){
                     bool={true}
                     // setCroppedImageFor={setCroppedImageFor}
                 /> : null}
+
+                
     </>
+
+
     );
 };
 
