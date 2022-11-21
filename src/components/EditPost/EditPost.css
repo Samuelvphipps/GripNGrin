@@ -1,0 +1,25 @@
+.editData {
+    margin-bottom: 20px;
+    font-size: 22px;
+    align-items: center;
+    display: flex;
+}
+
+.detailsData.top {
+    margin-top: 35px;
+}
+
+.editItemDataDetails {
+    font-weight: bold;
+    margin-right: 13px;
+
+}
+
+#editTextArea {
+    
+    width: 98%;
+    font-size: 22px;
+    height: 150px;
+    resize: none;
+    padding: .5rem
+}
