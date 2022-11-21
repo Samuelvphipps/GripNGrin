@@ -39,7 +39,7 @@ function CommentItem ({comment, post, comments}){
         reverseButtons: true
         }).then((result) => {
         if (result.isConfirmed) {
-            swalWithBootstrapButtons.fire(
+            Swal.fire(
             'Deleted!',
             'Your comment has been deleted.'
             )

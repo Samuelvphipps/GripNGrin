@@ -1,19 +1,41 @@
-.imgContainer {
-    max-width: 150px;
+
+.postItem {
+    max-width: 750px;
+    margin: 2rem auto;
+    border: 2px solid black;
+    border-radius: 14px;
+    background-color: #dedede;
+
 }
 
-.postBox{
-    display: flex;
+.postItem img{
+    border-radius: 10px;
 }
 
-.titleRow{
-    display: flex;
+.postItemImage {
+    max-width: 200px;
 }
 
-.bodyBox{
-    display: block;
+.innerPostItem {
+    background-color: white;
+    border:1px solid black;
+    margin: 4px;
+    border-radius: 23px;
+    padding: 1rem;
+}
+#postItemTitle>.MuiGrid-root{
+    align-items: center;
 }
 
-.dataContainer {
-    display: flex;
+.postItemTitle{
+    font-size: 23px;
+
+}
+
+.postItemHead {
+    font-size: 17px
+}
+
+.postItemData {
+    font-weight: bold;
 }

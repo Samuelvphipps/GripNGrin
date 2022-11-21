@@ -3,12 +3,18 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
+import { Grid } from '@mui/material';
 
 function Nav() {
   const user = useSelector((store) => store.user);
 
   return (
+    
     <div className="nav">
+        
+        <h3 className="nav-title">{user.username}</h3>
+        <LogOutButton className="navLink" />
+
       <Link to="/home">
         <h2 className="nav-title">Prime Solo Project</h2>
       </Link>
@@ -39,7 +45,7 @@ function Nav() {
               Info Page
             </Link> */}
 
-            <LogOutButton className="navLink" />
+            
           </>
         )}
 

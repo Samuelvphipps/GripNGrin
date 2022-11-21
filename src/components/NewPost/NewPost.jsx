@@ -1,13 +1,19 @@
-import Input from '@mui/material/Input';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import TextareaAutosize from '@mui/base/TextareaAutosize';
 
+import {
+    TextareaAutosize,
+    Input,
+    Box,
+    InputLabel,
+    MenuItem,
+    FormControl,
+    Select,
+    Grid
+} from '@mui/material'
 //sweet alert import
 const Swal = require('sweetalert2')
+
+//import moment for date
+import moment from 'moment';
 
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,6 +31,8 @@ function NewPost(){
 
     //get huntAreas redux state
     const huntAreaList = useSelector(store=>store.huntAreasReducer);
+    //get user information
+    const user = useSelector(store => store.user);
     // console.log('huntAreaList', huntAreaList);
 
     
@@ -117,8 +125,8 @@ function NewPost(){
                     value={postTitle} 
                     onChange={(evt)=>setPostTitle(evt.target.value)} 
                     required/>
-                    <p> Username </p>
-                    <p> Date Posted (autofilled)</p>
+                    <p> {user.username} </p>
+                    <p> {moment().format("MMM Do YYYY")}</p>
                 </header>
 
                 

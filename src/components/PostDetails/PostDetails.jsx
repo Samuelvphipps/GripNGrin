@@ -61,7 +61,7 @@ function PostDetails(){
         reverseButtons: true
         }).then((result) => {
         if (result.isConfirmed) {
-            swalWithBootstrapButtons.fire(
+            Swal.fire(
             'Deleted!',
             'Your post has been deleted.'
             )
@@ -76,7 +76,7 @@ function PostDetails(){
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
         ) {
-            swalWithBootstrapButtons.fire(
+            Swal.fire(
             'Cancelled'
             )
         }
