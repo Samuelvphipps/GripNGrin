@@ -1,6 +1,6 @@
 //mui
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import {Stack, Button, Grid} from '@mui/material';
+
 
 //sweet alert import
 const Swal = require('sweetalert2')
@@ -31,15 +31,7 @@ function PostItems({post}){
 
         //original example of this sweet alert found @
         //https://sweetalert2.github.io/
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-              confirmButton: 'btn btn-success',
-              cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: false
-          })
-          
-        swalWithBootstrapButtons.fire({
+        Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
         icon: 'warning',
@@ -49,7 +41,7 @@ function PostItems({post}){
         reverseButtons: true
         }).then((result) => {
         if (result.isConfirmed) {
-            swalWithBootstrapButtons.fire(
+            Swal.fire(
             'Deleted!',
             'Your Post has been deleted.'
             )
@@ -62,7 +54,7 @@ function PostItems({post}){
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
         ) {
-            swalWithBootstrapButtons.fire(
+            Swal.fire(
             'Cancelled'
             )
         }
@@ -78,50 +70,73 @@ function PostItems({post}){
 
     return(
         <li>
-            <article >
-                <div className='postBox'>
-                    <div>
-                        <div className="imgContainer">
-                            <img src={post.picture}/>
-                        </div>
+            <article className='postItem'>
+                    <div className='innerPostItem'>
+                        <Grid container spacing={2}>
+                            <Grid item sm={4}>
+                               
+                                        <a href={post.picture}><img className='postItemImage' src={post.picture}/></a>
+                                    
+                            </Grid>
+                            <Grid item sm={8}>
+                                                   
+                                        <div id='postItemTitle'>
+                                            <Grid container spacing={2}>
+                                                
+                                                    <Grid item sm={3.5}><h3 className='postItemTitle'>{post.title}</h3></Grid>
+                                                    <Grid item sm={4}><p className='postItemHead'>{post.username}</p></Grid>
+                                                    <Grid item sm={3}><p className='postItemHead'>{moment(post.created).format("MMM Do YYYY")}</p></Grid>
+                                                 
+                                            </Grid>
+                                        </div>
+                                    
+                                        <Grid container spacing={1}>
+                                            
+                                                <Grid item sm={7}>
+                                                    <p><span className='postItemData'>Date of hunt:</span> {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
+                                                    <p><span className='postItemData'>Species:</span> {post.species}</p>
+                                                    <p><span className='postItemData'>Success:</span> {post.success ? <>Yes</> : <>No</>}</p>
+                                                </Grid>
+                                           
+                                            
+                                                <Grid item sm={5}>
+                                                    <p><span className='postItemData'>Location:</span> {post.hunt_area}</p>
+                                                    <p><span className='postItemData'>Weapon used:</span> {post.weapon_type}</p>
+                                                    <p><span className='postItemData'>Land Type:</span> {post.land_type}</p>
+                                                </Grid>
+                                           
+                                        </Grid>
+                                    
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={1}>
+                            <Grid item sm={1}></Grid>
+                            <Grid item sm={10}>
+                                <p className='postContent' onClick={pushToDetails}>{post.content.substring(0, 240) + '...'}</p>
+                            </Grid>
+                            <Grid item sm={1}></Grid>
+                        </Grid>
+                    
+                    <Grid container spacing={2}>
+                        <Grid item sm={2}></Grid>
+                        <Grid item sm={6}>
+                            <LikeButton 
+                                post={post}
+                                user={user}
+                            />
+                        </Grid>
+                        <Grid item sm={4}>
+                            { user.id===post.user_id ?
+                                                    <Stack spacing={2} direction="row">
+                                                        <Button onClick={()=>history.push(`/post/edit/${post.id}`)} variant="text">Edit</Button>
+                                                        <Button onClick={deletePost} variant="text">Delete</Button>
+                                                    </Stack>
+                                                    :
+                                                    null
+                                                    }
+                        </Grid>
+                    </Grid>
                     </div>
-                    <div className='bodyBox'>
-                        <div>
-                            <div className='titleRow'>
-                                <h3>{post.title}</h3>
-                                <p>{post.username}-</p>
-                                <p>{moment(post.created).format("MMM Do YYYY")}</p>
-                                { user.id===post.user_id ?
-                                <Stack spacing={2} direction="row">
-                                    <Button onClick={()=>history.push(`/post/edit/${post.id}`)} variant="text">Edit</Button>
-                                    <Button onClick={deletePost} variant="text">Delete</Button>
-                                </Stack>
-                                :
-                                null
-                                }
-                            </div>
-                        </div>
-                        <div className='dataContainer'>
-                            <div>
-                                <p>Date of hunt: {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
-                                <p>Species: {post.species}</p>
-                                <p>Success: {post.success ? <>Yes</> : <>No</>}</p>
-                            </div>
-                            <div>
-                                <p>Location: {post.hunt_area}</p>
-                                <p>Weapon used: {post.weapon_type}</p>
-                                <p>Land Type: {post.land_type}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <p className='postContent' onClick={pushToDetails}>{post.content.substring(0, 240) + '...'}</p>
-                </div>
-                <LikeButton 
-                    post={post}
-                    user={user}
-                />
 
             </article>
         </li>

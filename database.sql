@@ -26,7 +26,7 @@ CREATE TABLE "posts" (
 	"picture" VARCHAR,
 	"content" VARCHAR,
 	"created" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	"user_id" INT REFERENCES "user",
+	"user_id" INT REFERENCES "user" ON DELETE CASCADE,
 	"land_type" varchar(255),
 	"flagged" BOOLEAN DEFAULT 'false',
 	"weapon_type" VARCHAR
@@ -36,16 +36,16 @@ CREATE TABLE "posts" (
 
 CREATE TABLE "liked_post" (
 	"id" SERIAL PRIMARY KEY,
-	"user_id" INT REFERENCES "user",
-	"post_id" INT REFERENCES "posts");
+	"user_id" INT REFERENCES "user" ON DELETE CASCADE,
+	"post_id" INT REFERENCES "posts" ON DELETE CASCADE);
 
 
 CREATE TABLE "comments" (
 	"id" SERIAL PRIMARY KEY,
 	"content" VARCHAR,
 	"created" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	"user_id" INT REFERENCES "user",
-	"post_id" INT REFERENCES "posts",
+	"user_id" INT REFERENCES "user" ON DELETE CASCADE,
+	"post_id" INT REFERENCES "posts" ON DELETE CASCADE,
 	"parent_comment_id" INT);
 
 
@@ -64,4 +64,3 @@ VALUES
 	(156),(183),(159),(157),(152),(604),(114),(260),('Red Lake Reservation');
 	
 
-	

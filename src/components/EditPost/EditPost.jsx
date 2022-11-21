@@ -127,8 +127,8 @@ function EditPost(){
         <div className='postBox'>
             <div>
                 <div className="imgContainer">
-                    { finalFile ? <img src={imgUrl}/> :
-                        <img src={editPost.picture}/>
+                    { finalFile ? <img className='imgContainer' src={imgUrl}/> :
+                        <img className='imgContainer' src={editPost.picture}/>
                     
                     }
                     

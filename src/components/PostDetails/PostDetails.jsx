@@ -2,6 +2,8 @@
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
+//css
+import './PostDetails.css'
 //sweet alert import
 const Swal = require('sweetalert2')
 //import moment
@@ -13,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import CommentList from '../CommentList/CommentList';
 import LikeButton from '../LikeButton/LikeButton';
+import { Link } from 'react-router-dom';
 
 function PostDetails(){
 
@@ -48,18 +51,10 @@ function PostDetails(){
 
         // console.log('selected post:', post);
        
-         //original example of this sweet alert found @
+         //original example of this sweet alert found in documentation found @
         //https://sweetalert2.github.io/
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-              confirmButton: 'btn btn-success',
-              cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: false
-          })
-          
-        swalWithBootstrapButtons.fire({
-        title: 'Are you sur you want to delete this post?',
+        Swal.fire({
+        title: 'Are you sure you want to delete this post?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
@@ -68,7 +63,7 @@ function PostDetails(){
         reverseButtons: true
         }).then((result) => {
         if (result.isConfirmed) {
-            swalWithBootstrapButtons.fire(
+            Swal.fire(
             'Deleted!',
             'Your post has been deleted.'
             )
@@ -83,7 +78,7 @@ function PostDetails(){
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
         ) {
-            swalWithBootstrapButtons.fire(
+            Swal.fire(
             'Cancelled'
             )
         }
@@ -107,8 +102,8 @@ function PostDetails(){
         <article >
         <div className='postBox'>
             <div>
-                <div className="imgContainer">
-                    <img src={post.picture}/>
+                <div>
+                    <a href={post.picture}><img className='imgContainer' src={post.picture}/></a>
                 </div>
             </div>
             <div className='bodyBox'>

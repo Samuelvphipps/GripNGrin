@@ -27,17 +27,9 @@ function CommentItem ({comment, post, comments}){
         console.log('in delete comment with an id of:', id);
 
 
-                 //original example of this sweet alert found @
+        //original example of this sweet alert found in documentation found @
         //https://sweetalert2.github.io/
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-              confirmButton: 'btn btn-success',
-              cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: false
-          })
-          
-        swalWithBootstrapButtons.fire({
+        Swal.fire({
         title: 'Are you sure you want to delete this comment?',
         text: "You won't be able to revert this!",
         icon: 'warning',
@@ -47,7 +39,7 @@ function CommentItem ({comment, post, comments}){
         reverseButtons: true
         }).then((result) => {
         if (result.isConfirmed) {
-            swalWithBootstrapButtons.fire(
+            Swal.fire(
             'Deleted!',
             'Your comment has been deleted.'
             )
