@@ -74,12 +74,16 @@ function CommentItem ({comment, post, comments}){
         <>      
                 {/* if the comment has a parent_id it isn't rendered here because its not a parent comment itslef */}
                 { comment.parent_comment_id ? null :
-                    <CommentEditToggle 
-                        editComment={editComment} 
-                        deleteComment={deleteComment} 
-                        user={user} 
-                        post={post} 
-                        comment={comment} />
+                    <div className='parentComment'>
+                        <CommentEditToggle 
+                            editComment={editComment} 
+                            deleteComment={deleteComment} 
+                            user={user} 
+                            post={post} 
+                            comment={comment} />
+                        <ReplyToggle comment={comment} />
+                        <div className='parentCommentBottom'></div>
+                    </div>
                 }           
                 {/* go to second layer comments where the comments have this comment as 
                 a parent comment 
@@ -95,7 +99,7 @@ function CommentItem ({comment, post, comments}){
                     else {return};
                 })}
         
-            <ReplyToggle comment={comment} />
+            {/* <ReplyToggle comment={comment} /> */}
         </>
     );
 }

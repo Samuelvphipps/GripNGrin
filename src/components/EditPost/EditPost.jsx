@@ -19,7 +19,7 @@ import{
     Select,
     TextareaAutosize,
     Grid
-} from '@mui/material'
+} from '@mui/material';
 
 import './EditPost.css';
 

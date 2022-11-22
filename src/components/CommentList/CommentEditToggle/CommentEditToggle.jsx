@@ -19,7 +19,8 @@ function CommentEditToggle({user, post, deleteComment, comment, editComment}){
     if(editOpen){
         return(
                 <>
-                    <p>{comment.username} {comment.created}</p>
+                    <p><span className='commentUserName'>{comment.username}</span> 
+                    <span className='commentDate'>{comment.created}</span></p>
                     <TextareaAutosize
                         required
                         style={{ width: 350, height:50 }}
@@ -36,16 +37,17 @@ function CommentEditToggle({user, post, deleteComment, comment, editComment}){
         // if toggle isnt engaged show this
     return(
         <>
-                <><p>{comment.username} {moment(comment.created).format("MMM Do YYYY")}</p>
-                <p>{comment.content}</p></>
+                <><p><span className='commentUserName'>{comment.username}</span>  
+                <span className='commentDate'>{moment(comment.created).format("MMM Do YYYY")}</span></p>
+                <p className='commentContent'>{comment.content}</p></>
             
                 {/* if the user owns the  comment the buttons are here and allow the user to delete or edit the post*/}
                 {(user.id===comment.user_id) ?
                     <>
                     {/* OPENS TOGGLE above to allow an edit field and submittal */}
-                    <Button variant="text" onClick={()=>setEditOpen(true)}>Edit</Button>
+                    <button className='editBtnComment' type="text" onClick={()=>setEditOpen(true)}>Edit</button>
                     {/* calls the delete comment with id info */}
-                    <Button  onClick={()=>deleteComment(comment.id)} variant="text">Delete</Button>
+                    <button className='deleteBtnComment' onClick={()=>deleteComment(comment.id)} type="text">Delete</button>
                     </>
                     :
                     null

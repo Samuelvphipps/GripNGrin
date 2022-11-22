@@ -153,7 +153,11 @@ function PostDetails(){
             </Grid>
         </article>
         </div>
-    <article className='commentsContainer'><CommentList post={post}/></article>
+    <div className='postDetailsContainer'>
+        <article className='postDetailsInnerContainer'>
+            <CommentList post={post}/>
+        </article>
+    </div>
     </>
     );
 };

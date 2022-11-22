@@ -50,7 +50,7 @@ function ReplyToggle({comment}){
                     required></TextareaAutosize>
                     <Input type='submit' name="postComment" />
                 </form> :
-                <button onClick={()=>setReplyOpen(true)}>reply</button>}
+                <button className='replyBtn' onClick={()=>setReplyOpen(true)}>Reply</button>}
             </>
     )}
     else { return null};
