@@ -8,6 +8,14 @@
 
 }
 
+.innerPostItem {
+    background-color: white;
+    border:1px solid black;
+    margin: 4px;
+    border-radius: 23px;
+    padding: 1rem;
+}
+
 .postItem img{
     border-radius: 10px;
 }
@@ -16,13 +24,7 @@
     max-width: 200px;
 }
 
-.innerPostItem {
-    background-color: white;
-    border:1px solid black;
-    margin: 4px;
-    border-radius: 23px;
-    padding: 1rem;
-}
+
 #postItemTitle>.MuiGrid-root{
     align-items: center;
 }

@@ -5,9 +5,11 @@
 
 .postDetailsContainer{
     max-width: 1000px;
-    margin: auto;
-    border: 1px solid black;
-    padding: 2rem
+    margin: 2rem auto;
+    border: 2px solid black;
+    border-radius: 14px;
+    background-color: #dedede;
+    padding: 3px;
 }
 
 .commentsContainer {
@@ -21,6 +23,7 @@
     font-size: 40px;
     text-align: center;
     margin-top: 0;
+    margin-bottom: 0;
 }
 
 .postItemDataDetails {
@@ -28,17 +31,18 @@
 }
 
 .detailsData {
-    margin-bottom: 40px;
+    margin-bottom: 45px;
     font-size: 22px;
 
 }
 
 .detailsData.top {
-    margin-top: 41px;
+    margin-top: 20px;
 }
 
 .postContent {
     font-size: 22px;
+    margin-top: 2rem;
 }
 
 .username {

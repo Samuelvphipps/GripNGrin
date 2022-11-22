@@ -1,8 +1,30 @@
+.postDetailsContainer {
+    max-width: 1000pxpx;
+    margin: 2rem auto;
+    border: 2px solid black;
+    border-radius: 14px;
+    background-color: #dedede;
+    padding: 3px;
+}
+
+.postDetailsInnerContainer {
+    background-color: white;
+    border:1px solid black;
+    margin: 4px;
+    border-radius: 23px;
+    padding: 2rem;
+}
+
 .editData {
+    margin-left: -.8rem;
     margin-bottom: 20px;
     font-size: 22px;
     align-items: center;
     display: flex;
+}
+
+.editData.top {
+    margin-top: 28px;
 }
 
 .detailsData.top {
@@ -15,11 +37,41 @@
 
 }
 
+.editImageInput {
+    text-align: center;
+}
+
 #editTextArea {
-    
+    border-radius: 5px;
+
     width: 98%;
     font-size: 22px;
     height: 150px;
     resize: none;
     padding: .5rem
+}
+
+.postDate{
+    text-align: right;
+}
+
+#editHeaderBottom {
+    width: 85%;
+    height: 7px;
+    background-color: blue;
+    margin-bottom: 25px;
+    margin: -.5rem auto 25px auto;
+    border-radius: 5px;
+}
+
+.editPostDetailsTitle {
+    font-size: 40px;
+    text-align: center;
+    margin-top: -2rem;
+    margin-bottom: 0;
+}
+
+.editDetailsHeader {
+    font-size: 25px;
+    margin-top: .25rem;
 }

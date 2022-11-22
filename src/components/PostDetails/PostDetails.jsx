@@ -104,50 +104,55 @@ function PostDetails(){
     
     return(
         <>
-        <article className='postDetailsContainer'>
-                        <h3 className='postDetailsTitle'>{post.title}</h3>
-                        <Grid container spacing={1}>
-                            <Grid item sm={1}></Grid>
-                            <Grid item sm={5}><p className='username detailsHeader'>{post.username}</p></Grid>
-                            <Grid item sm={3}>
-                                
-                            </Grid>
-                            <Grid item sm={3}><p className='postDate detailsHeader'>{moment(post.created).format("MMM Do YYYY")}</p></Grid>
-                        </Grid>
-
-            
-       <Grid container spacing={1}>
-            <Grid item sm={6}>
-                <a href={post.picture}><img className='imgContainer' src={post.picture}/></a>
-            </Grid>
-            <Grid item sm={6}>
-                            
-                            <p className='detailsData top'><span className='postItemDataDetails'>Date of hunt:</span> {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
-                            <p className='detailsData'><span className='postItemDataDetails'>Species:</span> {post.species}</p>
-                            <p className='detailsData'><span className='postItemDataDetails'>Success:</span> {post.success ? <>Yes</> : <>No</>}</p>                        
-                            <p className='detailsData'><span className='postItemDataDetails'>Location:</span> {post.hunt_area}</p>
-                            <p className='detailsData'><span className='postItemDataDetails'>Weapon used:</span> {post.weapon_type}</p>
-                            <p className='detailsData'><span className='postItemDataDetails'>Land Type:</span> {post.land_type}</p>
+        <div className='postDetailsContainer'>
+            <article className='postDetailsInnerContainer'>
+                <h3 className='postDetailsTitle'>{post.title}</h3>
+                <Grid container spacing={1}>
+                    <Grid item sm={1}></Grid>
+                    <Grid item sm={4}><p className='username detailsHeader'>{post.username}</p></Grid>
+                    <Grid item sm={3}>
+                        
+                    </Grid>
+                    <Grid item sm={3}><p className='postDate detailsHeader'>{moment(post.created).format("MMM Do YYYY")}</p></Grid>
+                    <Grid item sm={1}></Grid>
+                </Grid>
+                <div id='editHeaderBottom'></div>
+    
                 
+            <Grid container spacing={1}>
+                    <Grid item sm={6}>
+                        <a href={post.picture}><img className='imgContainer' src={post.picture}/></a>
+                    </Grid>
+                    <Grid item sm={6}>
+                                    
+                        <p className='detailsData top'><span className='postItemDataDetails'>Date of hunt:</span> {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
+                        <p className='detailsData'><span className='postItemDataDetails'>Species:</span> {post.species}</p>
+                        <p className='detailsData'><span className='postItemDataDetails'>Success:</span> {post.success ? <>Yes</> : <>No</>}</p>                        
+                        <p className='detailsData'><span className='postItemDataDetails'>Location:</span> {post.hunt_area}</p>
+                        <p className='detailsData'><span className='postItemDataDetails'>Weapon used:</span> {post.weapon_type}</p>
+                        <p className='detailsData'><span className='postItemDataDetails'>Land Type:</span> {post.land_type}</p>                        
+                    </Grid>
+                    
             </Grid>
-       </Grid>
-        <div>
-            <p className='postContent' >{post.content}</p>
+            <div className='postContent' >
+                <p >{post.content}</p>
+            </div>
+    
+            <Grid container spacing={2}>
+                <Grid sm={10}></Grid>
+                { user.id===post.user_id ?
+                    <Grid sm={2}>
+                        <Stack spacing={2} direction="row">
+                            <Button onClick={()=>history.push(`/post/edit/${post.id}`)} variant="text">Edit</Button>
+                            <Button onClick={deletePost} variant="text">Delete</Button>
+                        </Stack>
+                    </Grid>
+                    :
+                    null
+                }
+            </Grid>
+        </article>
         </div>
-        <LikeButton 
-            post={post}
-            user={user}
-            selectedId={params.id}
-        />
-        { user.id===post.user_id ?
-                                        <Stack spacing={2} direction="row">
-                                            <Button onClick={()=>history.push(`/post/edit/${post.id}`)} variant="text">Edit</Button>
-                                            <Button onClick={deletePost} variant="text">Delete</Button>
-                                        </Stack>
-                                        :
-                                        null
-                                    }
-    </article>
     <article className='commentsContainer'><CommentList post={post}/></article>
     </>
     );
