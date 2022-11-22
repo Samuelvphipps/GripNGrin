@@ -93,16 +93,16 @@ function PostItems({post}){
                                         <Grid container spacing={1}>
                                             
                                                 <Grid item sm={7}>
-                                                    <p><span className='postItemData'>Date of hunt:</span> {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
-                                                    <p><span className='postItemData'>Species:</span> {post.species}</p>
-                                                    <p><span className='postItemData'>Success:</span> {post.success ? <>Yes</> : <>No</>}</p>
+                                                    <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Date of hunt:</span> {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
+                                                    <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Species:</span> {post.species}</p>
+                                                    <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Success:</span> {post.success ? <>Yes</> : <>No</>}</p>
                                                 </Grid>
                                            
                                             
                                                 <Grid item sm={5}>
-                                                    <p><span className='postItemData'>Location:</span> {post.hunt_area}</p>
-                                                    <p><span className='postItemData'>Weapon used:</span> {post.weapon_type}</p>
-                                                    <p><span className='postItemData'>Land Type:</span> {post.land_type}</p>
+                                                    <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Location:</span> {post.hunt_area}</p>
+                                                    <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Weapon used:</span> {post.weapon_type}</p>
+                                                    <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Land Type:</span> {post.land_type}</p>
                                                 </Grid>
                                            
                                         </Grid>
@@ -112,7 +112,7 @@ function PostItems({post}){
                         <Grid container spacing={1}>
                             <Grid item sm={1}></Grid>
                             <Grid item sm={10}>
-                                <p className='postContent' onClick={pushToDetails}>{post.content.substring(0, 150) + '...'}</p>
+                                <p className='postContent postContentItem' onClick={pushToDetails}>{post.content.substring(0, 150) + '...'}</p>
                             </Grid>
                             <Grid item sm={1}></Grid>
                         </Grid>
@@ -128,8 +128,8 @@ function PostItems({post}){
                         <Grid item sm={4}>
                             { user.id===post.user_id ?
                                                     <Stack spacing={2} direction="row">
-                                                        <Button onClick={()=>history.push(`/post/edit/${post.id}`)} variant="text">Edit</Button>
-                                                        <Button onClick={deletePost} variant="text">Delete</Button>
+                                                        <button className='editBtn' onClick={()=>history.push(`/post/edit/${post.id}`)} type="text">Edit</button>
+                                                        <button className='deleteBtn' onClick={deletePost} type="text">Delete</button>
                                                     </Stack>
                                                     :
                                                     null

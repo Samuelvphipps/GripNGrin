@@ -143,8 +143,8 @@ function PostDetails(){
                 { user.id===post.user_id ?
                     <Grid sm={2}>
                         <Stack spacing={2} direction="row">
-                            <Button onClick={()=>history.push(`/post/edit/${post.id}`)} variant="text">Edit</Button>
-                            <Button onClick={deletePost} variant="text">Delete</Button>
+                            <button className='editBtn' onClick={()=>history.push(`/post/edit/${post.id}`)} type="text">Edit</button>
+                            <button className='deleteBtn' onClick={deletePost} type="text">Delete</button>
                         </Stack>
                     </Grid>
                     :

@@ -4,8 +4,7 @@
     margin: 2rem auto;
     border: 2px solid black;
     border-radius: 14px;
-    background-color: #dedede;
-
+    background-color: #3e885b;
 }
 
 .innerPostItem {
@@ -15,6 +14,7 @@
     border-radius: 23px;
     padding: 1rem;
 }
+
 
 .postItem img{
     border-radius: 10px;
@@ -35,9 +35,14 @@
 }
 
 .postItemHead {
-    font-size: 17px
+    font-size: 20px
 }
 
 .postItemData {
     font-weight: bold;
+}
+
+.postContentItem:hover, .linkToPost:hover {
+    cursor: pointer;
+    text-decoration-line: underline;
 }

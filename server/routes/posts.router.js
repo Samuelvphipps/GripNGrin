@@ -203,7 +203,7 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
              res.sendStatus(201);
         })
         .catch(err => {
-            console.error('in posts POST error:', err);
+            console.error('in posts POST error:', err.message);
             res.sendStatus(500);
         })
 });
