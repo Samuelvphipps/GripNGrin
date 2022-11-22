@@ -2,15 +2,13 @@
 .postItem {
     max-width: 850px;
     margin: 2rem auto;
-    border: 2px solid black;
     border-radius: 14px;
     background-color: #3e885b;
+    padding: 5px;
 }
 
 .innerPostItem {
     background-color: white;
-    border:1px solid black;
-    margin: 4px;
     border-radius: 23px;
     padding: 1rem;
 }

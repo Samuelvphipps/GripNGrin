@@ -1,6 +1,6 @@
 //mui
 import {Stack, Button, Grid} from '@mui/material';
-
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 //sweet alert import
 const Swal = require('sweetalert2')
@@ -127,10 +127,12 @@ function PostItems({post}){
                         </Grid>
                         <Grid item sm={4}>
                             { user.id===post.user_id ?
-                                                    <Stack spacing={2} direction="row">
-                                                        <button className='editBtn' onClick={()=>history.push(`/post/edit/${post.id}`)} type="text">Edit</button>
-                                                        <button className='deleteBtn' onClick={deletePost} type="text">Delete</button>
-                                                    </Stack>
+                                                    // <Stack spacing={2} direction="row">
+                                                        <>
+                                                            <button className='editBtn' onClick={()=>history.push(`/post/edit/${post.id}`)} type="text">Edit</button>
+                                                            <button className='deleteBtn' onClick={deletePost} type="text"> Delete </button>
+                                                        </>
+                                                    // </Stack>
                                                     :
                                                     null
                                                     }

@@ -139,13 +139,13 @@ function PostDetails(){
             </div>
     
             <Grid container spacing={2}>
-                <Grid sm={10}></Grid>
+                <Grid sm={8}></Grid>
                 { user.id===post.user_id ?
-                    <Grid sm={2}>
-                        <Stack spacing={2} direction="row">
+                    <Grid sm={4}>
+                        
                             <button className='editBtn' onClick={()=>history.push(`/post/edit/${post.id}`)} type="text">Edit</button>
                             <button className='deleteBtn' onClick={deletePost} type="text">Delete</button>
-                        </Stack>
+                        
                     </Grid>
                     :
                     null
