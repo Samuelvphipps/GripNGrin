@@ -139,8 +139,206 @@ function EditPost(){
             on the presence of an image
             */ 
     return(
-        <>
-        {/* <form onSubmit={submitEditPost}>
+        
+        <form onSubmit={submitEditPost}>
+            <article className='postDetailsContainer'>
+                <div className='postDetailsInnerContainer'>
+                    <h3 className='editPostDetailsTitle'>
+                        <Input type='Text' 
+                            multiline={true}
+                            value={editPost.title}
+                            style={{ width: 500, fontSize:40, height: 100}}
+                            
+                            //add in dispatch fn
+                            //on change update redux store with new value
+                            onChange={(evt) => dispatch({
+                                type: 'UPDATE_EDIT_POST',
+                                payload: {title: evt.target.value}
+                            })}
+                            placeholder='Post Title' 
+                            required
+                        />
+                    </h3>
+                    <header className='editHeader'>
+                        <Grid container spacing={1}>
+                            <Grid item sm={1}></Grid>
+                            <Grid item sm={4}><p className='username editDetailsHeader'>{editPost.username}</p></Grid>
+                            <Grid item sm={3}>
+                                
+                            </Grid>
+                            <Grid item sm={3}><p className='postDate editDetailsHeader'>{moment(editPost.created).format("MMM Do YYYY")}</p></Grid>
+                            <Grid item sm={1}></Grid>
+                        </Grid>
+                    </header>
+                    <div id='editHeaderBottom'></div>
+            
+                        
+                    <Grid container spacing={4}>
+                        <Grid item sm={6}>
+                        { finalFile ? <img className='imgContainer' src={imgUrl}/> :
+                                <img className='imgContainer' src={editPost.picture}/>
+                            
+                            }
+                            <div className='editImageInput'>
+                                <Input type='file' 
+                                    onChange={changeHandler}
+                                    // onChange={(evt) => dispatch({
+                                    //     type: 'UPDATE_EDIT_POST',
+                                    //     payload: {picture: evt.target.files[0]}
+                                    // })}
+                                    name="post_img"/>
+                            </div>
+                        </Grid>
+                        <Grid item sm={6}>
+                                        
+                            <p className='editData top'><span className='editItemDataDetails'>Date of hunt:    </span> 
+                                <Input 
+                                    required 
+                                    value={format(parseISO(editPost.date_of_hunt), 'yyyy-MM-dd')}
+                                    inputProps={{style: {fontSize: 22}}}
+                                    type='date'
+                                    //on change update redux store with new value
+                                    onChange={(evt) => dispatch({
+                                        type: 'UPDATE_EDIT_POST',
+                                        payload: {date_of_hunt: evt.target.value}
+                                    })}
+                                >
+                                </Input>
+                            </p>
+                            <p className='editData'><span className='editItemDataDetails'>Species:    </span> 
+                                <Input 
+                                    type='text' 
+                                    placeholder='Species'
+                                    inputProps={{style: {fontSize: 22, height:44}}} 
+                                    required
+                                    value={editPost.species}
+                                    //on change update redux store with new value
+                                    onChange={(evt) => dispatch({
+                                        type: 'UPDATE_EDIT_POST',
+                                        payload: {species: evt.target.value}
+                                    })}
+                                    //on change
+                                ></Input>
+                            </p>
+                            <p className='editData'><span className='editItemDataDetails'>Success:</span>
+                                <FormControl style={{minWidth: 120}}>
+                                    <InputLabel>Succesful Hunt?</InputLabel>
+                                        <Select
+                                            required
+                                            
+                                            labelId="successful-input-label"                                                
+                                            label="successful-hunt"
+                                            value={editPost.success}
+                                            //on change update redux store with new value    
+                                            onChange={(evt) => dispatch({
+                                                type: 'UPDATE_EDIT_POST',
+                                                payload: {success: evt.target.value}
+                                            })}                                          
+                                        >
+                                            <MenuItem value={true}>Yes</MenuItem>
+                                            <MenuItem value={false}>No</MenuItem>
+                                        </Select>
+                                </FormControl></p>                        
+                            <p className='editData'><span className='editItemDataDetails'>Location:</span> 
+                                <FormControl style={{minWidth: 120}}>
+                                    <InputLabel required id="huntarea-input-label">Hunt Area</InputLabel>
+                                        <Select
+                                            labelId="huntarea-input-label"
+                                            //have the input be empty until the hunt area id arrives (prevents an error)
+                                            value={editPost.hunt_area_id ? editPost.hunt_area_id : ''}
+                                            //on change update redux store with new value
+                                            onChange={(evt) => dispatch({
+                                                type: 'UPDATE_EDIT_POST',
+                                                payload: {hunt_area_id: evt.target.value}
+                                            })}                               
+                                            label="hunt-area"
+                                        >
+                                            {huntAreaList.map((area)=>{
+                                                return <MenuItem key={area.id} value={area.id}>{area.hunt_area}</MenuItem>
+                                            })}
+    
+                                        </Select>
+                                </FormControl></p>
+                            <p className='editData'><span className='editItemDataDetails'>Weapon used:</span> 
+                                <Input 
+                                    type='text' 
+                                    inputProps={{style: {fontSize: 22}}}
+                                    placeholder='weapon-used'
+                                    //on change update redux store with new value
+                                    onChange={(evt) => dispatch({
+                                        type: 'UPDATE_EDIT_POST',
+                                        payload: {weapon_type: evt.target.value}
+                                    })}
+                                    value={editPost.weapon_type}
+                                >
+                                </Input>
+                            </p>
+                            <p className='editData'><span className='editItemDataDetails'>Land Type:</span> 
+                                <FormControl style={{minWidth: 120}}>
+                                    <InputLabel id="land-type-input-label">Land Type</InputLabel>
+                                    <Select
+                                        labelId="land-type-input-label"
+                                        value={editPost.land_type}
+                                        //onchange
+                                        //on change update redux store with new value
+                                        onChange={(evt) => dispatch({
+                                            type: 'UPDATE_EDIT_POST',
+                                            payload: {land_type: evt.target.value}
+                                        })}
+                                        label="land-type"
+                                        // onChange={(evt)=>setLandType(evt.target.value)}
+                                    >
+                                        <MenuItem value={'public'}>Public</MenuItem>
+                                        <MenuItem value={'private'}>Private</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </p>                        
+                        </Grid>
+                    </Grid>
+                    <div>
+                        <p className='postContent' >
+                            <textarea
+                                id='editTextArea'
+                                required
+                                placeholder="Tell the story..."
+                                value={editPost.content} 
+                                onChange={(evt) => dispatch({
+                                    type: 'UPDATE_EDIT_POST',
+                                    payload: {content: evt.target.value}
+                                })}
+                            //on change update redux store with new value
+                            // onChange={(evt)=>setStory(evt.target.value)}
+                            />
+                        </p>
+                    </div>
+                    <button type='submit' className='submitBtn'>Submit</button>
+                    <button className='cancelBtn' onClick={()=>history.push(`/post/${params.id}`)}>Cancel</button>
+                </div>
+            </article>
+            {/* image cropper to open on image upload */}
+            {selectedFile ? 
+                <ImageCropper 
+                    id={selectedFile.id} 
+                    imageUrl={selectedFile.imageUrl}
+                    setFinalFile={setFinalFile}
+                    setSelectedFile={setSelectedFile}
+                    setImgUrl={setImgUrl}
+                    dispatchNewFile={dispatchNewFile}
+                    bool={true}
+                    // setCroppedImageFor={setCroppedImageFor}
+                /> : null}
+        </form>  
+    );
+};
+
+
+export default EditPost;
+
+
+
+
+//OLD FORMAT
+{/* <form onSubmit={submitEditPost}>
         <div className='postBox'>
             <div>
                 <div className="imgContainer">
@@ -300,201 +498,3 @@ function EditPost(){
 
 
     </form> */}
-        {/* image cropper to open on image upload */}
-        {selectedFile ? 
-                <ImageCropper 
-                    id={selectedFile.id} 
-                    imageUrl={selectedFile.imageUrl}
-                    setFinalFile={setFinalFile}
-                    setSelectedFile={setSelectedFile}
-                    setImgUrl={setImgUrl}
-                    dispatchNewFile={dispatchNewFile}
-                    bool={true}
-                    // setCroppedImageFor={setCroppedImageFor}
-                /> : null}
-
-    <form onSubmit={submitEditPost}>
-        <article className='postDetailsContainer'>
-            <div className='postDetailsInnerContainer'>
-                <h3 className='editPostDetailsTitle'>
-                    <Input type='Text' 
-                        multiline={true}
-                        value={editPost.title}
-                        style={{ width: 500, fontSize:40, height: 100}}
-                        
-                        //add in dispatch fn
-                        //on change update redux store with new value
-                        onChange={(evt) => dispatch({
-                            type: 'UPDATE_EDIT_POST',
-                            payload: {title: evt.target.value}
-                        })}
-                        placeholder='Post Title' 
-                        required
-                    />
-                </h3>
-                <header className='editHeader'>
-                    <Grid container spacing={1}>
-                        <Grid item sm={1}></Grid>
-                        <Grid item sm={4}><p className='username editDetailsHeader'>{editPost.username}</p></Grid>
-                        <Grid item sm={3}>
-                            
-                        </Grid>
-                        <Grid item sm={3}><p className='postDate editDetailsHeader'>{moment(editPost.created).format("MMM Do YYYY")}</p></Grid>
-                        <Grid item sm={1}></Grid>
-                    </Grid>
-                </header>
-                <div id='editHeaderBottom'></div>
-        
-                    
-                <Grid container spacing={4}>
-                    <Grid item sm={6}>
-                    { finalFile ? <img className='imgContainer' src={imgUrl}/> :
-                            <img className='imgContainer' src={editPost.picture}/>
-                        
-                        }
-                        <div className='editImageInput'>
-                            <Input type='file' 
-                                onChange={changeHandler}
-                                // onChange={(evt) => dispatch({
-                                //     type: 'UPDATE_EDIT_POST',
-                                //     payload: {picture: evt.target.files[0]}
-                                // })}
-                                name="post_img"/>
-                        </div>
-                    </Grid>
-                    <Grid item sm={6}>
-                                    
-                        <p className='editData top'><span className='editItemDataDetails'>Date of hunt:    </span> 
-                            <Input 
-                                required 
-                                value={format(parseISO(editPost.date_of_hunt), 'yyyy-MM-dd')}
-                                inputProps={{style: {fontSize: 22}}}
-                                type='date'
-                                //on change update redux store with new value
-                                onChange={(evt) => dispatch({
-                                    type: 'UPDATE_EDIT_POST',
-                                    payload: {date_of_hunt: evt.target.value}
-                                })}
-                            >
-                            </Input>
-                        </p>
-                        <p className='editData'><span className='editItemDataDetails'>Species:    </span> 
-                            <Input 
-                                type='text' 
-                                placeholder='Species'
-                                inputProps={{style: {fontSize: 22, height:44}}} 
-                                required
-                                value={editPost.species}
-                                //on change update redux store with new value
-                                onChange={(evt) => dispatch({
-                                    type: 'UPDATE_EDIT_POST',
-                                    payload: {species: evt.target.value}
-                                })}
-                                //on change
-                            ></Input>
-                        </p>
-                        <p className='editData'><span className='editItemDataDetails'>Success:</span>
-                            <FormControl style={{minWidth: 120}}>
-                                <InputLabel>Succesful Hunt?</InputLabel>
-                                    <Select
-                                        required
-                                        
-                                        labelId="successful-input-label"                                                
-                                        label="successful-hunt"
-                                        value={editPost.success}
-                                        //on change update redux store with new value    
-                                        onChange={(evt) => dispatch({
-                                            type: 'UPDATE_EDIT_POST',
-                                            payload: {success: evt.target.value}
-                                        })}                                          
-                                    >
-                                        <MenuItem value={true}>Yes</MenuItem>
-                                        <MenuItem value={false}>No</MenuItem>
-                                    </Select>
-                            </FormControl></p>                        
-                        <p className='editData'><span className='editItemDataDetails'>Location:</span> 
-                            <FormControl style={{minWidth: 120}}>
-                                <InputLabel required id="huntarea-input-label">Hunt Area</InputLabel>
-                                    <Select
-                                        labelId="huntarea-input-label"
-                                        //have the input be empty until the hunt area id arrives (prevents an error)
-                                        value={editPost.hunt_area_id ? editPost.hunt_area_id : ''}
-                                        //on change update redux store with new value
-                                        onChange={(evt) => dispatch({
-                                            type: 'UPDATE_EDIT_POST',
-                                            payload: {hunt_area_id: evt.target.value}
-                                        })}                               
-                                        label="hunt-area"
-                                    >
-                                        {huntAreaList.map((area)=>{
-                                            return <MenuItem key={area.id} value={area.id}>{area.hunt_area}</MenuItem>
-                                        })}
-
-                                    </Select>
-                            </FormControl></p>
-                        <p className='editData'><span className='editItemDataDetails'>Weapon used:</span> 
-                            <Input 
-                                type='text' 
-                                inputProps={{style: {fontSize: 22}}}
-                                placeholder='weapon-used'
-                                //on change update redux store with new value
-                                onChange={(evt) => dispatch({
-                                    type: 'UPDATE_EDIT_POST',
-                                    payload: {weapon_type: evt.target.value}
-                                })}
-                                value={editPost.weapon_type}
-                            >
-                            </Input>
-                        </p>
-                        <p className='editData'><span className='editItemDataDetails'>Land Type:</span> 
-                            <FormControl style={{minWidth: 120}}>
-                                <InputLabel id="land-type-input-label">Land Type</InputLabel>
-                                <Select
-                                    labelId="land-type-input-label"
-                                    value={editPost.land_type}
-                                    //onchange
-                                    //on change update redux store with new value
-                                    onChange={(evt) => dispatch({
-                                        type: 'UPDATE_EDIT_POST',
-                                        payload: {land_type: evt.target.value}
-                                    })}
-                                    label="land-type"
-                                    // onChange={(evt)=>setLandType(evt.target.value)}
-                                >
-                                    <MenuItem value={'public'}>Public</MenuItem>
-                                    <MenuItem value={'private'}>Private</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </p>                        
-                    </Grid>
-                </Grid>
-                <div>
-                    <p className='postContent' >
-                        <textarea
-                            id='editTextArea'
-                            required
-                            placeholder="Tell the story..."
-                            value={editPost.content} 
-                            onChange={(evt) => dispatch({
-                                type: 'UPDATE_EDIT_POST',
-                                payload: {content: evt.target.value}
-                            })}
-                        //on change update redux store with new value
-                        // onChange={(evt)=>setStory(evt.target.value)}
-                        />
-                    </p>
-                </div>
-                <Button type='submit'>Submit</Button>
-                <button onClick={()=>history.push(`/post/${params.id}`)}>Cancel</button>
-            </div>
-        </article>
-    </form>
-                
-    </>
-
-
-    );
-};
-
-
-export default EditPost;
