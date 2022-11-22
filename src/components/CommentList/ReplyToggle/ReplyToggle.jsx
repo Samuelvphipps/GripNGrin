@@ -48,7 +48,8 @@ function ReplyToggle({comment}){
                     value={reply}
                     style={{ width: 400, height:100 }} 
                     required></TextareaAutosize>
-                    <Input type='submit' name="postComment" />
+                    <button className='cancelReplyBtn' onClick={()=>setReplyOpen(false)}>Cancel</button>
+                    <button type='submit' className='submitReplyBtn' name="postComment">Comment</button>
                 </form> :
                 <button className='replyBtn' onClick={()=>setReplyOpen(true)}>Reply</button>}
             </>
