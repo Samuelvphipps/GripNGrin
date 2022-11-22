@@ -313,8 +313,15 @@ function EditPost(){
                                 />
                             </p>
                         </div>
-                        <button type='submit' className='submitBtn'>Submit</button>
-                        <button className='cancelBtn' onClick={()=>history.push(`/post/${params.id}`)}>Cancel</button>
+                        <Grid container spacing={2}>
+                            <Grid item sm={8}></Grid>
+                            <Grid item sm={2}>                                
+                                <button className='cancelBtn' onClick={()=>history.push(`/post/${params.id}`)}>Cancel</button>                                
+                            </Grid>
+                            <Grid item sm={2}>
+                                <button type='submit' className='submitBtn'>Submit</button>                                
+                            </Grid>
+                        </Grid>
                     </div>
                 </article>
                 {/* image cropper to open on image upload */}

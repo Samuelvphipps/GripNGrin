@@ -9,7 +9,7 @@
 
 
 .parentComment{
-
+    margin-top: 25px;
     padding: .25rem 2rem;
     margin-left: 4rem;
 }
@@ -19,6 +19,10 @@
 
     padding: .25rem 2rem;
 
+}
+
+.commentHeader>.MuiGrid-root{
+align-items: center;
 }
 
 .parentCommentBottom {
@@ -58,6 +62,10 @@
     margin: .5rem auto 1rem auto;
 }
 
+/* REPLY btn */
 
+.replyBtn {
+    color: blue;
+}
 
 

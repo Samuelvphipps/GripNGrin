@@ -36,28 +36,30 @@ function CommentEditToggle({user, post, deleteComment, comment, editComment}){
     else{    
         // if toggle isnt engaged show this
     return(
-        <>
-                <Grid container spacing={2}>
-                    <Grid item sm={9}>
-                        <p><span className='commentUserName'>{comment.username}</span>  
-                        <span className='commentDate'>{moment(comment.created).format("MMM Do YYYY")}</span></p>
-                    </Grid>
-                    {(user.id===comment.user_id) ?
-                        
-                        <Grid item sm={3}>
-                            {/* OPENS TOGGLE above to allow an edit field and submittal */}
-                            <button className='editBtnComment' type="text" onClick={()=>setEditOpen(true)}>Edit</button>
-                            {/* calls the delete comment with id info */}
-                            <button className='deleteBtnComment' onClick={()=>deleteComment(comment.id)} type="text">Delete</button>
+        
+                <div className='commentHeader'>
+                    <Grid container spacing={2}>
+                        <Grid item sm={9}>
+                            <p><span className='commentUserName'>{comment.username}</span>  
+                            <span className='commentDate'>{moment(comment.created).format("MMM Do YYYY")}</span></p>
                         </Grid>
-                        
-                        :
-                        <Grid item sm={3}></Grid>
-                    }
-                </Grid>
-                    <p className='commentContent'>{comment.content}</p>
+                        {(user.id===comment.user_id) ?
+                            
+                            <Grid item sm={3}>
+                                {/* OPENS TOGGLE above to allow an edit field and submittal */}
+                                <button className='editBtnComment' type="text" onClick={()=>setEditOpen(true)}>Edit</button>
+                                {/* calls the delete comment with id info */}
+                                <button className='deleteBtnComment' onClick={()=>deleteComment(comment.id)} type="text">Delete</button>
+                            </Grid>
+                            
+                            :
+                            <Grid item sm={3}></Grid>
+                        }
+                    </Grid>
+                        <p className='commentContent'>{comment.content}</p>
+                </div>
             
-        </>
+        
 
         );
     }
