@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { IconButton } from '@mui/material'
+import { IconButton, Grid} from '@mui/material'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+
 
 function LikeButton({user, post, selectedId}){
     //dispatch setup
@@ -70,7 +71,12 @@ function LikeButton({user, post, selectedId}){
     }
     //if user owns the post no button exists
     if(post.user_id === user.id){
-        return <>Likes: {post.likes}</>
+        return (
+            <Grid container spacing={2}>
+                {/* <Grid item sm={.5}></Grid> */}
+                <p  className='totalLikes'>{post.likes} Likes</p>
+            </Grid>
+        )
     }
 
     //if the user has liked this post before the have an unlike option
@@ -78,10 +84,14 @@ function LikeButton({user, post, selectedId}){
         if(post.id===like.post_id){
             return (
                 <>
-                    <p>Likes: {post.likes}</p>
-                    <IconButton onClick={unlikePost} style={{ fill: '#0072ea' }}>
-                            <ThumbUpIcon color={'primary'} fontSize='large'/>
-                    </IconButton>        
+                    <Grid container spacing={2}>
+                        {/* <Grid item sm={.5}></Grid> */}                        
+                            <p  className='totalLikes'>{post.likes}</p>
+                            <Grid item sm={.25}></Grid>
+                            <IconButton onClick={unlikePost} style={{ fill: '#0072ea' }}>
+                                    <ThumbUpIcon color={'primary'} fontSize='large'/>
+                            </IconButton>                        
+                    </Grid>        
                 </>
             )
         }
@@ -90,10 +100,14 @@ function LikeButton({user, post, selectedId}){
     
     return(
         <>  
-            <p>Likes: {post.likes}</p>
-            <IconButton onClick={likePost}>
-                <ThumbUpOffAltIcon color={'primary'} fontSize='large'/>
-            </IconButton>
+            <Grid container spacing={2}>
+                {/* <Grid item sm={.5}></Grid> */}
+                <p className='totalLikes'>{post.likes}</p>
+                <Grid item sm={.25}></Grid>
+                <IconButton onClick={likePost}>
+                    <ThumbUpOffAltIcon color={'primary'} fontSize='large'/>
+                </IconButton>
+            </Grid>
         </>   
     )
 }

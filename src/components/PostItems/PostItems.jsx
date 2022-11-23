@@ -117,20 +117,20 @@ function PostItems({post}){
                             <Grid item sm={1}></Grid>
                         </Grid>
                     
-                    <Grid container spacing={2}>
+                    <Grid id='gridBtns' container spacing={2}>
                         <Grid item sm={2}></Grid>
-                        <Grid item sm={6}>
+                        <Grid item sm={5.5}>
                             <LikeButton 
                                 post={post}
                                 user={user}
                             />
                         </Grid>
-                        <Grid item sm={4}>
+                        <Grid item sm={4.5}>
                             { user.id===post.user_id ?
                                                     // <Stack spacing={2} direction="row">
                                                         <>
-                                                            <button className='editBtn' onClick={()=>history.push(`/post/edit/${post.id}`)} type="text">Edit</button>
-                                                            <button className='deleteBtn' onClick={deletePost} type="text"> Delete </button>
+                                                            <button className='editItemBtn' onClick={()=>history.push(`/post/edit/${post.id}`)} type="text">Edit</button>
+                                                            <button className='deleteItemBtn' onClick={deletePost} type="text"> Delete </button>
                                                         </>
                                                     // </Stack>
                                                     :
