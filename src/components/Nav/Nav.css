@@ -44,4 +44,6 @@
 
 #rightNavItems.MuiGrid-root{
     text-align: right;
+    display: flex;
+    justify-content: flex-end;
 }

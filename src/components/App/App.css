@@ -89,19 +89,31 @@ Form Treatment
 -------------------------------------------------------------------------------- */
 
 .formPanel {
-  box-sizing: border-box;
-  width: 400px;
-  max-width: 100%;
-  padding: 25px;
-  margin: 0 auto 20px;
-  background-color: #efefef;
-  border-radius: 3px;
-  box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
+    background-color: white;
+    border:1px solid black;
+    margin: 4px;
+    border-radius: 23px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.formPanelOuter {
+    
+    width: 400px;
+    margin: 2rem auto;
+        border-radius: 14px;
+        background-color: #3e885b;
+        padding: 3px;
+        box-shadow: 3px 3px 5px grey;
 }
 
 input {
   margin: 5px;
   margin-bottom: 10px;
+}
+
+.loginHeader {
+    text-align: center;
 }
 
 /* --------------------------------------------------------------------------------
@@ -115,3 +127,5 @@ header{
 .navTitle {
     font-family: 'Carter One', 'Saira', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+

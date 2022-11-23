@@ -20,7 +20,7 @@ function Nav() {
     
             <Grid item sm={4}>
                 <Link to="/home">
-                <h2 className="nav-title">Grip N Grin</h2>
+                <h2 className="nav-title">Grip 'N Grin</h2>
                 </Link>
             </Grid>
                 
