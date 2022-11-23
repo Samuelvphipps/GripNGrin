@@ -56,7 +56,7 @@ function NewPost(){
     const [finalFile, setFinalFile] = useState(null);
     const [imgUrl, setImgUrl] = useState('');
    
-    console.log('finalFile', finalFile)
+    // console.log('finalFile', finalFile)
 
     //todo: consolidate some data with spreaders? - STRETCH
 
@@ -139,9 +139,12 @@ function NewPost(){
                         {imgUrl.length>0 ? 
                             <img  className='imgContainer' src={imgUrl}></img>: 
                             <figure>
-                                <Input type='file' name="post_img" 
-                                onChange = {changeHandler}
-                                //original==onChange={(evt)=>setImage(evt.target.files[0])}
+                                <input 
+                                    type='file' 
+                                    name="post_img" 
+                                    className='inputBtn'
+                                    onChange = {changeHandler}
+                                    //original==onChange={(evt)=>setImage(evt.target.files[0])}
                                 />
                             </figure>}                            
                         </Grid>
