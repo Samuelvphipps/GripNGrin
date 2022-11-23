@@ -32,7 +32,7 @@ function PostItems({post}){
         //original example of this sweet alert found @
         //https://sweetalert2.github.io/
         Swal.fire({
-        title: 'Are you sure?',
+        title: 'Are you sure you want to delete this post?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         iconColor: 'red',
@@ -114,7 +114,10 @@ function PostItems({post}){
                         <Grid container spacing={1}>
                             <Grid item sm={1}></Grid>
                             <Grid item sm={10}>
-                                <p className='postContent postContentItem' onClick={pushToDetails}>{post.content.substring(0, 150) + '...'}</p>
+                                <p className='postContent postContentItem' 
+                                    onClick={pushToDetails}>{post.content.substring(0, 150) + '... '} 
+                                    <span className='seeMore'>See More</span>
+                                </p>
                             </Grid>
                             <Grid item sm={1}></Grid>
                         </Grid>

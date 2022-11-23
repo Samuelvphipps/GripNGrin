@@ -12,8 +12,8 @@ function Nav() {
     
         
         <Grid container className="nav" spacing={2}>
-            <Grid item sm={1}></Grid>
-            <Grid item sm={3}>
+            {/* <Grid item sm={}></Grid> */}
+            <Grid item sm={4}>
                 {user.username &&<h3 className="nav-title">Welcome {user.username}</h3>}
             </Grid>
             
@@ -24,7 +24,7 @@ function Nav() {
                 </Link>
             </Grid>
                 
-                   <Grid item sm={4}>
+                   <Grid item id='rightNavItems' sm={4}>
                         {/* If no user is logged in, show these links */}
                         {!user.id && (
                             // If there's no user, show login/registration links

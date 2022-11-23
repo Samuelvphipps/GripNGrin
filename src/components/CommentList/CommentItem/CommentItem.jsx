@@ -33,6 +33,8 @@ function CommentItem ({comment, post, comments}){
         title: 'Are you sure you want to delete this comment?',
         text: "You won't be able to revert this!",
         icon: 'warning',
+        iconColor: 'red',
+        confirmButtonColor: 'red',
         showCancelButton: true,
         confirmButtonText: 'Yes, delete it!',
         cancelButtonText: 'No, cancel!',

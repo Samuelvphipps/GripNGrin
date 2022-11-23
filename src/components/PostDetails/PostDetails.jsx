@@ -59,13 +59,15 @@ function PostDetails(){
          //original example of this sweet alert found in documentation found @
         //https://sweetalert2.github.io/
         Swal.fire({
-        title: 'Are you sure you want to delete this post?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
-        reverseButtons: true
+            title: 'Are you sure you want to delete this post?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            iconColor: 'red',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            confirmButtonColor: 'red',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
         }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire(

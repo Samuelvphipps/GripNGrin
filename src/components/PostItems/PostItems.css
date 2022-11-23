@@ -52,3 +52,7 @@
     overflow-wrap: break-word;
     font-weight: 500;
 }
+
+.seeMore {
+    color: blue;
+}
