@@ -20,16 +20,22 @@ function CommentEditToggle({user, post, deleteComment, comment, editComment}){
         return(
                 <>
                     <p><span className='commentUserName'>{comment.username}</span> 
-                    <span className='commentDate'>{comment.created}</span></p>
-                    <TextareaAutosize
-                        required
-                        style={{ width: 350, height:50 }}
-                        value={content} onChange={(evt)=>setContent(evt.target.value)}
-                    />                  
-                    {/* calls the edit comment function with props to edit it then resets the toggle to false */}
-                    <button onClick={()=>{editComment(comment.id, content, comment.user_id), setEditOpen(false)}}>Submit</button>
-                    {/* on cancel reset toggle */}
-                    <button onClick={()=>setEditOpen(false)}>Cancel</button>
+                    <span className='commentDate'>{moment(comment.created).format("MMM Do YYYY")}</span></p>
+                    <Grid container spacing={1}>
+                       <Grid container>
+                            <textarea className='editCommentTextArea'
+                                required
+                                style={{ width: 350, height:50 }}
+                                value={content} onChange={(evt)=>setContent(evt.target.value)}
+                            />
+                       </Grid>                  
+                        <Grid container>
+                            {/* on cancel reset toggle */}
+                            <button className='cancelCommentBtn' onClick={()=>setEditOpen(false)}>Cancel</button>
+                            {/* calls the edit comment function with props to edit it then resets the toggle to false */}
+                            <button className='submitCommentBtn' onClick={()=>{editComment(comment.id, content, comment.user_id), setEditOpen(false)}}>Submit</button>
+                        </Grid>
+                    </Grid>
                 </>
         )
     }

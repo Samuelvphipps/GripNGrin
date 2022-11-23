@@ -2,6 +2,7 @@
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
+import { Grid } from '@mui/material';
 
 
 import { useState } from 'react';
@@ -41,15 +42,22 @@ function ReplyToggle({comment}){
         return(
             <>
             {/* this is the input area for replies to comments. When reply is clicked it opens a  text box for a new reply on the parent comment */}
-                {replyOpen ? <form onSubmit={newReply}>
-                    <InputLabel>Reply</InputLabel>
-                    <TextareaAutosize 
-                    onChange={(evt)=>setReply(evt.target.value)}
-                    value={reply}
-                    style={{ width: 400, height:100 }} 
-                    required></TextareaAutosize>
-                    <button className='cancelReplyBtn' onClick={()=>setReplyOpen(false)}>Cancel</button>
-                    <button type='submit' className='submitReplyBtn' name="postComment">Comment</button>
+                {replyOpen ?
+                <form onSubmit={newReply}> 
+                <div className='replyCommentTop'></div>                   
+                    <Grid container spacing={1}>
+                        <Grid container>
+                            <textarea className='replyTextArea'
+                                onChange={(evt)=>setReply(evt.target.value)}
+                                value={reply}                                
+                                required>                            
+                            </textarea>
+                        </Grid>
+                        <Grid container>
+                            <button className='cancelCommentBtn' onClick={()=>setReplyOpen(false)}>Cancel</button>
+                            <button type='submit' className='submitCommentBtn' name="postComment">Reply</button>
+                        </Grid>
+                    </Grid>
                 </form> :
                 <button className='replyBtn' onClick={()=>setReplyOpen(true)}>Reply</button>}
             </>

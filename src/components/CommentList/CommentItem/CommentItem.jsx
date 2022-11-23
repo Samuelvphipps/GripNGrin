@@ -75,6 +75,7 @@ function CommentItem ({comment, post, comments}){
                 {/* if the comment has a parent_id it isn't rendered here because its not a parent comment itslef */}
                 { comment.parent_comment_id ? null :
                     <div className='parentComment'>
+                        <div className='parentCommentTop'></div>
                         <CommentEditToggle 
                             editComment={editComment} 
                             deleteComment={deleteComment} 
@@ -98,8 +99,6 @@ function CommentItem ({comment, post, comments}){
                         comment2={comment2}/>}
                     else {return};
                 })}
-        
-            {/* <ReplyToggle comment={comment} /> */}
         </>
     );
 }

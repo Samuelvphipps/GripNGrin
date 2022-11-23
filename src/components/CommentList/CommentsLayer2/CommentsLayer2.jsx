@@ -36,7 +36,7 @@ function CommentsLayer2({comment2, user, deleteComment, editComment}){
                             deleteComment={deleteComment}
                             editComment={editComment}
                         />
-                        <div className='childCommentBottom'></div>
+                    <div className='childCommentBottom'></div>
                 </div>
             </Grid>
         </Grid>
