@@ -129,7 +129,7 @@ function NewPost(){
                                 
                             </Grid>
                             <Grid item sm={3}><p className='postDate editDetailsHeader'>{moment().format("MMM Do YYYY")}</p></Grid>
-                            <Grid item sm={1}><input></input></Grid>
+                            <Grid item sm={1}></Grid>
                         </Grid>
                     </header>
                     <div id='editHeaderBottom'></div>
@@ -268,8 +268,10 @@ function NewPost(){
                     </Grid>
                 </div>
             </article>
-            {/* image cropper to open on image upload */}
-            {selectedFile ? 
+            
+        </form> 
+        {/* image cropper to open on image upload */}
+        {selectedFile ? 
                 <ImageCropper 
                     id={selectedFile.id} 
                     imageUrl={selectedFile.imageUrl}
@@ -279,7 +281,6 @@ function NewPost(){
                     bool={false}
                     // setCroppedImageFor={setCroppedImageFor}
                 /> : null}
-        </form> 
         </>
     )
 };
