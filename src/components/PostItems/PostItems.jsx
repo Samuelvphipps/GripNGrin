@@ -35,8 +35,10 @@ function PostItems({post}){
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
         icon: 'warning',
+        iconColor: 'red',
         showCancelButton: true,
         confirmButtonText: 'Yes, delete it!',
+        confirmButtonColor: 'red',
         cancelButtonText: 'No, cancel!',
         reverseButtons: true
         }).then((result) => {

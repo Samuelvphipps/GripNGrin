@@ -5,6 +5,7 @@
     border-radius: 14px;
     background-color: #3e885b;
     padding: 5px;
+    box-shadow: 3px 3px 5px grey;
 }
 
 .innerPostItem {
@@ -19,7 +20,7 @@
 }
 
 .postItemImage {
-    max-width: 200px;
+    max-width: 255px;
 }
 
 
@@ -38,6 +39,8 @@
 
 .postItemData {
     font-weight: bold;
+    font-size: 18px;
+    margin-top: 10px;
 }
 
 .postContentItem:hover, .linkToPost:hover {
@@ -47,4 +50,5 @@
 
 .postContent {
     overflow-wrap: break-word;
+    font-weight: 500;
 }

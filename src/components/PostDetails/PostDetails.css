@@ -9,6 +9,7 @@
     border-radius: 14px;
     background-color: #3e885b;
     padding: 3px;
+    box-shadow: 3px 3px 5px grey;
 }
 
 .postDetailsInnerContainer {
@@ -38,7 +39,7 @@
 }
 
 .detailsData {
-    margin-bottom: 45px;
+    margin-bottom: 36px;
     font-size: 22px;
 
 }
