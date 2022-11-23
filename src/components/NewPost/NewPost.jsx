@@ -56,6 +56,7 @@ function NewPost(){
     const [finalFile, setFinalFile] = useState(null);
     const [imgUrl, setImgUrl] = useState('');
    
+    console.log('finalFile', finalFile)
 
     //todo: consolidate some data with spreaders? - STRETCH
 

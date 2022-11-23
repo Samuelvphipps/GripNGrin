@@ -154,7 +154,7 @@ function PostDetails(){
         </article>
         </div>
     <div className='postDetailsContainer'>
-        <article className='postDetailsInnerContainer'>
+        <article className='postDetailsInnerContainer'>            
             <CommentList post={post}/>
         </article>
     </div>

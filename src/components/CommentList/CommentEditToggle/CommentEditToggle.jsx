@@ -23,9 +23,10 @@ function CommentEditToggle({user, post, deleteComment, comment, editComment}){
                     <span className='commentDate'>{moment(comment.created).format("MMM Do YYYY")}</span></p>
                     <Grid container spacing={1}>
                        <Grid container>
+
                             <textarea className='editCommentTextArea'
                                 required
-                                style={{ width: 350, height:50 }}
+                                // style={{ width: 350, height:50 }}
                                 value={content} onChange={(evt)=>setContent(evt.target.value)}
                             />
                        </Grid>                  
