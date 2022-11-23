@@ -1,19 +1,67 @@
-.imgContainer {
-    max-width: 150px;
+.imgContainer{
+    max-width: 450px;
+    border-radius: 10px;
 }
 
-.postBox{
-    display: flex;
+.postDetailsContainer{
+    max-width: 1000px;
+    margin: 2rem auto;
+    border-radius: 14px;
+    background-color: #3e885b;
+    padding: 3px;
+    box-shadow: 3px 3px 5px grey;
 }
 
-.titleRow{
-    display: flex;
+.postDetailsInnerContainer {
+    background-color: white;
+    border:1px solid black;
+    margin: 4px;
+    border-radius: 23px;
+    padding: 2rem;
 }
 
-.bodyBox{
-    display: block;
+
+.commentsContainer {
+    max-width: 1000px;
+    margin: auto;
+    padding: 2rem
 }
 
-.dataContainer {
-    display: flex;
+.postDetailsTitle {
+    font-size: 40px;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.postItemDataDetails {
+    font-weight: bold;
+}
+
+.detailsData {
+    margin-bottom: 36px;
+    font-size: 22px;
+    margin-left: 30px;
+}
+
+.detailsData.top {
+    margin-top: 20px;
+}
+
+.postContent {
+    font-size: 22px;
+    margin-top: 2rem;
+}
+
+.username {
+    color: #f65600;
+    font-weight: bold;
+}
+
+.detailsHeader {
+    font-size: 25px;
+}
+
+.postDate {
+    font-style: italic;
 }

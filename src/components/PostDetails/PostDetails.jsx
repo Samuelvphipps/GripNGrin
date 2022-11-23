@@ -1,6 +1,11 @@
 //mui
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+
+import {
+    Button,
+    Stack, 
+    Grid,
+    Divider
+} from '@mui/material';
 
 //css
 import './PostDetails.css'
@@ -54,13 +59,15 @@ function PostDetails(){
          //original example of this sweet alert found in documentation found @
         //https://sweetalert2.github.io/
         Swal.fire({
-        title: 'Are you sure you want to delete this post?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
-        reverseButtons: true
+            title: 'Are you sure you want to delete this post?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            iconColor: 'red',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            confirmButtonColor: 'red',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
         }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire(
@@ -99,54 +106,70 @@ function PostDetails(){
     
     return(
         <>
-        <article >
-        <div className='postBox'>
-            <div>
-                <div>
-                    <a href={post.picture}><img className='imgContainer' src={post.picture}/></a>
-                </div>
+        <div className='postDetailsContainer'>
+            <article className='postDetailsInnerContainer'>
+                <h3 className='postDetailsTitle'>{post.title}</h3>
+                <Grid container spacing={1}>
+                    <Grid item sm={1}>
+                        
+                    </Grid>
+                    <Grid item sm={4}><p className='username detailsHeader'>{post.username}</p></Grid>
+                    <Grid item sm={3}>
+                        
+                    </Grid>
+                    <Grid item sm={3}><p className='postDate detailsHeader'>{moment(post.created).format("MMM Do YYYY")}</p></Grid>
+                    <Grid item sm={1}></Grid>
+                </Grid>
+                <div id='editHeaderBottom'></div>
+    
+                
+            <Grid container spacing={1}>
+                    <Grid item sm={6}>
+                        <a href={post.picture}><img className='imgContainer' src={post.picture}/></a>
+                    </Grid>
+                    <Grid item sm={6}>
+                                    
+                        <p className='detailsData top'><span className='postItemDataDetails'>Date of hunt:</span> {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
+                        <p className='detailsData'><span className='postItemDataDetails'>Species:</span> {post.species}</p>
+                        <p className='detailsData'><span className='postItemDataDetails'>Success:</span> {post.success ? <>Yes</> : <>No</>}</p>                        
+                        <p className='detailsData'><span className='postItemDataDetails'>Location:</span> {post.hunt_area}</p>
+                        <p className='detailsData'><span className='postItemDataDetails'>Weapon used:</span> {post.weapon_type}</p>
+                        <p className='detailsData'><span className='postItemDataDetails'>Land Type:</span> {post.land_type}</p>                        
+                    </Grid>
+                    
+            </Grid>
+            <div className='postContent' >
+                <p >{post.content}</p>
             </div>
-            <div className='bodyBox'>
-                <div>
-                    <div className='titleRow'>
-                        <h3>{post.title}</h3>
-                        <p>{post.username}</p>
-                        <p>{moment(post.created).format("MMM Do YYYY")}</p>
-                        { user.id===post.user_id ?
-                                <Stack spacing={2} direction="row">
-                                    <Button onClick={()=>history.push(`/post/edit/${post.id}`)} variant="text">Edit</Button>
-                                    <Button onClick={deletePost} variant="text">Delete</Button>
-                                </Stack>
-                                :
-                                null
-                            }
-                    </div>
-                </div>
-                <div className='dataContainer'>
-                    <div>
-                        <p>Date of hunt: {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
-                        <p>Species: {post.species}</p>
-                        <p>Success: {post.success ? <>Yes</> : <>No</>}</p>
-                    </div>
-                    <div>
-                        <p>Location: {post.hunt_area}</p>
-                        <p>Weapon used: {post.weapon_type}</p>
-                        <p>Land Type: {post.land_type}</p>
-                    </div>
-                </div>
-            </div>
+    
+            <Grid container spacing={2}>
+                <Grid item sm={1}></Grid>
+                <Grid item sm={7}>
+                <LikeButton 
+                            post={post}
+                            user={user}
+                            selectedId={params.id}
+                        />
+                </Grid>
+                
+                { user.id===post.user_id ?
+                    <Grid item sm={4}>
+                        
+                            <button className='editBtn' onClick={()=>history.push(`/post/edit/${post.id}`)} type="text">Edit</button>
+                            <button className='deleteBtn' onClick={deletePost} type="text">Delete</button>
+                        
+                    </Grid>
+                    :
+                    null
+                }
+            </Grid>
+        </article>
         </div>
-        <div>
-            <p className='postContent' >{post.content}</p>
-        </div>
-        <LikeButton 
-            post={post}
-            user={user}
-            selectedId={params.id}
-        />
-
-    </article>
-    <CommentList post={post}/>
+    <div className='postDetailsContainer'>
+        <article className='postDetailsInnerContainer'>            
+            <CommentList post={post}/>
+        </article>
+    </div>
     </>
     );
 };

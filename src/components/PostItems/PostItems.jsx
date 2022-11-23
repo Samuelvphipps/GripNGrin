@@ -1,6 +1,6 @@
 //mui
 import {Stack, Button, Grid} from '@mui/material';
-
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 //sweet alert import
 const Swal = require('sweetalert2')
@@ -32,11 +32,13 @@ function PostItems({post}){
         //original example of this sweet alert found @
         //https://sweetalert2.github.io/
         Swal.fire({
-        title: 'Are you sure?',
+        title: 'Are you sure you want to delete this post?',
         text: "You won't be able to revert this!",
         icon: 'warning',
+        iconColor: 'red',
         showCancelButton: true,
         confirmButtonText: 'Yes, delete it!',
+        confirmButtonColor: 'red',
         cancelButtonText: 'No, cancel!',
         reverseButtons: true
         }).then((result) => {
@@ -84,8 +86,8 @@ function PostItems({post}){
                                             <Grid container spacing={2}>
                                                 
                                                     <Grid item sm={3.5}><h3 className='postItemTitle'>{post.title}</h3></Grid>
-                                                    <Grid item sm={4}><p className='postItemHead'>{post.username}</p></Grid>
-                                                    <Grid item sm={3}><p className='postItemHead'>{moment(post.created).format("MMM Do YYYY")}</p></Grid>
+                                                    <Grid item sm={4}><p className='postItemHead username'>{post.username}</p></Grid>
+                                                    <Grid item sm={4}><p className='postItemHead postDate'>{moment(post.created).format("MMM Do YYYY")}</p></Grid>
                                                  
                                             </Grid>
                                         </div>
@@ -93,16 +95,16 @@ function PostItems({post}){
                                         <Grid container spacing={1}>
                                             
                                                 <Grid item sm={7}>
-                                                    <p><span className='postItemData'>Date of hunt:</span> {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
-                                                    <p><span className='postItemData'>Species:</span> {post.species}</p>
-                                                    <p><span className='postItemData'>Success:</span> {post.success ? <>Yes</> : <>No</>}</p>
+                                                    <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Date of hunt:</span> {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
+                                                    <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Species:</span> {post.species}</p>
+                                                    <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Success:</span> {post.success ? <>Yes</> : <>No</>}</p>
                                                 </Grid>
                                            
                                             
                                                 <Grid item sm={5}>
-                                                    <p><span className='postItemData'>Location:</span> {post.hunt_area}</p>
-                                                    <p><span className='postItemData'>Weapon used:</span> {post.weapon_type}</p>
-                                                    <p><span className='postItemData'>Land Type:</span> {post.land_type}</p>
+                                                    <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Location:</span> {post.hunt_area}</p>
+                                                    <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Weapon used:</span> {post.weapon_type}</p>
+                                                    <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Land Type:</span> {post.land_type}</p>
                                                 </Grid>
                                            
                                         </Grid>
@@ -112,25 +114,30 @@ function PostItems({post}){
                         <Grid container spacing={1}>
                             <Grid item sm={1}></Grid>
                             <Grid item sm={10}>
-                                <p className='postContent' onClick={pushToDetails}>{post.content.substring(0, 240) + '...'}</p>
+                                <p className='postContent postContentItem' 
+                                    onClick={pushToDetails}>{post.content.substring(0, 150) + '... '} 
+                                    <span className='seeMore'>See More</span>
+                                </p>
                             </Grid>
                             <Grid item sm={1}></Grid>
                         </Grid>
                     
-                    <Grid container spacing={2}>
+                    <Grid id='gridBtns' container spacing={2}>
                         <Grid item sm={2}></Grid>
-                        <Grid item sm={6}>
+                        <Grid item sm={5.5}>
                             <LikeButton 
                                 post={post}
                                 user={user}
                             />
                         </Grid>
-                        <Grid item sm={4}>
+                        <Grid item sm={4.5}>
                             { user.id===post.user_id ?
-                                                    <Stack spacing={2} direction="row">
-                                                        <Button onClick={()=>history.push(`/post/edit/${post.id}`)} variant="text">Edit</Button>
-                                                        <Button onClick={deletePost} variant="text">Delete</Button>
-                                                    </Stack>
+                                                    // <Stack spacing={2} direction="row">
+                                                        <>
+                                                            <button className='editItemBtn' onClick={()=>history.push(`/post/edit/${post.id}`)} type="text">Edit</button>
+                                                            <button className='deleteItemBtn' onClick={deletePost} type="text"> Delete </button>
+                                                        </>
+                                                    // </Stack>
                                                     :
                                                     null
                                                     }

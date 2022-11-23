@@ -47,7 +47,7 @@ function CommentList ({post}) {
 
     return(
         <>
-            <h1>Comments component</h1>
+            <h1>Leave a comment!</h1>
                 <div>
                     {comments.map(comment => {
                         return <CommentItem 
@@ -60,13 +60,13 @@ function CommentList ({post}) {
                 </div>
 
             <form onSubmit={newComment}>
-                <InputLabel>New Comment</InputLabel>
-                <TextareaAutosize 
+                <h3 className='newCommentHeader'>New Comment:</h3>
+                <textarea
                 onChange={(evt)=>setComment(evt.target.value)}
                 value={comment}
-                style={{ width: 400, height:100 }} 
-                required></TextareaAutosize>
-                <Input type='submit' name="postComment" />
+                className='newCommentField'
+                required></textarea>
+                <button type='submit' className="submitBtn">Comment</button>
             </form>
         </>
     )

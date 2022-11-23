@@ -1,0 +1,17 @@
+
+.imagePrep {
+    height: 33%;
+    text-align: center;
+}
+
+.swal2-popup .swal2-styled:focus {
+    box-shadow: none !important;
+}
+
+.newHuntHeader {
+    text-align: center;
+    font-family: 'Carter One', 'Saira', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 10px;
+    text-shadow: 3px 3px 5px grey;
+    font-size: 35px;
+}

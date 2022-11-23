@@ -8,5 +8,16 @@ ul {
     list-style: none;
 }
 
+#homeHeader.MuiGrid-root {
+    align-items: center;
+}
+
+.pageHeader {
+    font-family: 'Carter One', 'Saira', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 74px;
+    margin: 10px;
+    text-shadow: 3px 3px 5px grey;
+}
+
 
 

@@ -81,7 +81,7 @@ function ImageCropper({ setImgUrl,
                     className='slider'></input>
                 </div>
                 <div className="button-area">
-                    <button onClick={onCrop}>Crop</button>
+                    <button className='cropBtn' onClick={onCrop}>Crop</button>
                 </div>
             </div>
         </div>

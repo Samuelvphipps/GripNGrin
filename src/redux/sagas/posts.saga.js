@@ -15,7 +15,9 @@ function* addPost(action) {
     //THERE HAS GOT TO BE A BETTER WAY TO DO THIS
     //TODO: fix this shit ⬇️
     let formData = new FormData();
+    //req.file
     formData.append('post_img', data.image);
+    //req.body                 req.body.date_of_hunt
     formData.append('date_of_hunt', data.date);
     formData.append('hunt_area_id', data.huntAreaId);
     formData.append('land_type', data.landType);

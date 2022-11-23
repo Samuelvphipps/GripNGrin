@@ -1,0 +1,64 @@
+
+
+
+.editData {
+    margin-left: -.8rem;
+    margin-bottom: 20px;
+    font-size: 22px;
+    align-items: center;
+    display: flex;
+}
+
+.editData.top {
+    margin-top: 28px;
+}
+
+.detailsData.top {
+    margin-top: 35px;
+}
+
+.editItemDataDetails {
+    font-weight: bold;
+    margin-right: 13px;
+    margin-left: 30px;
+
+}
+
+.editImageInput {
+    text-align: center;
+}
+
+#editTextArea {
+    border-radius: 5px;
+
+    width: 98%;
+    font-size: 22px;
+    height: 150px;
+    resize: none;
+    padding: .5rem
+}
+
+.postDate{
+    text-align: right;
+}
+
+#editHeaderBottom {
+    width: 85%;
+    height: 5px;
+    background-color: #f65600;
+    margin-bottom: 25px;
+    margin: -.5rem auto 25px auto;
+    border-radius: 5px;
+}
+
+.editPostDetailsTitle {
+    font-size: 40px;
+    text-align: center;
+    margin-top: -2rem;
+    margin-bottom: 0;
+}
+
+.editDetailsHeader {
+    font-size: 25px;
+    margin-top: .25rem;
+}

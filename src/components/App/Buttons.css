@@ -1,0 +1,333 @@
+
+/* background-color: #2f4b27; */
+/* post items */
+.editBtn {
+    color: #2f4b27;
+    font-size: 16px;
+    padding: 6px 30px;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: white;
+    font-weight: bold;
+}
+
+.editBtn:hover {
+    /* background-color: #3e885c8a; */
+    box-shadow: 0px 0px 3px 3px #3e885c34;
+    cursor: pointer;
+}
+
+.editBtn:active {
+    background-color: #3e885c34;
+}
+
+.deleteBtn {
+    background-color: white;
+    color: red;
+    font-size: 16px;
+    padding: 6px 30px;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.deleteBtn:hover {
+    cursor: pointer;
+    color: red;
+    box-shadow: 0px 0px 3px 3px rgba(255, 0, 0, 0.24);
+}
+
+.deleteBtn:active {
+    background-color: rgba(255, 0, 0, 0.24);
+}
+
+
+/* COMMENTS */
+
+.editBtnComment {
+    color: #2f4b27;
+    font-size: 13px;
+    padding: 3px 15px;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: white;
+    font-weight: bold;
+}
+
+.editBtnComment:hover {
+    /* background-color: #3e885c8a; */
+    box-shadow: 0px 0px 3px 3px #3e885c34;
+    cursor: pointer;
+}
+
+.editBtnComment:active {
+    background-color: #3e885c34;
+}
+
+.deleteBtnComment {
+    background-color: white;
+    color: red;
+    font-size: 13px;
+    padding: 3px 15px;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.deleteBtnComment:hover {
+    cursor: pointer;
+    /* background-color: rgb(249, 166, 166); */
+    color: red;
+    box-shadow: 0px 0px 3px 3px rgba(255, 0, 0, 0.24);
+}
+
+.deleteBtnComment:active {
+    cursor: pointer;
+    background-color: rgba(255, 0, 0, 0.24);
+}
+
+/* REPLY btn */
+
+.replyBtn {
+    background-color: white;
+    color: blue;
+    font-size: 13px;
+    padding: 3px 15px;
+    border: none;
+    margin: 0px 10px 10px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.replyBtn:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 255, 0.315);
+}
+.replyBtn:active {
+    background-color: rgba(0, 0, 255, 0.315);
+}
+
+/* submitBtn for new post and edit */
+
+.submitBtn {
+    color: #2f4b27;
+    font-size: 19px;
+    padding: 6px 30px;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: white;
+    font-weight: bold;
+}
+
+.submitBtn:hover {
+    /* background-color: #3e885c8a; */
+    box-shadow: 0px 0px 3px 3px #3e885c34;
+    cursor: pointer;
+}
+
+.submitBtn:active {
+    background-color: #3e885c34;
+}
+
+/* cancel button newpost and edit */
+
+.cancelBtn {
+    background-color: white;
+    color: red;
+    font-size: 19px;
+    padding: 6px 30px;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.cancelBtn:hover {
+    cursor: pointer;
+    color: red;
+    box-shadow: 0px 0px 3px 3px rgba(255, 0, 0, 0.24);
+}
+
+.cancelBtn:active {
+    background-color: rgba(255, 0, 0, 0.24);
+}
+
+/* reply and cancel reply button */
+
+.submitCommentBtn {
+    color: #2f4b27;
+    font-size: 13px;
+    padding: 3px 15px;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: white;
+    font-weight: bold;
+}
+
+.submitCommentBtn:hover {
+    /* background-color: #3e885c8a; */
+    box-shadow: 0px 0px 3px 3px #3e885c34;
+    cursor: pointer;
+}
+
+.submitCommentBtn:active {
+    background-color: #3e885c34;
+}
+
+.cancelCommentBtn {
+    background-color: white;
+    color: red;
+    font-size: 13px;
+    padding: 3px 15px;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.cancelCommentBtn:hover {
+    cursor: pointer;
+    color: red;
+    box-shadow: 0px 0px 3px 3px rgba(255, 0, 0, 0.24);
+}
+
+.cancelCommentBtn:active {
+    background-color: rgba(255, 0, 0, 0.24);
+}
+
+/* Likes */
+.totalLikes {
+    color:#1876d2;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+/* editItem deleteItem */
+
+.editItemBtn {
+    color: #2f4b27;
+    font-size: 18px;
+    padding: 6px 30px;
+    border: none;
+    margin: 5px 10px 25px 10px;
+    border-radius: 5px;
+    background-color: white;
+    font-weight: bold;
+}
+
+.editItmBtn:hover {
+    /* background-color: #3e885c8a; */
+    box-shadow: 3px 0px 3px 3px #3e885c34;
+    cursor: pointer;
+}
+
+.editItemBtn:active {
+    background-color: #3e885c34;
+}
+
+.deleteItemBtn {
+    background-color: white;
+    color: red;
+    font-size: 18px;
+    padding: 6px 30px;
+    border: none;
+    margin: 5px 10px 25px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.deleteItemBtn:hover {
+    cursor: pointer;
+    color: red;
+    box-shadow: 0px 0px 3px 3px rgba(255, 0, 0, 0.24);
+}
+
+.deleteBtn:active {
+    background-color: rgba(255, 0, 0, 0.24);
+}
+
+/* Upload btn */
+
+.inputBtn {
+    color: blue;
+    text-decoration: underline;
+}
+.inputBtn::file-selector-button {
+    background-color: white;
+    color: blue;
+    font-size: 15px;
+    padding: 3px 15px;
+    border: none;
+    margin: 10px 10px 10px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 255, 0.315);
+
+}
+
+.inputBtn::file-selector-button:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 255, 0.315);
+}
+.inputBtn::file-selector-button:active {
+    background-color: rgba(0, 0, 255, 0.315);
+}
+
+.postHuntBtn {
+    font-weight: bold;
+    padding: 0px;
+}
+
+/* Submit Hunt btn */
+
+.newHuntBtn {
+    color: #f65600;
+    font-size: 24px;
+    padding: 6px 30px;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: white;
+    font-weight: bold;
+    box-shadow: 4px 4px 10px 3px ;
+}
+
+.newHuntBtn:hover {
+    /* background-color: #3e885c8a; */
+
+    cursor: pointer;
+}
+
+.newHuntBtn:active {
+    background-color: #f6560034;
+    box-shadow: 1px 1px 5px 1px ;
+}
+
+.cropBtn {
+    color: #f65600;
+    font-size: 20px;
+    padding: 5px 30px;
+    border: none;
+    margin: 0px;
+    border-radius: 5px;
+    background-color: white;
+    font-weight: bold;
+    box-shadow: 4px 4px 10px 3px ;
+}
+
+.cropBtn:hover {
+    /* background-color: #3e885c8a; */
+
+    cursor: pointer;
+}
+
+.cropBtn:active {
+    background-color: #f6560034;
+    box-shadow: 1px 1px 5px 1px ;
+}

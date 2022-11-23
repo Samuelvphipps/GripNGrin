@@ -171,6 +171,8 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
     // console.log('req.file.filename', req.file.filename);
     // console.log('req.body is:', req.body.title);
 
+    console.log('req.file', req.file)
+
     let post=req.body;
 
     //sqlText using params to protect the DB
@@ -203,7 +205,7 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
              res.sendStatus(201);
         })
         .catch(err => {
-            console.error('in posts POST error:', err);
+            console.error('in posts POST error:', err.message);
             res.sendStatus(500);
         })
 });

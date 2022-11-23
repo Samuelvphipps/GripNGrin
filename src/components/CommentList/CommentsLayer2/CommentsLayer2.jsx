@@ -1,6 +1,16 @@
 //mui
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import{
+    Button,
+    Stack,
+    Input,
+    Box,
+    InputLabel,
+    MenuItem,
+    FormControl,
+    Select,
+    TextareaAutosize,
+    Grid
+} from '@mui/material';
 
 import CommentEditToggle from '../CommentEditToggle/CommentEditToggle';
 
@@ -13,14 +23,23 @@ function CommentsLayer2({comment2, user, deleteComment, editComment}){
     return(
         //call in the comment edit toggle bit
         //TODO climb back one layer as this is redundant and happend through edits
-        <div className="commentl2">
-                <CommentEditToggle 
-                    comment={comment2}
-                    user={user}
-                    deleteComment={deleteComment}
-                    editComment={editComment}
-                />
-        </div>
+        
+        <Grid container spacing={2}>
+            <Grid item sm={1.5}>
+                
+            </Grid>
+            <Grid item sm={10.5}>
+                <div className="childComment">
+                        <CommentEditToggle 
+                            comment={comment2}
+                            user={user}
+                            deleteComment={deleteComment}
+                            editComment={editComment}
+                        />
+                    <div className='childCommentBottom'></div>
+                </div>
+            </Grid>
+        </Grid>
     );
 }
 
