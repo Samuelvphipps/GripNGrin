@@ -106,9 +106,9 @@ function NewPost(){
     
     return(
         <>
-            <h3>Create New Post</h3>
-
-        
+        <div className='newHuntHeader'>
+            <h1>Share Your Hunt!</h1>
+        </div>
         <form onSubmit={submitHunt}>
             <article className='postDetailsContainer'>
                 <div className='postDetailsInnerContainer'>
@@ -129,7 +129,7 @@ function NewPost(){
                                 
                             </Grid>
                             <Grid item sm={3}><p className='postDate editDetailsHeader'>{moment().format("MMM Do YYYY")}</p></Grid>
-                            <Grid item sm={1}></Grid>
+                            <Grid item sm={1}><input></input></Grid>
                         </Grid>
                     </header>
                     <div id='editHeaderBottom'></div>
