@@ -24,17 +24,23 @@ function CommentEditToggle({user, post, deleteComment, comment, editComment}){
                     <Grid container spacing={1}>
                        <Grid container>
 
-                            <textarea className='editCommentTextArea'
-                                required
-                                // style={{ width: 350, height:50 }}
-                                value={content} onChange={(evt)=>setContent(evt.target.value)}
-                            />
+                            <Grid item sm={8}>
+                                <textarea className='editCommentTextArea'
+                                    required
+                                    // style={{ width: 350, height:50 }}
+                                    value={content} onChange={(evt)=>setContent(evt.target.value)}
+                                />
+                            </Grid>
                        </Grid>                  
                         <Grid container>
+                            <Grid item sm={5}></Grid>
                             {/* on cancel reset toggle */}
-                            <button className='cancelCommentBtn' onClick={()=>setEditOpen(false)}>Cancel</button>
-                            {/* calls the edit comment function with props to edit it then resets the toggle to false */}
-                            <button className='submitCommentBtn' onClick={()=>{editComment(comment.id, content, comment.user_id), setEditOpen(false)}}>Submit</button>
+                            <Grid item sm={5}>
+                                <button className='cancelCommentBtn' onClick={()=>setEditOpen(false)}>Cancel</button>
+                                {/* calls the edit comment function with props to edit it then resets the toggle to false */}
+                                <button className='submitCommentBtn' onClick={()=>{editComment(comment.id, content, comment.user_id), setEditOpen(false)}}>Submit</button>
+                            </Grid>
+                            <Grid item sm={2}></Grid>
                         </Grid>
                     </Grid>
                 </>

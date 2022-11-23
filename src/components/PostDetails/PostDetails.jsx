@@ -108,7 +108,9 @@ function PostDetails(){
             <article className='postDetailsInnerContainer'>
                 <h3 className='postDetailsTitle'>{post.title}</h3>
                 <Grid container spacing={1}>
-                    <Grid item sm={1}></Grid>
+                    <Grid item sm={1}>
+                        
+                    </Grid>
                     <Grid item sm={4}><p className='username detailsHeader'>{post.username}</p></Grid>
                     <Grid item sm={3}>
                         
@@ -139,7 +141,14 @@ function PostDetails(){
             </div>
     
             <Grid container spacing={2}>
-                <Grid sm={8}></Grid>
+                <Grid sm={8}>
+                <LikeButton 
+                            post={post}
+                            user={user}
+                            selectedId={params.id}
+                        />
+                </Grid>
+                
                 { user.id===post.user_id ?
                     <Grid sm={4}>
                         

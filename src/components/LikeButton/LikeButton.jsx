@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { IconButton } from '@mui/material'
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+
 function LikeButton({user, post, selectedId}){
     //dispatch setup
     const dispatch =useDispatch();
@@ -75,7 +79,9 @@ function LikeButton({user, post, selectedId}){
             return (
                 <>
                     <p>Likes: {post.likes}</p>
-                    <button onClick={unlikePost}>Unlike</button>        
+                    <IconButton onClick={unlikePost} style={{ fill: '#0072ea' }}>
+                            <ThumbUpIcon color={'primary'} fontSize='large'/>
+                    </IconButton>        
                 </>
             )
         }
@@ -85,7 +91,9 @@ function LikeButton({user, post, selectedId}){
     return(
         <>  
             <p>Likes: {post.likes}</p>
-            <button onClick={likePost}>Like</button>
+            <IconButton onClick={likePost}>
+                <ThumbUpOffAltIcon color={'primary'} fontSize='large'/>
+            </IconButton>
         </>   
     )
 }

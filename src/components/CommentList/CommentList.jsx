@@ -60,11 +60,10 @@ function CommentList ({post}) {
                 </div>
 
             <form onSubmit={newComment}>
-                <InputLabel>New Comment</InputLabel>
+                <h3 className='newCommentHeader'>New Comment:</h3>
                 <textarea
                 onChange={(evt)=>setComment(evt.target.value)}
                 value={comment}
-                style={{ width: 400, height:100 }} 
                 className='newCommentField'
                 required></textarea>
                 <button type='submit' className="submitBtn">Comment</button>
