@@ -8,5 +8,9 @@ ul {
     list-style: none;
 }
 
+#homeHeader.MuiGrid-root {
+    align-items: center;
+}
+
 
 

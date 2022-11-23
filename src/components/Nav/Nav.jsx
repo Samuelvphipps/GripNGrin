@@ -13,7 +13,7 @@ function Nav() {
     <div className="nav">
         
         <h3 className="nav-title">{user.username}</h3>
-        <LogOutButton className="navLink" />
+        
 
       <Link to="/home">
         <h2 className="nav-title">Grip N Grin</h2>
@@ -28,11 +28,11 @@ function Nav() {
         )}
 
         {/* If a user is logged in, show these links */}
-        {user.id && (
+        {user.id ? (
           <>
 
             <Link className='navLink' to='/newpost'>
-                <button>Post Hunt</button>
+                Post Hunt
             </Link>
 
 
@@ -40,14 +40,17 @@ function Nav() {
               Home
             </Link>
 
+            <LogOutButton className="navLink" />
 
             {/* <Link className="navLink" to="/info">
               Info Page
             </Link> */}
-
-            
           </>
-        )}
+        )
+        :
+        null
+    
+        }
 
         <Link className="navLink" to="/about">
           About

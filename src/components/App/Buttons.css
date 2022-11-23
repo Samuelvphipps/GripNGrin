@@ -254,16 +254,20 @@
 
 /* Upload btn */
 
-
+.inputBtn {
+    color: blue;
+    text-decoration: underline;
+}
 .inputBtn::file-selector-button {
     background-color: white;
     color: blue;
-    font-size: 16px;
+    font-size: 15px;
     padding: 3px 15px;
     border: none;
     margin: 10px 10px 10px 10px;
     border-radius: 5px;
     font-weight: bold;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 255, 0.315);
 
 }
 
@@ -271,6 +275,34 @@
     cursor: pointer;
     box-shadow: 0px 0px 3px 3px rgba(0, 0, 255, 0.315);
 }
-.inputBtn::file-selector-button :active {
+.inputBtn::file-selector-button:active {
     background-color: rgba(0, 0, 255, 0.315);
+}
+
+.postHuntBtn {
+    font-weight: bold;
+    padding: 0px;
+}
+
+/* Submit Hunt btn */
+
+.newHuntBtn {
+    color: #f65600;
+    font-size: 24px;
+    padding: 6px 30px;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: white;
+    font-weight: bold;
+}
+
+.newHuntBtn:hover {
+    /* background-color: #3e885c8a; */
+    box-shadow: 0px 0px 3px 3px ;
+    cursor: pointer;
+}
+
+.newHuntBtn:active {
+    background-color: #f6560034;
 }

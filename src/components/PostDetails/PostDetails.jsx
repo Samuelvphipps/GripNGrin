@@ -141,7 +141,8 @@ function PostDetails(){
             </div>
     
             <Grid container spacing={2}>
-                <Grid sm={8}>
+                <Grid item sm={1}></Grid>
+                <Grid item sm={7}>
                 <LikeButton 
                             post={post}
                             user={user}
@@ -150,7 +151,7 @@ function PostDetails(){
                 </Grid>
                 
                 { user.id===post.user_id ?
-                    <Grid sm={4}>
+                    <Grid item sm={4}>
                         
                             <button className='editBtn' onClick={()=>history.push(`/post/edit/${post.id}`)} type="text">Edit</button>
                             <button className='deleteBtn' onClick={deletePost} type="text">Delete</button>

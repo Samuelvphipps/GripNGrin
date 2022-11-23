@@ -182,7 +182,9 @@ function EditPost(){
                                 
                                 }
                                 <div className='editImageInput'>
-                                    <Input type='file' 
+                                    <input 
+                                        className='inputBtn'
+                                        type='file' 
                                         onChange={changeHandler}
                                         // onChange={(evt) => dispatch({
                                         //     type: 'UPDATE_EDIT_POST',

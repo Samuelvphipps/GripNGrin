@@ -137,16 +137,24 @@ function NewPost(){
                     <Grid container spacing={4}>
                         <Grid item sm={6}>
                         {imgUrl.length>0 ? 
-                            <img  className='imgContainer' src={imgUrl}></img>: 
-                            <figure>
-                                <input 
-                                    type='file' 
-                                    name="post_img" 
-                                    className='inputBtn'
-                                    onChange = {changeHandler}
-                                    //original==onChange={(evt)=>setImage(evt.target.files[0])}
-                                />
-                            </figure>}                            
+                            <img  className='imgContainer' src={imgUrl}></img>:
+                            <>
+                                <div className='imagePrep'></div> 
+                                <figure className='imagePrep'>
+                                    <h1>Upload a picture!</h1>
+                                    <input 
+                                        title=' '
+                                        type='file' 
+                                        name="post_img" 
+                                        className='inputBtn'
+                                        onChange = {changeHandler}
+                                        //original==onChange={(evt)=>setImage(evt.target.files[0])}
+                                    />
+                                </figure>
+                                <div className='imagePrep'></div> 
+                            </>
+
+                            }                            
                         </Grid>
                         <Grid item sm={6}>
                                         

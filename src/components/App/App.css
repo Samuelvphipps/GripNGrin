@@ -108,7 +108,11 @@ input {
 Page headers
 -------------------------------------------------------------------------------- */
 
-.pageHeader{
+header{
     text-align: center;
 }
 
+.imagePrep {
+    height: 33%;
+    text-align: center;
+}
