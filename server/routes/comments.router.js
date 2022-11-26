@@ -5,9 +5,9 @@ const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
+
+
+  //get comments associated with the individual post details view using params.id
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     // GET route code here
     // console.log('in comments GET and post id is:', req.params.id);
@@ -36,9 +36,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 });
 
-/**
- * POST route template
- */
+
+//post a comment to the post user is currently at
 router.post('/', rejectUnauthenticated, (req, res) => {
   // POST route code here
     // console.log('in comments POST route and req.body is:', req.user.id, req.body);
@@ -70,6 +69,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 });
 
+//delete a comment user owns
 router.delete('/', rejectUnauthenticated, (req, res) => {
     // console.log('in delete Router with content of:', req.query);
 
@@ -92,8 +92,10 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
     else{res.sendStatus(403)}
 })
 
+
+//edit comment route. This changes the content of the comment. Doesnt modify comment parent id, user, or date
 router.put('/', rejectUnauthenticated, (req, res) => {
-    console.log('in /api/comments PUT with a payload of:', req.body);
+    // console.log('in /api/comments PUT with a payload of:', req.body);
     
     //conditional to protect delete route so only the comment owner can edit
     if(Number(req.body.data.user_id) === req.user.id){

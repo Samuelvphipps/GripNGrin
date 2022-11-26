@@ -54,6 +54,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 });
 
+
+//See route under this one for explanation on splitting edit route based on image
 //if there is an image file this is the route: ⬇️
 router.put('/image', rejectUnauthenticated, upload.single('post_img'), (req, res) => {
   // POST route code here
@@ -108,6 +110,10 @@ router.put('/image', rejectUnauthenticated, upload.single('post_img'), (req, res
 
 });
 
+//this is the edit post route for updates with no new image
+//created this because the info needs a different format if a file is included
+//this way made more sense than a massive conditional which would be another
+//way to do it.
 //if no image is sent this is the route for the put request to edit the post
 router.put('/noImage', rejectUnauthenticated, (req, res) => {
     // POST route code here
