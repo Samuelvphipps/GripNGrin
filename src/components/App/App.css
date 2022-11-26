@@ -129,3 +129,12 @@ header{
 }
 
 
+.advertisement{
+    margin:40px 50px 20px 50px;
+    position: sticky;
+    top: 70px;
+    border-radius: 10px;
+    border: 3px solid black;
+    max-width: 300px;
+}
+
