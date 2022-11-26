@@ -9,7 +9,11 @@ The user of Grip 'N Grin can upload hunts, view other hunts, and share info and 
 
 ## Screen Shot
 
-Include one or two screen shots of your project here (optional). Remove if unused.
+- Homepage screenshot
+![homepage](./public/images/Screenshot2.png)
+
+- Comments area viewable below post details page
+![comments](./public/images/Screenshot3.png)
 
 ### Prerequisites
 

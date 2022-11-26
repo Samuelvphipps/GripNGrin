@@ -103,11 +103,25 @@ function NewPost(){
         // setImgUrl(url);
 
     }
+
+    const populateFields = () => {
+        setPostTitle('Bowhunt');
+        setDate('2022-11-25');
+        setSpecies('Deer');
+        setSuccessful(false);
+        // setHuntAreaId(218);
+        setWeaponType('Bow');
+        setLandType('private');
+        setStory(`I went out for a post thanksgiving bowhunt this weekend trying to 
+        finally get my deer for the year. Unfortunately I had no luck! I did see an abundance of 
+        squirrels tho. Maybe I should have targeted them. It seems like the rut is winding down here, 
+        so I think I need to change up tactics before the muzzleloader season coming up.`);
+    }
     
     return(
         <>
         <div className='newHuntHeader'>
-            <h1>Share Your Hunt!</h1>
+            <h1 onClick={populateFields} >Share Your Hunt!</h1>
         </div>
         <form onSubmit={submitHunt}>
             <article className='postDetailsContainer'>
