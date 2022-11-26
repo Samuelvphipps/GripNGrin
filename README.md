@@ -10,10 +10,13 @@ The user of Grip 'N Grin can upload hunts, view other hunts, and share info and 
 ## Screen Shot
 
 - Homepage screenshot
-![homepage](./public/images/Screenshot2.png)
+![Homepage](./public/images/Homepage.png)
 
-- Comments area viewable below post details page
-![comments](./public/images/Screenshot3.png)
+-Post Details of a single post:
+![Post Details](./public/images/Screenshot2.png)
+
+- Comments area viewable below post details page:
+![Comments](./public/images/Comments.png)
 
 ### Prerequisites
 
