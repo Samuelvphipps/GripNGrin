@@ -112,10 +112,7 @@ function NewPost(){
         // setHuntAreaId(218);
         setWeaponType('Bow');
         setLandType('private');
-        setStory(`I went out for a post thanksgiving bowhunt this weekend trying to 
-        finally get my deer for the year. Unfortunately I had no luck! I did see an abundance of 
-        squirrels tho. Maybe I should have targeted them. It seems like the rut is winding down here, 
-        so I think I need to change up tactics before the muzzleloader season coming up.`);
+        setStory(`I went out for a post thanksgiving bowhunt this weekend trying to finally get my deer for the year. Unfortunately I had no luck! I did see an abundance of squirrels tho. Maybe I should have targeted them. It seems like the rut is winding down here, so I think I need to change up tactics before the muzzleloader season coming up.`);
     }
     
     return(
