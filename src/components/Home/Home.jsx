@@ -29,7 +29,13 @@ function Home(){
                     <button className="newHuntBtn" onClick={()=>history.push('/newpost')}>POST A HUNT!</button>
                 </header>
             
-            <PostList />
+            <Grid container spacing={2}>
+                <Grid  item sm={3}>
+                    <img className="advertisement" src='http://localhost:3000/images/Advertisement.png'></img>
+                </Grid>
+                <Grid item sm={8}><PostList /></Grid>
+                <Grid item sm={1}></Grid>
+            </Grid>
         </>
     );
 }

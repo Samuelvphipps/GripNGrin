@@ -25,6 +25,8 @@ function AboutPage() {
                 <li>React</li>
                 <li>Node.js</li>
                 <li>React Easy Crop</li>
+                <li>SweetAlert2</li>
+                <li>Moment.js</li>
                 <li>And many others...</li>
             </ul>
     
