@@ -7,11 +7,33 @@ import React from 'react';
 
 function AboutPage() {
   return (
-    <div className="container">
-      <div>
-        <p>This about page is for anyone to read!</p>
-      </div>
-    </div>
+    <>
+        <header><h1 className='pageHeader'> About Grip 'N Grin</h1></header>
+        <div className="postDetailsContainer">
+          <div className='postDetailsInnerContainer'>
+            
+            <p> This app was  conceived while I was looking through old blogs about hunting in Idaho
+                while preparing for a hunt next fall. 
+            There is no easily available information about different hunting in different areas. 
+            This is an early attempt to solve that. While there are many improvements still needed I like how it has turned out so far. 
+            My next step would be to incorporate some type of search feature that takes hunting areas and converts them to counties, areas, regions and species types. 
+            This will make the information gathering even better for the user.
+            </p>
+            <p>I used many technologies creating this app, including:</p>
+            <ul>
+                <li>Multer</li>
+                <li>React</li>
+                <li>Node.js</li>
+                <li>React Easy Crop</li>
+                <li>And many others...</li>
+            </ul>
+    
+            <p> A big thank you to Edan, Prime digital academy, my wonderfully supportive cohort mates, and especially my wife Julia for all the support.</p>
+    
+    
+          </div>
+        </div>
+    </>
   );
 }
 

@@ -33,11 +33,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   
 });
 
-/**
- * POST route template
- */
-router.post('/', rejectUnauthenticated, (req, res) => {
-  // POST route code here
-});
+
 
 module.exports = router;

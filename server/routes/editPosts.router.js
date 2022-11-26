@@ -108,7 +108,7 @@ router.put('/image', rejectUnauthenticated, upload.single('post_img'), (req, res
 
 });
 
-//if no image is sent this is the route for the put request
+//if no image is sent this is the route for the put request to edit the post
 router.put('/noImage', rejectUnauthenticated, (req, res) => {
     // POST route code here
     console.log('in the no image post edit PUT route', req.body)
