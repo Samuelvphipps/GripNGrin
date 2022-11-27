@@ -149,7 +149,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     pool.query(sqlText)
         .then(dbRes => {
             res.send(dbRes.rows);
-            console.log('response in get dbres posts', dbRes);
+            // console.log('response in get dbres posts', dbRes);
         })
         .catch(err => {
             console.error('in /api/posts GET Error', err);
@@ -171,7 +171,7 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
     // console.log('req.file.filename', req.file.filename);
     // console.log('req.body is:', req.body.title);
 
-    console.log('req.file', req.file)
+    // console.log('req.file', req.file)
 
     let post=req.body;
 
@@ -199,7 +199,7 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
         post.weaponType
     ];
 
-    console.log('sql params', sqlParams);
+    // console.log('sql params', sqlParams);
     //pool.query and send status back to saga
     //
     pool.query(sqlText, sqlParams)
@@ -214,7 +214,7 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
 
 //delete post
 router.delete('/', rejectUnauthenticated, (req, res) => {
-    console.log('in /api/posts DELETE with payload of:', Number(req.query.user_id), req.user.id);
+    // console.log('in /api/posts DELETE with payload of:', Number(req.query.user_id), req.user.id);
     //make sure the owner of the post is the one deleting it
     if(req.user.id === Number(req.query.user_id)){
         //set sql text if user matches the post owner
@@ -222,7 +222,7 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
             DELETE FROM "posts"
             WHERE "id" = $1;
         `;
-        console.log('in delete conditional')
+        // console.log('in delete conditional')
         //pool.query and send the post_id and the sql text
         pool.query(sqlText, [req.query.post_id])
             .then(dbres => {

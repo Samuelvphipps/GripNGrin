@@ -117,13 +117,13 @@ router.put('/image', rejectUnauthenticated, upload.single('post_img'), (req, res
 //if no image is sent this is the route for the put request to edit the post
 router.put('/noImage', rejectUnauthenticated, (req, res) => {
     // POST route code here
-    console.log('in the no image post edit PUT route', req.body)
+    // console.log('in the no image post edit PUT route', req.body)
     let post=req.body.data;
     //PROTECT THE ROUTE FROM OTHER USERS
-    console.log('user id', post.user_id, req.user.id)
+    // console.log('user id', post.user_id, req.user.id)
      if(post.user_id===req.user.id){
     //SQL to update the post @ the database
-        console.log('inside SQL area on the PUT')
+        // console.log('inside SQL area on the PUT')
         let sqlText = `
             UPDATE "posts"
             SET

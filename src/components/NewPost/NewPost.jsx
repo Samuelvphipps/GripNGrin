@@ -110,7 +110,7 @@ function NewPost(){
         setDate('2022-11-25');
         setSpecies('Deer');
         setSuccessful(false);
-        // setHuntAreaId(218);
+        setHuntAreaId(40);
         setWeaponType('Bow');
         setLandType('private');
         setStory(`I went out for a post thanksgiving bowhunt this weekend trying to finally get my deer for the year. Unfortunately I had no luck! I did see an abundance of squirrels tho. Maybe I should have targeted them. It seems like the rut is winding down here, so I think I need to change up tactics before the muzzleloader season coming up.`);
@@ -153,6 +153,7 @@ function NewPost(){
                                 <figure className='imagePrep'>
                                     <h1>Upload a picture!</h1>
                                     <input 
+                                        required
                                         title=' '
                                         type='file' 
                                         name="post_img" 
@@ -213,6 +214,7 @@ function NewPost(){
                                             // update local state
                                             onChange={(evt)=>setHuntAreaId(evt.target.value)}                               
                                             label="hunt-area"
+
                                         >
                                             {huntAreaList.map((area)=>{
                                                 return <MenuItem key={area.id} value={area.id}>{area.hunt_area}</MenuItem>
