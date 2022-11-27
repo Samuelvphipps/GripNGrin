@@ -20,10 +20,13 @@ function LikeButton({user, post, selectedId}){
             type: 'FETCH_USER_LIKES'
         });
         
-        dispatch({
+        //make sure this doesnt run if the button is in a post item on the home page but does run if in a post details
+        //in post details it needs to run otherwise there is a redux state mismatch which causes a rendering error (doesnt register changes without refresh)
+        if(selectedId != 0)
+        {dispatch({
             type: 'FETCH_SELECTED_POST',
             payload: selectedId
-        });
+        });};
 
 
     }, []);
