@@ -92,6 +92,7 @@ function PostItems({post}){
                                             {/* on click push to the post details page of the clicked on post */}
                                         <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Date of hunt:</span> {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
                                         <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Species:</span> {post.species}</p>
+                                                                                                                                        {/* if true display yes else no */}
                                         <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Success:</span> {post.success ? <>Yes</> : <>No</>}</p>
                                     </Grid>                                                                
                                     <Grid item sm={5}>
