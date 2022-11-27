@@ -119,6 +119,8 @@ function PostItems({post}){
                         <LikeButton 
                             post={post}
                             user={user}
+                            // send 0 to run conditional dispatch in like button to prevent an error
+                            selectedId={0}
                         />
                     </Grid>
                     <Grid item sm={4.5}>
