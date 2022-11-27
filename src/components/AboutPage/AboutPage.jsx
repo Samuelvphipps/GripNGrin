@@ -10,7 +10,7 @@ function AboutPage() {
     <>
         <header><h1 className='pageHeader'> About Grip 'N Grin</h1></header>
         <div className="postDetailsContainer">
-          <div className='postDetailsInnerContainer'>
+          <div className='postDetailsInnerContainer aboutContent'>
             
             <p> This app was  conceived while I was looking through old blogs about hunting in Idaho
                 while preparing for a hunt next fall. 

@@ -138,3 +138,7 @@ header{
     max-width: 300px;
 }
 
+/* about page font size */
+.postDetailsInnerContainer.aboutContent {
+    font-size: 20px;
+}
