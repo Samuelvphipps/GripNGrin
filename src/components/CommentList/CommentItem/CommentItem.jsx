@@ -22,13 +22,11 @@ function CommentItem ({comment, post, comments}){
     // console.log('comment', comment);
 
     //setup comment deletion function to send through props
-
     const deleteComment = (id) => {
         console.log('in delete comment with an id of:', id);
-
-
         //original example of this sweet alert found in documentation found @
         //https://sweetalert2.github.io/
+        //on delete click render this confirmation alert from sweetalerts2
         Swal.fire({
         title: 'Are you sure you want to delete this comment?',
         text: "You won't be able to revert this!",
@@ -51,7 +49,7 @@ function CommentItem ({comment, post, comments}){
             payload: {comment_id: id, post_id: post.id, user_id: user.id}
         })  
         } else if (
-            /* Read more about handling dismissals below */
+            // dismiss action
             result.dismiss === Swal.DismissReason.cancel
         ) {
             swalWithBootstrapButtons.fire(
@@ -63,11 +61,11 @@ function CommentItem ({comment, post, comments}){
 
     //function takes in comments id, the updated content and the user id (used to validate info on server side)
     const editComment = (id, content, userId) => {
-        console.log('in edit comment with an id of:', id, 'and content of:', content, 'user owner id:', userId);
+        // console.log('in edit comment with an id of:', id, 'and content of:', content, 'user owner id:', userId);
         
-        //dispatch to saga for the axios put
+        //dispatch to saga for the axios put request on the calling of this edit function
         dispatch({
-            type: 'UPDATE_COMMENT',
+            type: 'UPDATE_COMMENT',   //send comment id, content, user id, and postid for the comment edit.
             payload: {comment_id: id, comment_content: content, user_id:userId, post_id:post.id}
         })
     }
@@ -78,6 +76,7 @@ function CommentItem ({comment, post, comments}){
                 { comment.parent_comment_id ? null :
                     <div className='parentComment'>
                         <div className='parentCommentTop'></div>
+                        {/* show comment edit toggle which shows either the comment content or an edit field */}
                         <CommentEditToggle 
                             editComment={editComment} 
                             deleteComment={deleteComment} 
@@ -88,9 +87,8 @@ function CommentItem ({comment, post, comments}){
                         <div className='parentCommentBottom'></div>
                     </div>
                 }           
-                {/* go to second layer comments where the comments have this comment as 
-                a parent comment 
-                TODO - get rid of the middleman component that survived editing*/}
+                {/* go to second layer comments where the comments have the above comment as 
+                a parent comment */}                
                 {comments.map(comment2 =>{
                     if(comment.id === comment2.parent_comment_id){
                     return <CommentsLayer2 

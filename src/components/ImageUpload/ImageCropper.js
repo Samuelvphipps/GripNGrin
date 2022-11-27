@@ -16,32 +16,39 @@ function ImageCropper({ setImgUrl,
 
     //define dispatch
     const dispatch = useDispatch();
-
+    //zoom useState needed for cropper fn
     const [zoom, setZoom] = useState(1);
+    //crop location needed for cropper fn
     const [crop, setCrop] = useState({x:0, y:0});
-   ;
+    //cropped pixels needed for cropper function
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
 
+    //changes crop as field and image change locations
     const onCropChange=(crop)=>{
         setCrop(crop);
     }
-
+    //change zoom
     const onZoomChange = (zoom) => {
         setZoom(zoom);
     }
-
+    //when crop pauses set new pixel area
     const onCropComplete = (croppedArea, croppedAreaPixels)=>{
         setCroppedAreaPixels(croppedAreaPixels);
     }
     //npm install node-fetch
-    const onCrop = async()=>{
+    //onCrop function from documentation
+    const onCrop = async()=>{  //call imagecroper fn to create file
         const croppedBlob = await getCroppedImg(imageUrl, croppedAreaPixels);
-        console.log('croppedImageUrl return on Crop fn:', croppedBlob);
+        // console.log('croppedImageUrl return on Crop fn:', croppedBlob);
+        //set the final file for the dispatch
         setFinalFile(croppedBlob);
+        //added the url creation for conditional render image preview to this function
         setImgUrl(URL.createObjectURL(croppedBlob));
+        //setSelected file to null to close cropper
         setSelectedFile(null);
 
         //conditional edit dispatch for edit view. Boolean passed in props
+        //when this cropper is used in the edit page update redux here, on new post no bool is passed so this dispatch isnt called
         if(bool===true){dispatch({
             type: 'UPDATE_EDIT_POST',
             payload: {picture: croppedBlob}

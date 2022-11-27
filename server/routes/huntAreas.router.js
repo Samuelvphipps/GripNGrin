@@ -7,9 +7,8 @@ const {
 
 //API ROUT '/api/huntAreas'
 
-/**
- * GET route template
- */
+
+//get the hunt areas from the db for the redux store.
 router.get('/', rejectUnauthenticated, (req, res) => {
     // console.log('in api/huntareas GET request');
 

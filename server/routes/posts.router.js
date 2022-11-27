@@ -55,7 +55,7 @@ const upload = multer({
 
 // })
 
-//  TESTING ROUTE FOR NEW SQL
+//  This route gets the userlikes along side the post information
 router.get('/:id', rejectUnauthenticated, (req, res) =>{
     // console.log('in GET single post');
     // console.log('req.params', req.params.id);
@@ -91,7 +91,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) =>{
 
 })
 
-        // THIS IS THE ORIGINAL ROUTE
+        // THIS IS THE ORIGINAL ROUTE - keep in case of bugs for reference
 // router.get('/', rejectUnauthenticated, (req, res) => {
 //     // console.log('in /api/posts GET');
 //     //get all posts from db
@@ -122,7 +122,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) =>{
 //   // GET route code here
 // });
 
-        //NEW SQL ROUTE TESTER
+        //gets posts likes along side info. Keep original format for any debugging
 router.get('/', rejectUnauthenticated, (req, res) => {
     // console.log('in /api/posts GET');
     //get all posts from db
@@ -176,6 +176,7 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
     let post=req.body;
 
     //sqlText using params to protect the DB
+    //sql text creates a post
     let sqlText = `
     INSERT INTO "posts"
 	    ("title", "species", "hunt_area_id", "date_of_hunt", "success", 
@@ -184,7 +185,7 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
         ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
     `;
 
-    //sql params
+    //sql params to send to DB to create a post
     let sqlParams=[
         post.title,
         post.species,
@@ -200,6 +201,7 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
 
     console.log('sql params', sqlParams);
     //pool.query and send status back to saga
+    //
     pool.query(sqlText, sqlParams)
         .then(result => {
              res.sendStatus(201);
@@ -210,6 +212,7 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
         })
 });
 
+//delete post
 router.delete('/', rejectUnauthenticated, (req, res) => {
     console.log('in /api/posts DELETE with payload of:', Number(req.query.user_id), req.user.id);
     //make sure the owner of the post is the one deleting it

@@ -54,7 +54,7 @@ function* fetchPosts(){
     // console.log('in fetchPosts SAGA');
 
     try{
-        //Get posts from server
+        //Get all posts from server
         let posts = yield axios.get('/api/posts');
 
         // console.log('response from server in posts get is:', posts.data);

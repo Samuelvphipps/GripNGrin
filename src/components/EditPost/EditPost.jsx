@@ -51,12 +51,16 @@ function EditPost(){
 
     //useSelecter to get singlepost from redux and user from redux
     const editPost = useSelector(store => store.editPost.editPostReducer);
+    //get huntarea list
     const huntAreaList = useSelector(store=>store.huntAreasReducer);
     // console.log('selected post is:', selectedPost);
 
     //image processing information
+    //chosen file
     const [selectedFile, setSelectedFile] = useState(null);
+    //output of the cropper
     const [finalFile, setFinalFile] = useState(null);
+    //image url created in cropper for conditional render
     const [imgUrl, setImgUrl] = useState(null);
     
 
@@ -119,19 +123,12 @@ function EditPost(){
         //on change activate cropper
         const changeHandler = (event) => {
             console.log('in changeHandler');
+            //setSelected file in useState, activates the conditional render of the imageCropper
             setSelectedFile({imageUrl: URL.createObjectURL(event.target.files[0])});
-            // ⬇️ this is setting a url for conditional render of the preview
-            //likely need to move this to the onCrop fn
-            // let url= URL.createObjectURL(event.target.files[0]);
-            // setImgUrl(url);
-            // if(finalFile != null){
-            //     dispatch({
-            //         type: 'UPDATE_EDIT_POST',
-            //         payload: {picture: finalFile}
-            //     })
-            // }
 
         }
+
+
             /*
             In this return the values are pulled from the editPost info pulled from redux. On change they update redux with new data. This keeps redux state
             in synce with form prior to the axios.put.
@@ -165,18 +162,15 @@ function EditPost(){
                             <Grid container spacing={1}>
                                 <Grid item sm={1}></Grid>
                                 <Grid item sm={4}><p className='username editDetailsHeader'>{editPost.username}</p></Grid>
-                                <Grid item sm={3}>
-                                    
-                                </Grid>
+                                <Grid item sm={3}></Grid>
                                 <Grid item sm={3}><p className='postDate editDetailsHeader'>{moment(editPost.created).format("MMM Do YYYY")}</p></Grid>
                                 <Grid item sm={1}></Grid>
                             </Grid>
                         </header>
-                        <div id='editHeaderBottom'></div>
-                
-                            
+                        <div id='editHeaderBottom'></div>                                            
                         <Grid container spacing={4}>
                             <Grid item sm={6}>
+                                {/* img preview. If new image show image in the imgContainer instead of original image */}
                             { finalFile ? <img className='imgContainer' src={imgUrl}/> :
                                     <img className='imgContainer' src={editPost.picture}/>
                                 
@@ -185,6 +179,7 @@ function EditPost(){
                                     <input 
                                         className='inputBtn'
                                         type='file' 
+                                        // call changeHandler fn for the image cropper activity
                                         onChange={changeHandler}
                                         // onChange={(evt) => dispatch({
                                         //     type: 'UPDATE_EDIT_POST',
@@ -317,7 +312,8 @@ function EditPost(){
                         </div>
                         <Grid container spacing={2}>
                             <Grid item sm={8}></Grid>
-                            <Grid item sm={2}>                                
+                            <Grid item sm={2}>                     
+                                       {/* if user cancels edit, return to post details view (no new changes made)  */}
                                 <button className='cancelBtn' onClick={()=>history.push(`/post/${params.id}`)}>Cancel</button>                                
                             </Grid>
                             <Grid item sm={2}>
@@ -329,8 +325,10 @@ function EditPost(){
                 {/* image cropper to open on image upload */}
                 
             </form>  
+            {/* image cropper component called on the upload of a new file */}
             {selectedFile ? 
                 <ImageCropper 
+                //pass props needed for the image cropper
                     id={selectedFile.id} 
                     imageUrl={selectedFile.imageUrl}
                     setFinalFile={setFinalFile}

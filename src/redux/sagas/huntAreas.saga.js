@@ -11,8 +11,7 @@ function* fetchHuntAreas(){
         const huntAreas = yield axios.get('/api/huntAreas');
         
         // console.log('in huntAreas SAGA with a server return of:', huntAreas.data);
-        //send to Redux
-        
+        //send hunt areas to Redux store
         yield put({
             type: 'SET_HUNT_AREAS',
             payload: huntAreas.data

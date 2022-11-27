@@ -9,13 +9,11 @@ import axios from 'axios';
 //add comment and post to DB
 function* addComment(action){
     // console.log('in addComment Saga');
-
-
     try{
-        //post comment to server
+        //post new comment to server
         yield axios.post('/api/comments', action.payload);
         console.log('action.payload in post', action.payload);
-        //get updated comments
+        //get updated comments for this post
         yield put({
             type: 'FETCH_COMMENTS',
             payload: action.payload.post_id,
@@ -28,13 +26,12 @@ function* addComment(action){
 
 function* fetchComments(action) {
     // console.log('in fetchComments SAGA and payload is:', action.payload);
-
     try{
-        //get comments from server (DB) using post id
+        //get comments from server (DB) using individual post id
         const comments = yield axios.get(`/api/comments/${action.payload}`);
         // console.log('comments retrieved from server in SAGA are:', comments.data);
 
-        //send response to redux
+        //send response to redux store
         yield put({
             type: 'SET_COMMENTS',
             payload: comments.data
@@ -47,17 +44,15 @@ function* fetchComments(action) {
 };
 
 function* deleteComment(action){
-    console.log('in deleteComment SAGA');
-
+    // console.log('in deleteComment SAGA');
     // console.log('in delete comment with data of:', action.payload);
-
     try{
         //send delete request with comment id
         yield axios.delete(`/api/comments/`, {
             params: action.payload
         });
 
-        //get updated comment list
+        //get updated comment list which triggers rerender
         yield put({
             type: 'FETCH_COMMENTS',
             payload: action.payload.post_id,
@@ -69,15 +64,15 @@ function* deleteComment(action){
 }
 
 function* updateComment(action){
-    console.log('in updateComment SAGA with payload of:', action.payload);
-
+    // console.log('in updateComment SAGA with payload of:', action.payload);
     try{
         //send updated content to database through the data
         //user verification in server to make sure they own the comment serverside
+        //update sent via put request with a data payload
         yield axios.put('/api/comments', {
             data: action.payload
         })
-        //refetch comments
+        //refetch comments for rerender
         yield put({
             type: 'FETCH_COMMENTS',
             payload: action.payload.post_id

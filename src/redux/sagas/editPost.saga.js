@@ -7,7 +7,7 @@ import FormData from 'form-data';
 
 //ROUTE: /api/editPosts
 
-//fetch the post to edit
+//fetch the post to edit's information for the edit view
 function* fetchEditPost(action){
     console.log('in fetchEditPost SAGA with payload of:', action.payload);
 
@@ -42,7 +42,7 @@ function* editPost(action){
             //create form data for information
             let formData = new FormData();
 
-            //append values to be updated to send to server for put route
+            //append values to be updated to send to server for put route using formdata
             formData.append('id', data.id);
             formData.append('content', data.content);
             formData.append('date_of_hunt', data.date_of_hunt);
@@ -61,7 +61,7 @@ function* editPost(action){
         formData.append('post_img', data.picture)
         try{
             //send updated post to server then re-get the info
-                            //this route sends an image file
+                            //this route sends an image file to server
             yield axios.put('/api/editPosts/image', formData,{
                 //must include this header, it is what Multer uses to id file
                 headers:{
@@ -77,6 +77,7 @@ function* editPost(action){
         } catch (err){
             console.error('in image post edit put route err SAGA:', err);
         }}
+        //if the image hasnt been replaced follow this route
     else{
         // console.error('in the no Image conditional')
         try{

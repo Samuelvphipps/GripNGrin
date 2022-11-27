@@ -11,23 +11,27 @@ import { useState } from 'react';
 
 function CommentEditToggle({user, post, deleteComment, comment, editComment}){
 
+    // edit toggle, controls whether edit field or content is shown
     const [editOpen, setEditOpen] = useState(false);
 
+    //used to store new comment state
+    //TODO switch this to a redux edit process
     const [content, setContent] = useState(comment.content)
 
     //returns buttons and text field for an edit on selected comment
     if(editOpen){
+        // when edit is true show this, which contains an edit text field with a cancel button
         return(
                 <>
                     <p><span className='commentUserName'>{comment.username}</span> 
                     <span className='commentDate'>{moment(comment.created).format("MMM Do YYYY")}</span></p>
                     <Grid container spacing={1}>
                        <Grid container>
-
                             <Grid item sm={8}>
                                 <textarea className='editCommentTextArea'
                                     required
                                     // style={{ width: 350, height:50 }}
+                                    //as input changes change the usestate value and value in field
                                     value={content} onChange={(evt)=>setContent(evt.target.value)}
                                 />
                             </Grid>
@@ -47,7 +51,7 @@ function CommentEditToggle({user, post, deleteComment, comment, editComment}){
         )
     }
     else{    
-        // if toggle isnt engaged show this
+        // if toggle isnt engaged show this with all comment content. when edit btn is clicked toggle switches to edit mode
     return(
         
                 <div className='commentHeader'>
@@ -56,6 +60,7 @@ function CommentEditToggle({user, post, deleteComment, comment, editComment}){
                             <p><span className='commentUserName'>{comment.username}</span>  
                             <span className='commentDate'>{moment(comment.created).format("MMM Do YYYY")}</span></p>
                         </Grid>
+                        {/* if the user owns the comment allow them to edit and delete the comment */}
                         {(user.id===comment.user_id) ?
                             
                             <Grid item sm={3}>

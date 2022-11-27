@@ -22,6 +22,8 @@ function* addLike(action){
         })
         
 //if an id is sent along update the selected post store to cause a rerender
+//this prevents a state mismatch and rerenders the page
+//TODO fix bug on home page
         if(action.payload.selectedPost){
             yield put({
                 type: 'FETCH_SELECTED_POST',
@@ -56,7 +58,7 @@ function* unlike(action) {
     console.log('in unlike SAGA', action.payload);
 
     try{
-        //delete to DB
+        //delete like instante in DB
         yield axios.delete('/api/likes', {
             params: action.payload
         });
@@ -71,6 +73,8 @@ function* unlike(action) {
             type: 'FETCH_USER_LIKES'
         })
         //if an id is sent along update the selected post store to cause a rerender
+        //this prevents a state mismatch and rerenders the page
+        //TODO fix bug on home page
         if(action.payload.selectedPost){
             yield put({
                 type: 'FETCH_SELECTED_POST',

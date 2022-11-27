@@ -94,6 +94,7 @@ function NewPost(){
         //send user to the home page with the list of posts
     };
 
+    //sets the image and opens the cropper
     const changeHandler = (event) => {
         console.log('in changeHandler');
         setSelectedFile({imageUrl: URL.createObjectURL(event.target.files[0])});
@@ -103,7 +104,7 @@ function NewPost(){
         // setImgUrl(url);
 
     }
-
+//Demo presentation hidden click listener to populate fields
     const populateFields = () => {
         setPostTitle('Bowhunt');
         setDate('2022-11-25');
@@ -118,6 +119,7 @@ function NewPost(){
     return(
         <>
         <div className='newHuntHeader'>
+            {/* populate fields for the demo presentation */}
             <h1 onClick={populateFields} >Share Your Hunt!</h1>
         </div>
         <form onSubmit={submitHunt}>
@@ -128,7 +130,7 @@ function NewPost(){
                         type='Text' 
                         placeholder='Post Title' 
                         style={{ width: 500, fontSize:40, height: 100}}
-                        value={postTitle} 
+                        value={postTitle} // update local state
                         onChange={(evt)=>setPostTitle(evt.target.value)} 
                         required/>
                     </h3>
@@ -136,16 +138,12 @@ function NewPost(){
                         <Grid container spacing={1}>
                             <Grid item sm={1}></Grid>
                             <Grid item sm={4}><p className='username editDetailsHeader'>{user.username}</p></Grid>
-                            <Grid item sm={3}>
-                                
-                            </Grid>
+                            <Grid item sm={3}></Grid>
                             <Grid item sm={3}><p className='postDate editDetailsHeader'>{moment().format("MMM Do YYYY")}</p></Grid>
                             <Grid item sm={1}></Grid>
                         </Grid>
                     </header>
-                    <div id='editHeaderBottom'></div>
-            
-                        
+                    <div id='editHeaderBottom'></div>                                    
                     <Grid container spacing={4}>
                         <Grid item sm={6}>
                         {imgUrl.length>0 ? 
@@ -160,23 +158,20 @@ function NewPost(){
                                         name="post_img" 
                                         className='inputBtn'
                                         onChange = {changeHandler}
-                                        //original==onChange={(evt)=>setImage(evt.target.files[0])}
                                     />
                                 </figure>
                                 <div className='imagePrep'></div> 
                             </>
-
                             }                            
                         </Grid>
-                        <Grid item sm={6}>
-                                        
+                        <Grid item sm={6}>                                        
                             <p className='editData top'><span className='editItemDataDetails'>Date of hunt:    </span> 
                                 <Input 
                                     required 
                                     value={date}
                                     inputProps={{style: {fontSize: 22}}}
                                     type='date'
-                                    //on change update redux store with new value
+                                    // update local state
                                     onChange={(evt)=>setDate(evt.target.value)}                                     
                                 >
                                 </Input>
@@ -188,7 +183,7 @@ function NewPost(){
                                     inputProps={{style: {fontSize: 22, height:44}}} 
                                     required
                                     value={species}
-                                    //on change update redux store with new value
+                                    // update local state
                                     onChange={(evt)=>setSpecies(evt.target.value)}
                                     //on change
                                 ></Input>
@@ -201,22 +196,21 @@ function NewPost(){
                                             labelId="successful-input-label"                                                
                                             label="successful-hunt"
                                             value={successful}
-                                            //on change update redux store with new value    
+                                           // update local state   
                                             onChange={(evt)=>setSuccessful(evt.target.value)}                                          
                                         >
                                             <MenuItem value={true}>Yes</MenuItem>
                                             <MenuItem value={false}>No</MenuItem>
                                         </Select>
-
                                 </FormControl></p>                        
                             <p className='editData'><span className='editItemDataDetails'>Location:</span> 
                                 <FormControl style={{minWidth: 120}}>
                                     <InputLabel required id="huntarea-input-label">Hunt Area</InputLabel>
                                         <Select
                                             labelId="huntarea-input-label"
-                                            //have the input be empty until the hunt area id arrives (prevents an error)
+                                            //have the input be empty until the hunt area id arrives (prevents an error and empty field)
                                             value={huntAreaId ? huntAreaId : ''}
-                                            //on change update redux store with new value
+                                            // update local state
                                             onChange={(evt)=>setHuntAreaId(evt.target.value)}                               
                                             label="hunt-area"
                                         >
@@ -230,7 +224,7 @@ function NewPost(){
                                     type='text' 
                                     inputProps={{style: {fontSize: 22}}}
                                     placeholder='weapon-used'
-                                    //on change update redux store with new value
+                                    // update local state
                                     onChange={(evt)=>setWeaponType(evt.target.value)}
                                     value={weaponType}
                                 >
@@ -243,10 +237,9 @@ function NewPost(){
                                         labelId="land-type-input-label"
                                         value={landType}
                                         //onchange
-                                        //on change update redux store with new value
+                                      // update local state
                                         onChange={(evt)=>setLandType(evt.target.value)}
-                                        label="land-type"
-                                        // onChange={(evt)=>setLandType(evt.target.value)}
+                                        label="land-type"                                        
                                     >
                                         <MenuItem value={'public'}>Public</MenuItem>
                                         <MenuItem value={'private'}>Private</MenuItem>
@@ -262,15 +255,15 @@ function NewPost(){
                                 required
                                 placeholder="Tell the story..."
                                 value={story} 
+                                // update local state
                                 onChange={(evt)=>setStory(evt.target.value)}
-                            //on change update redux store with new value
-                            // onChange={(evt)=>setStory(evt.target.value)}
                             />
                         </p>
                     </div>
                     <Grid container spacing={2}>
                         <Grid item sm={8}></Grid>
                         <Grid item sm={2}>    
+                                            {/* on cancle go back to home */}
                         <button className='cancelBtn' onClick={()=>history.push(`/home`)}>Cancel</button>
                         </Grid>
                         <Grid item sm={2}>

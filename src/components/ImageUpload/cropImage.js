@@ -2,7 +2,6 @@
 
 I got this image function from the Easy Crop documentation and 
 through their how to tutorials
-
 */
 
 
@@ -20,7 +19,7 @@ function getRadianAngle(degreeValue) {
   return (degreeValue * Math.PI) / 180;
 }
 
-/**
+/**   ⬇️ from the react easy crop team for use with library
  * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
  * @param {File} image - Image File url
  * @param {Object} pixelCrop - pixelCrop Object provided by react-easy-crop

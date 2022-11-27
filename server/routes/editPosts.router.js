@@ -23,9 +23,8 @@ const storage = multer.diskStorage({
 const upload = multer({
     storage: storage,
 });
-/**
- * GET route template
- */
+
+//Get post to be edited to go to redux store for user changes to values
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     // console.log('in /api/editPosts/id GET route with id of:', req.params);
     //set sql text to get post info from db and send to the editpost reducer
@@ -56,7 +55,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 
 //See route under this one for explanation on splitting edit route based on image
-//if there is an image file this is the route: ⬇️
+//if there is an image file this is the route for the put request: ⬇️
 router.put('/image', rejectUnauthenticated, upload.single('post_img'), (req, res) => {
   // POST route code here
     // console.log('in /image put route with values: file:', req.file, 'body"', req.body);
@@ -65,6 +64,7 @@ router.put('/image', rejectUnauthenticated, upload.single('post_img'), (req, res
      if(Number(req.body.user_id)===req.user.id){
     //SQL
         // console.log('inside SQL area on the PUT')
+        //all values assigned  param so the user cant sql insert
         let sqlText = `
             UPDATE "posts"
             SET
@@ -81,7 +81,7 @@ router.put('/image', rejectUnauthenticated, upload.single('post_img'), (req, res
             WHERE "id" = $11;
             `;
 
-        //sql params
+        //sql params from user to put to the DB
         let sqlParams=[
             post.title,
             post.species,

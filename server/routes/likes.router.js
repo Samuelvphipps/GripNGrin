@@ -5,9 +5,9 @@ const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
+
+  //get signed in user's like list to make sure rendering happens
+  // based on if they have already liked a post or if they own the post
 router.get('/', rejectUnauthenticated, (req, res) => {
     // console.log('in /api/likes GET')
 
@@ -28,9 +28,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
-/**
- * POST route template
- */
+//add a like from the user to the likes db (creates a pairing in the many to many table)
 router.post('/', rejectUnauthenticated, (req, res) => {
 
 
@@ -58,8 +56,10 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     else{ res.sendStatus(403)}
 });
 
+// delete the pairing from the table (i.e. unlike post)
 router.delete('/', rejectUnauthenticated, (req,res) =>{
-    console.log('in /api/likes unlike DELETE route with params of:', req.query);
+    // console.log('in /api/likes unlike DELETE route with params of:', req.query);
+// verify it is the user unliking post and not someone else
     if(Number(req.query.user_id) === req.user.id){
         //setup query text to delete from DB
         let sqlText = `

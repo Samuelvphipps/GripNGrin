@@ -25,11 +25,11 @@ function CommentsLayer2({comment2, user, deleteComment, editComment}){
         //TODO climb back one layer as this is redundant and happend through edits
         
         <Grid container spacing={2}>
-            <Grid item sm={1.5}>
-                
-            </Grid>
+            <Grid item sm={1.5}></Grid>
             <Grid item sm={10.5}>
                 <div className="childComment">
+                    {/* edit comment toggle component to show either edit field or to show the content of the 
+                    comment */}
                         <CommentEditToggle 
                             comment={comment2}
                             user={user}

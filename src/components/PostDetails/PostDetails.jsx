@@ -41,7 +41,8 @@ function PostDetails(){
             type: 'FETCH_SELECTED_POST',
             payload: params.id
         });
-
+        
+        // get comments for this post
         dispatch({
             type: 'FETCH_COMMENTS',
             payload: params.id
@@ -58,6 +59,7 @@ function PostDetails(){
        
          //original example of this sweet alert found in documentation found @
         //https://sweetalert2.github.io/
+        //fire alert on delete
         Swal.fire({
             title: 'Are you sure you want to delete this post?',
             text: "You won't be able to revert this!",
@@ -110,38 +112,31 @@ function PostDetails(){
             <article className='postDetailsInnerContainer'>
                 <h3 className='postDetailsTitle'>{post.title}</h3>
                 <Grid container spacing={1}>
-                    <Grid item sm={1}>
-                        
-                    </Grid>
+                    <Grid item sm={1}></Grid>
                     <Grid item sm={4}><p className='username detailsHeader'>{post.username}</p></Grid>
-                    <Grid item sm={3}>
-                        
-                    </Grid>
+                    <Grid item sm={3}></Grid>
                     <Grid item sm={3}><p className='postDate detailsHeader'>{moment(post.created).format("MMM Do YYYY")}</p></Grid>
                     <Grid item sm={1}></Grid>
                 </Grid>
-                <div id='editHeaderBottom'></div>
-    
-                
+                <div id='editHeaderBottom'></div>                    
             <Grid container spacing={1}>
                     <Grid item sm={6}>
                         <a href={post.picture}><img className='imgContainer' src={post.picture}/></a>
                     </Grid>
-                    <Grid item sm={6}>
-                                    
-                        <p className='detailsData top'><span className='postItemDataDetails'>Date of hunt:</span> {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
+                    <Grid item sm={6}>                                    
+                        <p className='detailsData top'>
+                            <span className='postItemDataDetails'>Date of hunt:</span> {moment(post.date_of_hunt).format("MMM Do YYYY")}
+                        </p>
                         <p className='detailsData'><span className='postItemDataDetails'>Species:</span> {post.species}</p>
                         <p className='detailsData'><span className='postItemDataDetails'>Success:</span> {post.success ? <>Yes</> : <>No</>}</p>                        
                         <p className='detailsData'><span className='postItemDataDetails'>Location:</span> {post.hunt_area}</p>
                         <p className='detailsData'><span className='postItemDataDetails'>Weapon used:</span> {post.weapon_type}</p>
                         <p className='detailsData'><span className='postItemDataDetails'>Land Type:</span> {post.land_type}</p>                        
-                    </Grid>
-                    
+                    </Grid>                    
             </Grid>
             <div className='postContent' >
                 <p >{post.content}</p>
-            </div>
-    
+            </div>    
             <Grid container spacing={2}>
                 <Grid item sm={1}></Grid>
                 <Grid item sm={7}>
@@ -151,13 +146,11 @@ function PostDetails(){
                             selectedId={params.id}
                         />
                 </Grid>
-                
+                {/* if the user owns this post show the edit and delete btn */}
                 { user.id===post.user_id ?
-                    <Grid item sm={4}>
-                        
+                    <Grid item sm={4}>                        
                             <button className='editBtn' onClick={()=>history.push(`/post/edit/${post.id}`)} type="text">Edit</button>
-                            <button className='deleteBtn' onClick={deletePost} type="text">Delete</button>
-                        
+                            <button className='deleteBtn' onClick={deletePost} type="text">Delete</button>                        
                     </Grid>
                     :
                     null
@@ -165,6 +158,7 @@ function PostDetails(){
             </Grid>
         </article>
         </div>
+        {/* render the comment list and pass this post as prop*/}
     <div className='postDetailsContainer'>
         <article className='postDetailsInnerContainer'>            
             <CommentList post={post}/>

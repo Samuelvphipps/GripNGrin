@@ -18,12 +18,12 @@ function CommentList ({post}) {
 
     // console.log('post id is:', post);
 
-    //get comments from reducer
+    //get post's comments from reducer
     const comments = useSelector(store => store.comments.commentsReducer);
 
     // console.log('commentsreducer redux store in list:', comments);
 
-    //local state for comment
+    //local state for a new comment value prior to dispatch
     const [comment, setComment] = useState('');
 
 
@@ -32,7 +32,8 @@ function CommentList ({post}) {
         evt.preventDefault();
         console.log('In newComment and text says:', comment);
 
-        //dispatch to saga
+        //dispatch the new comment to saga
+        //send null for parent id since this is a parent comment input
         dispatch({
             type: 'ADD_COMMENT',
             payload: {
@@ -49,6 +50,7 @@ function CommentList ({post}) {
         <>
             <h1>Leave a comment!</h1>
                 <div>
+                    {/* render comments individually */}
                     {comments.map(comment => {
                         return <CommentItem 
                             post={post}
