@@ -15,53 +15,49 @@ function Nav() {
             {/* <Grid item sm={}></Grid> */}
             <Grid item sm={4}>
                 {user.username &&<h3 className="nav-title">Welcome {user.username}</h3>}
-            </Grid>
-            
-    
+            </Grid>                
             <Grid item sm={4}>
                 <Link to="/home">
                 <h2 className="nav-title">Grip 'N Grin</h2>
                 </Link>
-            </Grid>
-                
-                   <Grid item id='rightNavItems' sm={4}>
-                        {/* If no user is logged in, show these links */}
-                        {!user.id && (
-                            // If there's no user, show login/registration links
-                            <Link className="navLink" to="/login">
-                            Login / Register
-                            </Link>
-                        )}
-        
-                        {/* If a user is logged in, show these links */}
-                        {user.id ? (
-                            <>
-        
-                            <Link className='navLink' to='/newpost'>
-                                Post Hunt
-                            </Link>
-        
-        
-                            <Link className="navLink" to="/home">
-                                Home
-                            </Link>
-        
-                            <LogOutButton className="navLink" />
-        
-                            {/* <Link className="navLink" to="/info">
-                                Info Page
-                            </Link> */}
-                            </>
-                        )
-                        :
-                        null
-                        }
-        
-                        <Link className="navLink" to="/about">
-                            About
+            </Grid>                
+                <Grid item id='rightNavItems' sm={4}>
+                    {/* If no user is logged in, show these links */}
+                    {!user.id && (
+                        // If there's no user, show login/registration links
+                        <Link className="navLink" to="/login">
+                        Login / Register
                         </Link>
-                   </Grid>
-                
+                    )}
+    
+                    {/* If a user is logged in, show these links */}
+                    {user.id ? (
+                        <>
+    
+                        <Link className='navLink' to='/newpost'>
+                            Post Hunt
+                        </Link>
+    
+    
+                        <Link className="navLink" to="/home">
+                            Home
+                        </Link>
+    
+                        <LogOutButton className="navLink" />
+    
+                        {/* <Link className="navLink" to="/info">
+                            Info Page
+                        </Link> */}
+                        </>
+                    )
+                    :
+                    null
+                    }
+    
+                    <Link className="navLink" to="/about">
+                        About
+                    </Link>
+                </Grid>                
         </Grid >
     
   );

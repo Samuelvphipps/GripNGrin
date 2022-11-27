@@ -163,7 +163,11 @@ function EditPost(){
                                 <Grid item sm={1}></Grid>
                                 <Grid item sm={4}><p className='username editDetailsHeader'>{editPost.username}</p></Grid>
                                 <Grid item sm={3}></Grid>
-                                <Grid item sm={3}><p className='postDate editDetailsHeader'>{moment(editPost.created).format("MMM Do YYYY")}</p></Grid>
+                                <Grid item sm={3}>
+                                    <p className='postDate editDetailsHeader'>
+                                        {moment(editPost.created).format("MMM Do YYYY")
+                                    }</p>
+                                </Grid>
                                 <Grid item sm={1}></Grid>
                             </Grid>
                         </header>
@@ -314,7 +318,12 @@ function EditPost(){
                             <Grid item sm={8}></Grid>
                             <Grid item sm={2}>                     
                                        {/* if user cancels edit, return to post details view (no new changes made)  */}
-                                <button className='cancelBtn' onClick={()=>history.push(`/post/${params.id}`)}>Cancel</button>                                
+                                <button 
+                                    className='cancelBtn' 
+                                    onClick={()=>history.push(`/post/${params.id}`)}
+                                >
+                                        Cancel
+                                </button>                                
                             </Grid>
                             <Grid item sm={2}>
                                 <button type='submit' className='submitBtn'>Submit</button>                                

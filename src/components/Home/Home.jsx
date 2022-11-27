@@ -14,7 +14,6 @@ function Home(){
 
     useEffect(()=>{
         //GET ALL POSTS FROM SERVER
-        
         dispatch({
             type: 'FETCH_POSTS',
         });
@@ -23,12 +22,11 @@ function Home(){
     //grab the post list
     return(
         <>
-                <header>
-                    <h1 className='pageHeader'> Recent Hunts </h1>
-                    {/* button gos to new post page so user can post a hunt */}
-                    <button className="newHuntBtn" onClick={()=>history.push('/newpost')}>POST A HUNT!</button>
-                </header>
-            
+            <header>
+                <h1 className='pageHeader'> Recent Hunts </h1>
+                {/* button gos to new post page so user can post a hunt */}
+                <button className="newHuntBtn" onClick={()=>history.push('/newpost')}>POST A HUNT!</button>
+            </header>            
             <Grid container spacing={2}>
                 <Grid  item sm={3}>
                     {/* advertisement for remingtons! */}

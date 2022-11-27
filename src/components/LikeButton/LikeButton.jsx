@@ -11,7 +11,6 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 function LikeButton({user, post, selectedId}){
     //dispatch setup
     const dispatch =useDispatch();
-    const history = useHistory()
     const userLikes = useSelector(store => store.likes.userLikesReducer)
     //GET all likes to check if user likes the post already
 
@@ -105,11 +104,11 @@ function LikeButton({user, post, selectedId}){
         <>  
             <Grid container spacing={2}>
                 {/* <Grid item sm={.5}></Grid> */}
-                <p className='totalLikes'>{post.likes}</p>
-                <Grid item sm={.25}></Grid>
-                <IconButton onClick={likePost}>
-                    <ThumbUpOffAltIcon color={'primary'} fontSize='large'/>
-                </IconButton>
+                    <p className='totalLikes'>{post.likes}</p>
+                    <Grid item sm={.25}></Grid>
+                    <IconButton onClick={likePost}>
+                        <ThumbUpOffAltIcon color={'primary'} fontSize='large'/>
+                    </IconButton>
             </Grid>
         </>   
     )

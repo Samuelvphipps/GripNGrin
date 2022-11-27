@@ -83,22 +83,42 @@ function PostItems({post}){
                                     
                                     <Grid item sm={3.5}><h3 className='postItemTitle'>{post.title}</h3></Grid>
                                     <Grid item sm={4}><p className='postItemHead username'>{post.username}</p></Grid>
-                                    <Grid item sm={4}><p className='postItemHead postDate'>{moment(post.created).format("MMM Do YYYY")}</p></Grid>
+                                    <Grid item sm={4}>
+                                        <p className='postItemHead postDate'>{moment(post.created).format("MMM Do YYYY")}</p>
+                                    </Grid>
                                         
                                 </Grid>
                             </div>                                
                                 <Grid container spacing={1}>                                    
                                     <Grid item sm={7}>              
                                             {/* on click push to the post details page of the clicked on post */}
-                                        <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Date of hunt:</span> {moment(post.date_of_hunt).format("MMM Do YYYY")}</p>
-                                        <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Species:</span> {post.species}</p>
-                                                                                                                                        {/* if true display yes else no */}
-                                        <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Success:</span> {post.success ? <>Yes</> : <>No</>}</p>
+                                        <p className='linkToPost' onClick={pushToDetails}>
+                                            <span className='postItemData'>Date of hunt:</span>
+                                            {moment(post.date_of_hunt).format("MMM Do YYYY")}
+                                        </p>
+                                        <p className='linkToPost' onClick={pushToDetails}>
+                                            <span className='postItemData'>Species:</span> 
+                                            {post.species}
+                                        </p>                                                                                                                                        
+                                        <p className='linkToPost' onClick={pushToDetails}>
+                                            <span className='postItemData'>Success:</span> 
+                                            {/* if true display yes else no */}
+                                            {post.success ? <>Yes</> : <>No</>}
+                                        </p>
                                     </Grid>                                                                
                                     <Grid item sm={5}>
-                                        <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Location:</span> {post.hunt_area}</p>
-                                        <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Weapon used:</span> {post.weapon_type}</p>
-                                        <p className='linkToPost' onClick={pushToDetails}><span className='postItemData'>Land Type:</span> {post.land_type}</p>
+                                        <p className='linkToPost' onClick={pushToDetails}>
+                                            <span className='postItemData'>Location:</span> 
+                                            {post.hunt_area}
+                                        </p>
+                                        <p className='linkToPost' onClick={pushToDetails}>
+                                            <span className='postItemData'>Weapon used:</span> 
+                                            {post.weapon_type}
+                                        </p>
+                                        <p className='linkToPost' onClick={pushToDetails}>
+                                            <span className='postItemData'>Land Type:</span> 
+                                            {post.land_type}
+                                        </p>
                                     </Grid>                                    
                                 </Grid>                                    
                         </Grid>
@@ -129,8 +149,18 @@ function PostItems({post}){
                         { user.id===post.user_id ?
                             // <Stack spacing={2} direction="row">
                                 <>
-                                    <button className='editItemBtn' onClick={()=>history.push(`/post/edit/${post.id}`)} type="text">Edit</button>
-                                    <button className='deleteItemBtn' onClick={deletePost} type="text"> Delete </button>
+                                    <button 
+                                        className='editItemBtn' 
+                                        onClick={()=>history.push(`/post/edit/${post.id}`)} 
+                                        type="text">
+                                        Edit
+                                    </button>
+                                    <button 
+                                    className='deleteItemBtn' 
+                                    onClick={deletePost} 
+                                    type="text"> 
+                                        Delete 
+                                    </button>
                                 </>
                             // </Stack>
                             :
