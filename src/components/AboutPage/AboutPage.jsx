@@ -30,7 +30,7 @@ function AboutPage() {
                 <li>And many others...</li>
             </ul>
     
-            <p> A big thank you to Edan, Prime digital academy, my wonderfully supportive cohort mates, and especially my wife Julia for all the support.</p>
+            <p> A big thank you to Edan, Prime Digital Academy, my wonderfully supportive cohort mates, and especially my wife Julia for all the support.</p>
     
     
           </div>
