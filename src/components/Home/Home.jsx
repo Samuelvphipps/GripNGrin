@@ -30,7 +30,7 @@ function Home(){
             <Grid container spacing={2}>
                 <Grid  item sm={3}>
                     {/* advertisement for remingtons! */}
-                    <img className="advertisement" src='http://localhost:3000/images/Advertisement.png'></img>
+                    <a href='https://winchester.com/Hunting/Game/Big-Game'><img className="advertisement" src='http://localhost:3000/images/Advertisement.png'></img></a>
                 </Grid>
                                 {/* postlist of all posts (previews) */}
                 <Grid item sm={8}><PostList /></Grid>
