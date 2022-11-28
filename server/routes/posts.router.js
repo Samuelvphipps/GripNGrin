@@ -184,7 +184,7 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
     VALUES
         ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
     `;
-
+    // console.log('filepath', req.file.path);
     //sql params to send to DB to create a post
     let sqlParams=[
         post.title,
@@ -192,7 +192,8 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
         Number(post.hunt_area_id),
         post.date_of_hunt,
         post.success,
-        'http://localhost:3000/images/'+req.file.filename,
+        'images/'+req.file.filename,
+        // 'http://localhost:3000/images/'+req.file.filename,
         post.content,
         req.user.id,
         post.land_type,
