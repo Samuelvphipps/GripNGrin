@@ -10,13 +10,7 @@ function AboutPage() {
   return (
     <>
         <header><h1 className='pageHeader'> About Grip 'N Grin</h1></header>
-        <Grid container spacing={2}>
-            <Grid item sm={3}>
-                {/* applebees advertisement */}
-                <a href='https://www.applebees.com/en'><img className='applebees' src='images/AppleBees.png'></img></a>
-            </Grid>
 
-            <Grid item sm={8}>
                 <div className="postDetailsContainer">
                   <div className='postDetailsInnerContainer aboutContent'>
                     
@@ -31,7 +25,10 @@ function AboutPage() {
         
                     <h3>Biggest Challenge</h3>
                     <p>Creating image upload routes dependent on whether user wants to replace picture or not replace picture and incorporating image cropping into that process.</p>
-        
+
+                    <h3>Next Steps</h3>
+                    <p>Integrate a map based search feature to narrow down the feed for more targetted research</p>
+
                     <h3>Technology used:</h3>
                     <ul>
                         <li>Multer</li>
@@ -48,9 +45,6 @@ function AboutPage() {
             
                   </div>
                 </div>
-            </Grid>
-            <Grid item sm={1}></Grid>
-        </Grid>
     </>
   );
 }
