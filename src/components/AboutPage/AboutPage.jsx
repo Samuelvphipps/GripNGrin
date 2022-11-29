@@ -28,7 +28,10 @@ function AboutPage() {
                     My next step would be to incorporate some type of mapping/search feature that takes hunting areas and converts them to counties, areas, regions and species types. 
                     This will make the information gathering even better for the user.
                     </p>
-        
+
+                    <h3>Next Steps</h3>
+                    <p>Integrate a map based search feature to narrow down the feed for more targetted research</p>
+                    
                     <h3>Biggest Challenge</h3>
                     <p>Creating image upload routes dependent on whether user wants to replace picture or not replace picture and incorporating image cropping into that process.</p>
         
