@@ -30,7 +30,7 @@ function AboutPage() {
                     </p>
 
                     <h3>Next Steps</h3>
-                    <p>Integrate a map based search feature to narrow down the feed for more targetted research</p>
+                    <p>Integrate a map based search feature to narrow down the feed for more targeted research</p>
                     
                     <h3>Biggest Challenge</h3>
                     <p>Creating image upload routes dependent on whether user wants to replace picture or not replace picture and incorporating image cropping into that process.</p>
