@@ -66,10 +66,22 @@ Technologies used:
 - redux-lobber/redux-saga/redux/react-redux
 - sweetalert2
 
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
+## Lessons learned
 
-_Note, include this only if you have a license file. GitHub will generate one for you if you want!_
+- Be diligent about code comments throughout the coding process.
+- Control folder structure more logically.
+- Be careful with state management to ensure state doesnt run into a mismatch with the dom or other elements.
+    1) Example of this is the post details page, selectedPost was not correctly updating while using the 'LikeButton' component.
+    Solved this problem in likes.saga through conditional FETCH_SELECTED_POST call.
+    2) In edit should handle change directly to redux store instead of local state (useState)
+
+### Future Development Goals
+
+- Refactor program including folder organization and components
+- Fix state mismatches mentioned above
+- Integrate mapping system with species specific map overlays and selectors
+- Create system for multiple concurrent users that reflects changes in real time - Socket.io
+- Integrate search and filter features
 
 ## Acknowledgement
 Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality. Thank you to Edan Schwartz, my fearless instructor and advisor. My cohort mates who helped support me through this entire process. And finally, my wife Julia who has taken on a lot of extra responsibilities while I focused on this project.
