@@ -77,7 +77,7 @@ Technologies used:
 
 ### Future Development Goals
 
-- Refactor program including folder organization and components
+- Do some more in depth refactoring after some time has passed to clean up component layers and folder structure with a new view.
 - Fix state mismatches mentioned above
 - Integrate mapping system with species specific map overlays and selectors
 - Create system for multiple concurrent users that reflects changes in real time - Socket.io
