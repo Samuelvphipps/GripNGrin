@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
     filename: function (req, file, cb) {
         //names file profile_pic-(userid#).jpg
         //path.extname(file.originalname)
-        cb(null, 'post-image' + Date.now() + '.jpg');
+        cb(null, 'post-image' + Date.now() + '.png');
     }
 });
 
