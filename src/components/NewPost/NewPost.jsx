@@ -88,7 +88,6 @@ function NewPost(){
         Swal.fire('Your post is live!')
         .then((result) => {
             history.push('/home');
-            
           })
         // alert('Your post is live!');
         //send user to the home page with the list of posts
@@ -102,8 +101,8 @@ function NewPost(){
         //likely need to move this to the onCrop fn
         // let url= URL.createObjectURL(event.target.files[0]);
         // setImgUrl(url);
-
     }
+
 //Demo presentation hidden click listener to populate fields
     const populateFields = () => {
         setPostTitle('Bowhunt');
@@ -158,6 +157,7 @@ function NewPost(){
                                         type='file' 
                                         name="post_img" 
                                         className='inputBtn'
+                                        typeof=''
                                         onChange = {changeHandler}
                                     />
                                 </figure>
