@@ -40,7 +40,7 @@ app.use('/api/editPosts', editPostsRouter);
 app.use('/api/likes', likesRouter);
 
 // Serve static files
-app.use(express.static('build'));
+app.use(express.static('public'));
 
 // App Set //
 const PORT = process.env.PORT || 5000;
