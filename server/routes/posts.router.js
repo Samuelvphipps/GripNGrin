@@ -192,7 +192,7 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
         Number(post.hunt_area_id),
         post.date_of_hunt,
         post.success,
-        '/images/'+req.file.filename,
+        'https://gripngrin.herokuapp.com/images/'+req.file.filename,
         // 'http://localhost:3000/images/'+req.file.filename,
         post.content,
         req.user.id,
