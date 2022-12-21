@@ -2,6 +2,8 @@ const express = require('express');
 const pool = require('../modules/pool');
 require('dotenv').config();
 const router = express.Router();
+const uploadImage= require('../Util/s3Upload');
+const fs = require('fs');
 const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
@@ -165,13 +167,20 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
                 //reject non users and create image file in public/images folder
                 //parse the info for db query   
-router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) => {
+router.post('/', rejectUnauthenticated, upload.single('post_img'), async (req, res) => {
   // POST route code here
     // console.log('req.file is:', req.file);
     // console.log('req.file.filename', req.file.filename);
     // console.log('req.body is:', req.body.title);
 
     // console.log('req.file', req.file)
+
+    const filePath = await uploadImage(req.file);
+
+    //after image in S3 bucket delete the file
+    fs.unlink(req.file.path,()=>{
+        console.log('file deleted');
+    });
 
     let post=req.body;
 
@@ -192,7 +201,7 @@ router.post('/', rejectUnauthenticated, upload.single('post_img'), (req, res) =>
         Number(post.hunt_area_id),
         post.date_of_hunt,
         post.success,
-        'https://gripngrin.herokuapp.com/images/'+req.file.filename,
+        filePath,
         // 'http://localhost:3000/images/'+req.file.filename,
         post.content,
         req.user.id,

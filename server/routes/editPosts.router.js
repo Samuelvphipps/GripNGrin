@@ -1,7 +1,8 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-
+const uploadImage= require('../Util/s3Upload');
+const fs = require('fs');
 const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
@@ -56,12 +57,18 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 //See route under this one for explanation on splitting edit route based on image
 //if there is an image file this is the route for the put request: ⬇️
-router.put('/image', rejectUnauthenticated, upload.single('post_img'), (req, res) => {
+router.put('/image', rejectUnauthenticated, upload.single('post_img'), async (req, res) => {
   // POST route code here
     // console.log('in /image put route with values: file:', req.file, 'body"', req.body);
     let post=req.body;
     //PROTECT THE ROUTE FROM OTHER USERS
      if(Number(req.body.user_id)===req.user.id){
+        const filePath = await uploadImage(req.file);
+
+        //after image in S3 bucket delete the file
+        fs.unlink(req.file.path,()=>{
+            console.log('file deleted');
+        });
     //SQL
         // console.log('inside SQL area on the PUT')
         //all values assigned  param so the user cant sql insert
@@ -88,7 +95,7 @@ router.put('/image', rejectUnauthenticated, upload.single('post_img'), (req, res
             Number(post.hunt_area_id),
             post.date_of_hunt,
             post.success,
-            'images/'+req.file.filename,
+            filePath,
             // 'http://localhost:3000/images/'+req.file.filename,
             post.content,
             req.user.id,
