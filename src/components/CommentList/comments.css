@@ -7,6 +7,17 @@
     padding: .5rem
 }
 
+@media only screen and (max-width: 750px) {
+.newCommentField {
+    max-width: 350px;
+}
+}
+@media only screen and (max-width: 600px) {
+    .newCommentField {
+      max-width: 250px;
+    }
+  }
+
 
 .parentComment{
     margin-top: 25px;

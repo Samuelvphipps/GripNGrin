@@ -6,6 +6,7 @@ List item bullet
 
 ul {
     list-style: none;
+    padding-left: 0;
 }
 
 #homeHeader.MuiGrid-root {
