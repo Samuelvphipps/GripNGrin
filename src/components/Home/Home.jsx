@@ -27,15 +27,17 @@ function Home(){
                 {/* button gos to new post page so user can post a hunt */}
                 <button className="newHuntBtn" onClick={()=>history.push('/newpost')}>POST A HUNT!</button>
             </header>            
-            <Grid container spacing={2}>
-                <Grid  item sm={3}>
+            {/* <Grid container spacing={2}>
+                <Grid  item sm={3}> */}
                     {/* advertisement for remingtons! */}
-                    <a href='https://winchester.com/Hunting/Game/Big-Game'><img className="advertisement" src='http://localhost:3000/images/Advertisement.png'></img></a>
-                </Grid>
+                    {/* <a href='https://winchester.com/Hunting/Game/Big-Game'><img className="advertisement" placeholder="hunting advertisement" src='http://localhost:3000/images/Advertisement.png'></img></a> */}
+                {/* </Grid> */}
                                 {/* postlist of all posts (previews) */}
-                <Grid item sm={8}><PostList /></Grid>
+                {/* <Grid item sm={8}> */}
+                    <PostList />
+                    {/* </Grid>
                 <Grid item sm={1}></Grid>
-            </Grid>
+            </Grid> */}
         </>
     );
 }

@@ -10,13 +10,13 @@ function AboutPage() {
   return (
     <>
         <header><h1 className='pageHeader'> About Grip 'N Grin</h1></header>
-        <Grid container spacing={2}>
-            <Grid item sm={3}>
+        {/* <Grid container spacing={2}>
+            <Grid item sm={3}> */}
                 {/* applebees advertisement */}
-                <a href='https://www.applebees.com/en'><img className='applebees' src='http://localhost:3000/images/AppleBees.png'></img></a>
+                {/* <a href='https://www.applebees.com/en'><img className='applebees' src='http://localhost:3000/images/AppleBees.png'></img></a>
             </Grid>
 
-            <Grid item sm={8}>
+            <Grid item sm={8}> */}
                 <div className="postDetailsContainer">
                   <div className='postDetailsInnerContainer aboutContent'>
                     
@@ -51,9 +51,9 @@ function AboutPage() {
             
                   </div>
                 </div>
-            </Grid>
+            {/* </Grid>
             <Grid item sm={1}></Grid>
-        </Grid>
+        </Grid> */}
     </>
   );
 }
