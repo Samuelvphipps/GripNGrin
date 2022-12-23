@@ -18,6 +18,12 @@
     }
   }
 
+@media only screen and (max-width: 380px) {
+.newCommentField {
+    max-width: 220px;
+}
+}
+
 
 .parentComment{
     margin-top: 25px;
